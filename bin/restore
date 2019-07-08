@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'optparse'
+require 'pathname'
+require 'yaml'
+
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+require APP_ROOT.join('lib', 'trunk')
+
+
+# default options
+options = {
+  rails_env: ENV['RAILS_ENV'] || 'development',
+  file: nil
+}
+
+
+# parse arguments
+OptionParser.new do |opts|
+  opts.banner = <<~BANNER
+    Usage: dump [options]
+    With options:
+      # restoring a dump in development workstation
+      restore --file=/home/developer/dumps/full_data.dump
+      # restoring a production dump in QA environment
+      restore --file=/home/developer/dumps/production.dump --rails-env=production
+  BANNER
+
+  opts.on("-e RAILS_ENV", "--rails-env=RAILS_ENV",
+    "Defines Rails env. Defaults to 'development'") do |rails_env|
+      options[:rails_env] = rails_env
+    end
+
+  opts.on("-f FILE", "--file=FILE", "Output file.") do |file|
+    options[:file] = file
+  end
+end.parse!
+
+
+
+chdir APP_ROOT do
+  DB_CONFIG_YML = APP_ROOT.join('config', 'database.yml')
+
+  abort "Database config file '#{DB_CONFIG_YML} not found." unless File.exists?(DB_CONFIG_YML)
+
+  config = YAML.load_file(DB_CONFIG_YML)[options[:rails_env]]
+  abort "Unknown environment '#{options[:rails_env]}'" unless config
+
+  abort "Missing argument: restore dump file (--file=FILE)" unless options[:file]
+
+  trunk = Trunk.new file: options[:file],
+    username: config['username'],
+    host: config['host'],
+    database: config['database']
+
+  trunk.restore!
+
+  puts "Database '#{trunk.database}' successfully restored."
+end

@@ -1,0 +1,13 @@
+pt-BR:
+  notifications:
+    bidding:
+      under_review_admin: &under_review_admin
+        title: Licitação %s em análise.
+        body: A licitação <strong>%s</strong> está em análise. Aguarde a análise das propostas pela associação <strong>%s</strong>.
+
+      under_review_provider:
+        <<: *under_review_admin
+
+      under_review_cooperative:
+        <<: *under_review_admin
+        body: A licitação <strong>%s</strong> está em análise. As propostas estão disponíveis para análise"

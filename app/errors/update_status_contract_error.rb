@@ -1,0 +1,1 @@
+class UpdateStatusContractError < StandardError; end

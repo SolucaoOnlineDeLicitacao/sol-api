@@ -1,0 +1,19 @@
+# title
+pt-BR:
+  notifications:
+    bidding:
+      waiting_approval:
+        title: Licitação %s aguardando liberação.
+        body: A licitação <strong>%s</strong> foi criada e aguarda liberação.
+
+      approved:
+        title: Licitação %s liberada.
+        body: O revisor liberou a licitação <strong>%s</strong>! Ela será iniciada no dia <strong>%s</strong>.
+
+      finished:
+        title: Licitação %s concluída.
+        body: A licitação <strong>%s</strong> foi concluida com sucesso!
+
+      reproved:
+        title: Licitação %s reprovada.
+        body: O revisor reprovou a licitação <strong>%s</strong>!

@@ -1,0 +1,5 @@
+pt-BR:
+  services:
+    contracts:
+      system_refuse:
+        comment: 'Contrato recusado pelo sistema'

@@ -1,0 +1,6 @@
+pt-BR:
+  notifications:
+    bidding:
+      item_cooperative:
+        title: Licitação %s com item alterado.
+        body: A licitação <strong>%s</strong> teve o item <strong>%s</strong> alterado.

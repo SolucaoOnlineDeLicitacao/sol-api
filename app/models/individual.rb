@@ -1,0 +1,3 @@
+class Individual < Provider
+
+end

@@ -1,0 +1,31 @@
+pt-BR:
+  notifications:
+    contract:
+      refused_supplier:
+        title: Contrato recusado pelo fornecedor.
+        body: O contrato da licitação <strong>%s</strong> foi recusado pelo fornecedor <strong>%s</strong>.
+      refused_user:
+        title: Contrato recusado pela associação.
+        body: O contrato da licitação <strong>%s</strong> foi recusado pela associação <strong>%s</strong>.
+      refused_all:
+        title: Contrato recusado pelo sistema.
+        body: O contrato da licitação <strong>%s</strong> foi recusado automaticamente pelo sistema.
+      sign_admin_user:
+        title: Contrato assinado pelo fornecedor.
+        body: O contrato <strong>%s</strong> da licitação <strong>%s</strong> foi assinado pelo fornecedor <strong>%s</strong>
+      
+      total_inexecution:
+        title: Contrato com inexecução total.
+        body: O contrato <strong>%s</strong> da licitação <strong>%s</strong> foi marcado com inexecução total.
+
+      completed:
+        title: Contrato concluído.
+        body: O contrato <strong>%s</strong> da licitação <strong>%s</strong> foi concluído.
+
+      partial_execution:
+        title: Contrato com execução parcial.
+        body: O contrato <strong>%s</strong> da licitação <strong>%s</strong> foi marcado com execução parcial.
+
+      created:
+        title: Contrato criado.
+        body: Novo contrato <strong>%s</strong> gerado, clique aqui para mais detalhes.

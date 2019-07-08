@@ -1,0 +1,14 @@
+pt-BR:
+  notifications:
+    invite:
+      approved:
+        title: Convite aceito.
+        body: Seu pedido para participar da licitação <strong>%s</strong> foi aprovado pela associação <strong>%s</strong>.
+
+      pending:
+        title: Análise de convite pendente.
+        body: O fornecedor <strong>%s</strong> deseja participar da licitação <strong>%s</strong>! Analise o pedido.
+
+      reproved:
+        title: Convite reprovado.
+        body: Seu pedido para participar da licitação <strong>%s</strong> foi negado pela associação <strong>%s</strong>.

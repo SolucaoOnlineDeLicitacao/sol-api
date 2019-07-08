@@ -1,0 +1,14 @@
+pt-BR:
+  services:
+    importer:
+      log:
+        end: Importação finalizada
+        error: "Falha na importação: %{e}"
+        fail: 'Falha de importação na linha %{line}'
+        start: Importação iniciada
+        api_fault:  'Falha de comunicação com api "%{value}"'
+        validation_fail: 'Falha de importação no registo %{line} - %{error}'
+
+        resources:
+          cooperative: "Associação CNPJ %{value}"
+          covenant: "Convênio %{value}"

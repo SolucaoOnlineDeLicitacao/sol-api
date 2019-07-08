@@ -1,0 +1,39 @@
+pt-BR:
+  services:
+    biddings:
+      download:
+        units:
+          meter: Metro(s)
+          liter: Litro(s)
+          kilogram: Kilo(s)
+          square_meter: Metro(s) quadrado
+          cubic_meter: Metro(s) cúbico
+          other: Unidade(s)
+        file_name: licitacao_lote_itens
+        header:
+          price:
+            sheet: proposta valor item
+            title:
+              - lotes e itens da licitacao
+            columns:
+              - numero licitacao
+              - cod lote
+              - nome lote
+              - cod item na licitacao
+              - classificacao item
+              - descricao do item
+              - unidade do item
+              - quantidade do item
+              - proposta (valor unitario)
+          delivery:
+            sheet: proposta valor frete
+            title:
+              - lotes e itens da licitacao
+            columns:
+              - cod lote
+              - nome lote
+              - prazo do lote (dias)
+              - local de entrega do lote
+              - frete (valor)
+            rows:
+              deadline: "%s dias"

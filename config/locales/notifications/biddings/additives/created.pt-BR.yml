@@ -1,0 +1,6 @@
+pt-BR:
+  notifications:
+    bidding:
+      additive_created:
+        title: Alteração na data de encerramento da licitação %s.
+        body: Um aditivo foi criado para a licitação <strong>%s</strong>. A nova data de encerramento é <strong>%s</strong>.

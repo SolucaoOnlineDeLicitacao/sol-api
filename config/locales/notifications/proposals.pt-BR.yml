@@ -1,0 +1,48 @@
+pt-BR:
+  notifications:
+    proposal:
+      coop_accepted:
+        title: Proposta aceita.
+        body: A licitação <strong>%s</strong> tem uma proposta vencedora e pode ser revisada.
+
+      coop_refused:
+        title: Proposta recusada.
+        body: A licitação <strong>%s</strong> tem uma proposta recusada e pode ser revisada.
+
+      accepted:
+        title: Proposta vencedora.
+        body: A proposta do fornecedor <strong>%s</strong> da licitação <strong>%s</strong> foi aceita pelo revisor.
+
+      refused:
+        title: Proposta recusada aceita.
+        body: O revisor aceitou a recusa da proposta do fornecedor <strong>%s</strong> da licitação <strong>%s</strong>.
+
+      fail:
+        title: Necessário revisar propostas.
+        body: 'A proposta do fornecedor <strong>%s</strong> da licitação <strong>%s</strong> foi recusada, motivo: <strong>%s</strong>. Será necessário revisar as propostas novamente.'
+
+
+
+      lot_coop_accepted:
+        title: Proposta aceita.
+        body: O lote <strong>%s</strong> da licitação <strong>%s</strong> tem uma proposta vencedora e pode ser revisada.
+
+      lot_coop_refused:
+        title: Proposta recusada.
+        body: O lote <strong>%s</strong> da licitação <strong>%s</strong> tem uma proposta recusada e pode ser revisada.
+
+      lot_accepted:
+        title: Proposta vencedora.
+        body: A proposta do fornecedor <strong>%s</strong> para o lote <strong>%s</strong> da licitação <strong>%s</strong> foi aceita pelo revisor.
+
+      lot_refused:
+        title: Proposta recusada aceita.
+        body: O revisor aceitou a recusa da proposta do fornecedor <strong>%s</strong> para o lote <strong>%s</strong> da licitação <strong>%s</strong>.
+
+      lot_fail:
+        title: Necessário revisar propostas.
+        body: 'A proposta do fornecedor <strong>%s</strong> para o lote <strong>%s</strong> da licitação <strong>%s</strong> foi recusada, motivo: <strong>%s</strong>. Será necessário revisar as propostas novamente.'
+
+      supplier_accepted:
+        title: Parabéns, você foi o vencedor.
+        body: Parabéns, você foi o vencedor do(s) <strong>%s</strong>, clique aqui para detalhes

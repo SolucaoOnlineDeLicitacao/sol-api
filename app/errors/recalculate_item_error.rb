@@ -1,0 +1,1 @@
+class RecalculateItemError < StandardError; end

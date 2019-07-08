@@ -1,0 +1,20 @@
+pt-BR:
+  notifications:
+    bidding:
+      failure_cooperative: &failure_cooperative
+        title: Licitação %s fracassada.
+        body: 'O revisor fracassou a licitação <strong>%s</strong>, motivo: <strong>%s</strong>'
+
+      failure_provider:
+        <<: *failure_cooperative
+        body: 'A licitação <strong>%s</strong> foi fracassada, aguarde o inicio de uma nova licitação'
+      
+      failure_all_admin: &failure_all_without_proposals
+        <<: *failure_cooperative
+        body: 'A licitação <strong>%s</strong> sem proposta vencedora, foi fracassada'
+
+      failure_all_provider:
+        <<: *failure_all_without_proposals
+      
+      failure_all_cooperative:
+        <<: *failure_all_without_proposals

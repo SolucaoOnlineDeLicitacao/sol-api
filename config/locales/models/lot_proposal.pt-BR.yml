@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        lot_proposal:
+          attributes:
+            proposal:
+              already_abandoned_proposal: já existe uma proposta abandonada para esta licitação
+              invalid_modality_change: não pode alterar a proposta pois a licitação é de convite fechado
