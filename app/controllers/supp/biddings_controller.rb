@@ -26,7 +26,7 @@ module Supp
     end
 
     def find_biddings
-      Bidding.accessible_by(current_ability).active
+      Bidding.by_provider(current_provider).accessible_by(current_ability)
     end
   end
 end

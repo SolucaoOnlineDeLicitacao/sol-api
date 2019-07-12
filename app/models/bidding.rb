@@ -102,7 +102,7 @@ class Bidding < ApplicationRecord
   scope :drawed_today, -> { draw.where(draw_at: Date.current) }
   scope :ongoing_and_closed_today, -> { ongoing.where(closing_date: Date.current) }
   scope :in_progress, -> { where.not(status: [:draw, :canceled, :failure]) }
-  
+
   delegate :name, to: :classification, prefix: true, allow_nil: true
 
   def self.default_sort_column
@@ -113,8 +113,19 @@ class Bidding < ApplicationRecord
     :desc
   end
 
+  def self.by_provider(provider)
+    # licitações abertas e convite aberto ATIVAS
+    # OU licitações convite fechado COM convite aprovado ATIVAS
+    left_outer_joins(:invites).where(modality: [:unrestricted, :open_invite]).active
+    .or(
+      left_outer_joins(:invites).where(
+        modality: :closed_invite, invites: { status: :approved, provider: provider }
+      ).active
+    )
+  end
+
   def self.active
-    where.not(status: [0, 1, 2])
+    where.not(status: [:draft, :waiting, :approved])
   end
 
   def self.in_progress_count
