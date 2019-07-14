@@ -5,7 +5,7 @@ RSpec.describe Supp::BiddingsController, type: :controller do
   let(:covenant) { create(:covenant) }
   let(:cooperative) { covenant.cooperative }
   let(:user) { create(:supplier) }
-  let(:provider) { user.provider }
+  let(:provider) { Provider.find(user.provider_id) }
 
   let!(:biddings) { create_list(:bidding, 2, covenant: covenant, status: :ongoing) }
   let(:bidding) { biddings.first }
@@ -47,19 +47,26 @@ RSpec.describe Supp::BiddingsController, type: :controller do
     end
 
     describe 'response' do
-      let!(:another_bidding) { create(:bidding, covenant: covenant, status: :waiting) }
-
-      before { get_index }
-
       describe 'http_status' do
+        before { get_index }
+
         it { expect(response).to have_http_status :ok }
       end
 
       describe 'exposes' do
+        before do
+          allow(Bidding).to receive(:by_provider).with(provider) { Bidding.all }
+
+          get_index
+        end
+
+        it { expect(Bidding).to have_received(:by_provider).with(provider) }
         it { expect(controller.biddings).to match_array biddings }
       end
 
       describe 'JSON' do
+        before { get_index }
+
         let(:json) { JSON.parse(response.body) }
         let(:expected_json) { biddings.map { |bidding| format_json(serializer, bidding) } }
 

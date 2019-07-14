@@ -20,9 +20,19 @@ RSpec.describe Notifications::Biddings::Ongoing, type: :service do
         service.call
       end
 
-      it { expect(Notifications::Biddings::Ongoing::InvitedProvider).to have_received(:call).with(bidding) }
-      it { expect(Notifications::Biddings::Ongoing::Cooperative).to have_received(:call).with(bidding) }
-      it { expect(Notifications::Biddings::Ongoing::ClassificationProvider).to have_received(:call).with(bidding) }
+      context 'when bidding closed_invite' do
+        let!(:bidding) { create(:bidding, kind: :global, modality: :closed_invite, build_invite: true) }
+
+        it { expect(Notifications::Biddings::Ongoing::InvitedProvider).to have_received(:call).with(bidding) }
+        it { expect(Notifications::Biddings::Ongoing::Cooperative).to have_received(:call).with(bidding) }
+        it { expect(Notifications::Biddings::Ongoing::ClassificationProvider).not_to have_received(:call).with(bidding) }
+      end
+
+      context 'when another bidding modality' do
+        it { expect(Notifications::Biddings::Ongoing::InvitedProvider).to have_received(:call).with(bidding) }
+        it { expect(Notifications::Biddings::Ongoing::Cooperative).to have_received(:call).with(bidding) }
+        it { expect(Notifications::Biddings::Ongoing::ClassificationProvider).to have_received(:call).with(bidding) }
+      end
     end
   end
 end
