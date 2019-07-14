@@ -11,25 +11,7 @@ RSpec.describe Abilities::SupplierAbility, type: :model do
 
     it { expect(subject.permissions[:can]).to be_present }
 
-    describe 'bidding' do
-      context 'when policy true' do
-        before do
-          allow(Policies::Bidding::ManagePolicy).to receive(:allowed?) { true }
-        end
-
-        it { is_expected.to be_able_to(:manage, Bidding.new) }
-      end
-
-      context 'when policy false' do
-        before do
-          allow(::Policies::Bidding::ManagePolicy).to receive(:allowed?) { false }
-        end
-
-        it { is_expected.not_to be_able_to(:manage, Bidding.new) }
-      end
-    end
-
-    [ Lot, Contract, Notification, Invite,
+    [ Bidding, Lot, Contract, Notification, Invite,
       ProposalImport, LotProposalImport, Supplier ].each do |model|
       it { is_expected.to be_able_to(:manage, model) }
     end

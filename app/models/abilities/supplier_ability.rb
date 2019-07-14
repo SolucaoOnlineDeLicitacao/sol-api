@@ -9,11 +9,7 @@ module Abilities
 
       return update_revoked_at if user.provider.blocked
 
-      can :manage, Bidding, Bidding.all do |bidding|
-        Policies::Bidding::ManagePolicy.allowed?(bidding, user.provider)
-      end
-
-      can :manage, Lot
+      can :manage, [Bidding, Lot]
 
       can [:index, :show], Proposal, Proposal.read_policy_by(user.id) do |proposal|
         Policies::Proposal::ReadPolicy.allowed?(proposal, user)

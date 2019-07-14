@@ -514,51 +514,6 @@ RSpec.describe Bidding, type: :model do
   end
 
   describe 'methods' do
-    describe '.by_provider' do
-      let!(:provider) { create(:provider) }
-
-      let!(:draft_bidding) { create(:bidding, status: :draft) }
-
-      let!(:unrestricted_ongoing_bidding) do
-        create(:bidding, status: :ongoing, modality: :unrestricted)
-      end
-
-      let!(:open_invite_approved_bidding) do
-        create(:bidding, status: :approved, modality: :open_invite, build_invite: true)
-      end
-
-      let!(:open_invite_ongoing_bidding) do
-        create(:bidding, status: :ongoing, modality: :open_invite, build_invite: true)
-      end
-
-      let!(:closed_invite_ongoing_bidding) do
-        create(:bidding, status: :ongoing, modality: :closed_invite, build_invite: true)
-      end
-
-      let!(:closed_invite_ongoing_bidding_invite_approved) do
-        create(:bidding, status: :ongoing, modality: :closed_invite, build_invite: true)
-      end
-
-      let!(:approved_invite) do
-        create(:invite, bidding: closed_invite_ongoing_bidding_invite_approved,
-          provider: provider, status: :approved)
-      end
-
-      let!(:pending_invite) do
-        create(:invite, bidding: closed_invite_ongoing_bidding,
-          provider: provider, status: :pending)
-      end
-
-      let(:expected) do
-        [
-          unrestricted_ongoing_bidding, open_invite_ongoing_bidding,
-          closed_invite_ongoing_bidding_invite_approved
-        ]
-      end
-
-      it { expect(Bidding.by_provider(provider)).to match_array expected }
-    end
-
     describe 'self.active' do
       let(:bidding) { create(:bidding, status: 3) }
 
