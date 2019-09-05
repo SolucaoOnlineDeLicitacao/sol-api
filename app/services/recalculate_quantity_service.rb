@@ -24,15 +24,31 @@ class RecalculateQuantityService
     @returned_items_sum = {}
 
     covenant.biddings.each do |bidding|
-      bidding.lot_group_items.find_each do |lot_group_item|
-        debit_the_available_quantity(lot_group_item.group_item)
+      lot_group_items_by(bidding).find_each do |lot_group_item|
+        if destroying?
+          credit_the_available_quantity(
+            lot_group_item.group_item, lot_group_item.quantity
+          )
+        else
+          debit_the_available_quantity(lot_group_item.group_item)
+        end
         credit_the_returned_items(lot_group_item.group_item)
       end
     end
   end
 
+  def lot_group_items_by(bidding)
+    return bidding.lot_group_items.where(id: lot_group_item.id) if lot_group_item?
+
+    bidding.lot_group_items
+  end
+
   def debit_the_available_quantity(group_item)
     group_item.update!(available_quantity: group_item.quantity - active_lot_group_items_sum(group_item))
+  end
+
+  def credit_the_available_quantity(group_item, quantity)
+    group_item.update!(available_quantity: group_item.available_quantity + quantity)
   end
 
   def credit_the_returned_items(group_item)
@@ -58,6 +74,14 @@ class RecalculateQuantityService
       end
     end
     total
+  end
+
+  def lot_group_item?
+    respond_to?(:lot_group_item) && lot_group_item.present?
+  end
+
+  def destroying?
+    respond_to?(:destroying) && destroying
   end
 
   def contracts_by(lot_group_item_id)

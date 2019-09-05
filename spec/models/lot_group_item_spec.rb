@@ -174,16 +174,26 @@ RSpec.describe LotGroupItem, type: :model do
         create(:lot_group_item, group_item: group_item, lot: lot2, quantity: 50)
       end
 
-      context 'after_destroy' do
+      context 'before_destroy' do
         before do
-          RecalculateQuantityService.call(covenant: bidding.covenant)
+          allow(RecalculateQuantityService).to receive(:call!).with(
+            covenant: bidding.covenant,
+            lot_group_item: lot_group_item,
+            destroying: true
+          ).and_return(true)
 
           group_item.reload
 
           lot_group_item.destroy
         end
 
-        it { expect(group_item.available_quantity).to eq 50 }
+        it do
+          expect(RecalculateQuantityService).to have_received(:call!).with(
+            covenant: bidding.covenant,
+            lot_group_item: lot_group_item,
+            destroying: true
+          )
+        end
       end
     end
   end

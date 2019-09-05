@@ -1,7 +1,7 @@
 class LotGroupItem < ApplicationRecord
   versionable
 
-  after_destroy :recount_group_item_quantity
+  before_destroy :recount_group_item_quantity, prepend: true
 
   belongs_to :lot, counter_cache: true
   belongs_to :group_item
@@ -34,6 +34,10 @@ class LotGroupItem < ApplicationRecord
   end
 
   def recount_group_item_quantity
-    RecalculateQuantityService.call!(covenant: bidding.covenant)
+    RecalculateQuantityService.call!(
+      covenant: bidding.covenant,
+      lot_group_item: self,
+      destroying: true
+    )
   end
 end
