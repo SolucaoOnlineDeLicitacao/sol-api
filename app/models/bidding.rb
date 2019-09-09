@@ -147,8 +147,7 @@ class Bidding < ApplicationRecord
   end
 
   def proposals_not_draft_or_abandoned
-    return proposals.not_draft_or_abandoned if global?
-    lots&.map(&:proposals_not_draft_or_abandoned).flatten
+    proposals.not_draft_or_abandoned
   end
 
   def fully_failed_lots?

@@ -20,6 +20,8 @@ module ProposalService
 
     def fail
       execute_or_rollback do
+        return unless available_proposals?
+
         lots.map(&:triage!)
         event_cancel_proposal_by_status!
         change_proposals_statuses!
@@ -29,7 +31,7 @@ module ProposalService
     end
 
     def change_proposals_statuses!
-      bidding&.proposals&.where.not(status: [:draft, :abandoned])&.map(&:sent!)
+      bidding&.proposals&.not_failure.not_draft_or_abandoned&.map(&:sent!)
       bidding&.proposals&.sent&.lower&.triage!
       bidding&.proposals&.lower&.reload
     end
@@ -42,6 +44,10 @@ module ProposalService
 
     def notify
       Notifications::Proposals::Fail.call(proposal, event)
+    end
+
+    def available_proposals?
+      bidding&.proposals&.not_failure.not_draft_or_abandoned&.count > 0
     end
   end
 end

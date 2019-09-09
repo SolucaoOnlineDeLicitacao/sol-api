@@ -41,7 +41,7 @@ module ContractsService
     end
 
     def no_more_one_proposal
-      proposals_not_draft_or_abandoned.count > 1
+      proposals_not_draft_or_abandoned.not_failure.count >= 1
     end
 
     def update_reopen_reason_contract!
