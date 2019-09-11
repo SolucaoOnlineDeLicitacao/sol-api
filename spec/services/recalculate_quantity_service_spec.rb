@@ -82,6 +82,16 @@ RSpec.describe RecalculateQuantityService do
           end
         end
       end
+
+      context 'and the lot_group_item is destroyed' do
+        before do
+          subject
+          lot_group_item.destroy!
+        end
+
+        it { is_expected.to be_truthy }
+        it { expect(group_item.reload.available_quantity).to eq (group_item_quantity) }
+      end
     end
 
     context 'when failure' do
