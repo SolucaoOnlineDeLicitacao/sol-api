@@ -118,6 +118,20 @@ RSpec.describe Pdf::Bidding::Minute::FinnishedHtml do
         it { is_expected.not_to include("@@") }
       end
 
+      context 'when threre are draft proposals' do
+        let(:file_type) { 'minute_finnished_global' }
+        let(:service_build) { described_class.new(params) }
+
+        before do
+          allow(service_build).to receive(:proposal_line).and_return('')
+          proposal_1.draft!
+          proposal_2.draft!
+          service_build.call
+        end
+
+        it { expect(service_build).not_to have_received(:proposal_line) }
+      end
+
       after do
         File.write(
           Rails.root.join("spec/fixtures/myfiles/#{file_type}_template.html"),
