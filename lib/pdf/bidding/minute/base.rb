@@ -92,7 +92,7 @@ module Pdf::Bidding
     end
 
     def proposals_sentence(proposals)
-      proposals.all_lower.inject([]) do |array, proposal|
+      proposals.active_and_orderly.inject([]) do |array, proposal|
         array << proposal_line(proposal)
       end.to_sentence
     end

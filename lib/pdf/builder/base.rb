@@ -44,6 +44,10 @@ module Pdf::Builder
     def header_center
       "#{wrap(cooperative.name)}\n"\
       "#{cooperative.cnpj}\n"\
+      "#{wrap(cooperative_address)}"
+    end
+
+    def cooperative_address
       "#{cooperative.address.address}, "\
       "#{cooperative.address.city.name} - "\
       "#{cooperative.address.city.state.name}"
