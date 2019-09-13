@@ -124,12 +124,14 @@ RSpec.describe Pdf::Bidding::Minute::FinnishedHtml do
 
         before do
           allow(service_build).to receive(:proposal_line).and_return('')
+          allow(service_build).to receive(:provider_sentence).and_return('')
           proposal_1.draft!
           proposal_2.draft!
           service_build.call
         end
 
         it { expect(service_build).not_to have_received(:proposal_line) }
+        it { expect(service_build).not_to have_received(:provider_sentence) }
       end
 
       after do
