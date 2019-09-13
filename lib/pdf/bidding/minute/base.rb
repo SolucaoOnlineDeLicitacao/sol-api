@@ -63,7 +63,7 @@ module Pdf::Bidding
 
     def bidding_lot_proposals_providers
       I18n.t('document.pdf.bidding.minute.proposals_providers') +
-      bidding.lot_proposals.inject([]) do |array, lot_proposal|
+      bidding.lot_proposals.active_and_orderly.inject([]) do |array, lot_proposal|
         array << provider_sentence(lot_proposal)
       end.uniq.to_sentence + '.'
     end

@@ -30,6 +30,12 @@ class LotProposal < ApplicationRecord
 
   delegate :status, to: :proposal, allow_nil: true, prefix: true
 
+  scope :active_and_orderly, -> do
+    joins(:proposal)
+      .select("lot_proposals.*, COALESCE(proposals.sent_updated_at, proposals.created_at)")
+      .where.not(proposals: { status: [:draft, :abandoned] }).all_lower
+  end
+
   scope :active_and_orderly_with, ->(lot, statuses) do
     joins(:proposal)
       .select("lot_proposals.*, COALESCE(proposals.sent_updated_at, proposals.created_at)")
