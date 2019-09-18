@@ -13,7 +13,7 @@ module Policies
       end
 
       def allowed?
-        ::Bidding.by_provider(provider).find_by(bidding).any?
+        ::Bidding.by_provider(provider).where(id: bidding.id).any?
       end
     end
   end
