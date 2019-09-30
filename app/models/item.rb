@@ -29,7 +29,7 @@ class Item < ApplicationRecord
   validates_uniqueness_of :title, scope: :code, case_sensitive: false
   validates_uniqueness_of :code
 
-  validate :item_modification, if: :lot_group_items_in_use?
+  validate :item_modification
 
   delegate :name, to: :owner, prefix: true, allow_nil: true
   delegate :name, to: :classification, prefix: true, allow_nil: true
@@ -44,10 +44,18 @@ class Item < ApplicationRecord
   end
 
   def item_modification
-    errors.add(:lot_group_items, :in_use)
+    errors.add(:lot_group_items, :in_use) if locked_for_modification?
   end
 
   private
+
+  def locked_for_modification?
+    lot_group_items_in_use? && changed_forbidden_attributes?
+  end
+
+  def changed_forbidden_attributes?
+    title_changed? || description_changed? || unit_id_changed?
+  end
 
   def lot_group_items_in_use?
     bidding_by_lot_group_items.not_draft.any?

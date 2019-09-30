@@ -38,16 +38,34 @@ RSpec.describe Item, type: :model do
       describe 'lot_group_items_in_use?' do
         let!(:item) { create(:item) }
 
-        context 'when true' do
-          before { allow(item).to receive(:lot_group_items_in_use?) { true } }
+        before do
+          allow(item).to receive(:throw).with(:abort).and_call_original
+        end
 
-          it { expect { item.destroy! }.to raise_error(ActiveRecord::RecordNotDestroyed) }
+        context 'when true' do
+          let(:group_item) { create(:group_item, item: item) }
+          let!(:lot_group_item) do
+            create(:lot_group_item, group_item: group_item)
+          end
+          let(:lot) do
+            create(:lot, build_lot_group_item: false,
+                         lot_group_items: [lot_group_item])
+          end
+          let!(:bidding) do
+            create(:bidding, build_lot: false, lots: [lot], status: :waiting)
+          end
+
+          it do
+            item.destroy
+            expect(item).to have_received(:throw).with(:abort)
+          end
         end
 
         context 'when false' do
-          before { allow(item).to receive(:lot_group_items_in_use?) { false } }
-
-          it { expect { item.destroy! }.not_to raise_error }
+          it do
+            item.destroy
+            expect(item).not_to have_received(:throw).with(:abort)
+          end
         end
       end
     end
@@ -55,6 +73,7 @@ RSpec.describe Item, type: :model do
     describe 'item_modification' do
       let(:item) { create(:item, title: 'test') }
       let(:error) { 'não pode ser alterado pois o item está em uso' }
+      let(:item_code_factor) { 100 }
 
       before do
         allow(Notifications::Biddings::Items::Cooperative).to receive(:call)
@@ -101,6 +120,18 @@ RSpec.describe Item, type: :model do
                     to_not have_received(:call).with(bidding, item)
                 end
               end
+
+              context 'and changing permitted attribute' do
+                let(:new_code) { item.code + item_code_factor }
+
+                before do
+                  item.restore_attributes
+                  item.code = new_code
+                end
+
+                it { is_expected.to be_truthy }
+                it { expect(item.code).to eq(new_code) }
+              end
             end
 
             context 'with status draft' do
@@ -115,6 +146,18 @@ RSpec.describe Item, type: :model do
                   expect(Notifications::Biddings::Items::Cooperative).
                     to have_received(:call).with(bidding, item)
                 end
+              end
+
+              context 'and changing permitted attribute' do
+                let(:new_code) { item.code + item_code_factor }
+
+                before do
+                  item.restore_attributes
+                  item.code = new_code
+                end
+
+                it { is_expected.to be_truthy }
+                it { expect(item.code).to eq(new_code) }
               end
             end
           end
@@ -156,6 +199,18 @@ RSpec.describe Item, type: :model do
                     to_not have_received(:call).with(bidding, item)
                 end
               end
+
+              context 'and changing permitted attribute' do
+                let(:new_code) { item.code + item_code_factor }
+
+                before do
+                  item.restore_attributes
+                  item.code = new_code
+                end
+
+                it { is_expected.to be_truthy }
+                it { expect(item.code).to eq(new_code) }
+              end
             end
 
             context 'with all status waiting' do
@@ -181,6 +236,18 @@ RSpec.describe Item, type: :model do
                     to_not have_received(:call).with(bidding, item)
                 end
               end
+
+              context 'and changing permitted attribute' do
+                let(:new_code) { item.code + item_code_factor }
+
+                before do
+                  item.restore_attributes
+                  item.code = new_code
+                end
+
+                it { is_expected.to be_truthy }
+                it { expect(item.code).to eq(new_code) }
+              end
             end
 
             context 'with all status draft' do
@@ -196,6 +263,18 @@ RSpec.describe Item, type: :model do
                   expect(Notifications::Biddings::Items::Cooperative).
                     to have_received(:call).with(bidding, item)
                 end
+              end
+
+              context 'and changing permitted attribute' do
+                let(:new_code) { item.code + item_code_factor }
+
+                before do
+                  item.restore_attributes
+                  item.code = new_code
+                end
+
+                it { is_expected.to be_truthy }
+                it { expect(item.code).to eq(new_code) }
               end
             end
           end
