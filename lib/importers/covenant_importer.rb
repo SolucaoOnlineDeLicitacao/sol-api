@@ -72,6 +72,11 @@ module Importers
       group_items.each do |group_item_hash|
         group_item = group.group_items.find_or_initialize_by(item: item(group_item_hash))
 
+        unless group_item.new_record?
+          group_item.available_quantity =
+            group_item_hash[:quantity] - (group_item.quantity - group_item.available_quantity)
+        end
+
         group_item.quantity = group_item_hash[:quantity]
         group_item.estimated_cost = group_item_hash[:estimated_cost]
 
