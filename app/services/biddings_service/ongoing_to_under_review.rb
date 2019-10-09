@@ -11,7 +11,7 @@ module BiddingsService
 
     def ongoing_biddings_to_under_review
       execute_or_rollback do
-        Bidding.ongoing_and_closed_today.each do |bidding|
+        Bidding.ongoing_and_closed_until_today.each do |bidding|
           BiddingsService::UnderReview.call!(bidding: bidding)
         end
       end

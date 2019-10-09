@@ -11,7 +11,7 @@ module BiddingsService
 
     def approved_biddings_to_ongoing
       execute_or_rollback do
-        Bidding.approved_and_started_today.each do |bidding|
+        Bidding.approved_and_started_until_today.each do |bidding|
           BiddingsService::Ongoing.call!(bidding: bidding)
         end
       end
