@@ -2,7 +2,8 @@ module Supp
   class Biddings::LotsController < SuppController
     include CrudController
 
-    load_and_authorize_resource
+    load_and_authorize_resource :bidding
+    load_and_authorize_resource :lot, through: :bidding
 
     expose :bidding
     expose :lots, -> { find_lots }

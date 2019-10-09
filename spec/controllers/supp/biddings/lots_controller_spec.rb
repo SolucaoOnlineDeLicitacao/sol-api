@@ -7,7 +7,7 @@ RSpec.describe Supp::Biddings::LotsController, type: :controller do
   let(:user) { create(:supplier) }
   let(:provider) { user.supplier }
 
-  let!(:biddings) { create_list(:bidding, 2, covenant: covenant) }
+  let!(:biddings) { create_list(:bidding, 2, covenant: covenant, status: :ongoing) }
   let(:bidding) { biddings.first }
   let(:lots) { bidding.lots }
   let(:lot) { lots.first }
