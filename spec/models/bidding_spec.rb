@@ -446,38 +446,38 @@ RSpec.describe Bidding, type: :model do
       it { expect(Bidding.not_draft).to match_array expected_biddings }
     end
 
-    describe '.approved_and_started_today' do
+    describe '.approved_and_started_until_today' do
       let!(:bidding1) { create(:bidding, status: :approved, start_date: Date.current) }
-      let!(:bidding2) { create(:bidding, status: :approved, start_date: Date.current) }
-      let!(:bidding3) { create(:bidding, status: :approved) }
+      let!(:bidding2) { create(:bidding, status: :approved, start_date: Date.current-1.day) }
+      let!(:bidding3) { create(:bidding, status: :approved, start_date: Date.tomorrow) }
       let!(:bidding4) { create(:bidding, status: :canceled) }
       let!(:bidding5) { create(:bidding, status: :under_review) }
 
-      it { expect(Bidding.approved_and_started_today).to match_array [bidding1, bidding2] }
+      it { expect(Bidding.approved_and_started_until_today).to match_array [bidding1, bidding2] }
     end
 
-    describe '.drawed_today' do
-      let!(:bidding1) { create(:bidding, status: :waiting) }
-      let!(:bidding2) { create(:bidding, status: :approved) }
-      let!(:bidding3) { create(:bidding, status: :draw, closing_date: Date.tomorrow, draw_end_days: 1) }
-      let!(:bidding4) { create(:bidding, status: :draw) }
-      let!(:bidding5) { create(:bidding, status: :draw, closing_date: Date.tomorrow, draw_end_days: 1) }
+    describe '.drawed_until_today' do
+      let!(:bidding1) { create(:bidding, status: :draw, closing_date: Date.tomorrow, draw_end_days: 1) }
+      let!(:bidding2) { create(:bidding, status: :draw, closing_date: Date.today, draw_end_days: 1) }
+      let!(:bidding3) { create(:bidding, status: :draw, closing_date: Date.tomorrow+2.days, draw_end_days: 1) }
+      let!(:bidding4) { create(:bidding, status: :waiting) }
+      let!(:bidding5) { create(:bidding, status: :approved) }
 
-      let(:date_current) { bidding3.closing_date + bidding3.draw_end_days.to_i }
+      let(:date_current) { bidding1.closing_date + bidding1.draw_end_days.to_i }
 
       before { allow(Date).to receive(:current).and_return date_current }
 
-      it { expect(Bidding.drawed_today).to match_array [bidding3, bidding5] }
+      it { expect(Bidding.drawed_until_today).to match_array [bidding1, bidding2] }
     end
 
-    describe '.ongoing_and_closed_today' do
-      let!(:bidding1) { create(:bidding, status: :waiting) }
-      let!(:bidding2) { create(:bidding, status: :approved) }
-      let!(:bidding3) { create(:bidding, status: :ongoing, closing_date: Date.current) }
-      let!(:bidding4) { create(:bidding, status: :ongoing) }
-      let!(:bidding5) { create(:bidding, status: :ongoing, closing_date: Date.current) }
+    describe '.ongoing_and_closed_until_today' do
+      let!(:bidding1) { create(:bidding, status: :ongoing, closing_date: Date.current-1.day) }
+      let!(:bidding2) { create(:bidding, status: :ongoing, closing_date: Date.current) }
+      let!(:bidding3) { create(:bidding, status: :ongoing, closing_date: Date.tomorrow) }
+      let!(:bidding4) { create(:bidding, status: :waiting) }
+      let!(:bidding5) { create(:bidding, status: :approved) }
 
-      it { expect(Bidding.ongoing_and_closed_today).to match_array [bidding3, bidding5] }
+      it { expect(Bidding.ongoing_and_closed_until_today).to match_array [bidding2, bidding1] }
     end
 
     describe 'in_progress' do

@@ -98,9 +98,9 @@ class Bidding < ApplicationRecord
     joins(:cooperative).where(cooperatives: { id: cooperative_id })
   end
   scope :not_draft, -> { where.not(status: :draft) }
-  scope :approved_and_started_today, -> { approved.where(start_date: Date.current) }
-  scope :drawed_today, -> { draw.where(draw_at: Date.current) }
-  scope :ongoing_and_closed_today, -> { ongoing.where(closing_date: Date.current) }
+  scope :approved_and_started_until_today, -> { approved.where("start_date <= :date", date: Date.current) }
+  scope :drawed_until_today, -> { draw.where("draw_at <= :date", date: Date.current) }
+  scope :ongoing_and_closed_until_today, -> { ongoing.where("closing_date <= :date", date: Date.current) }
   scope :in_progress, -> { where.not(status: [:draw, :canceled, :failure]) }
 
   delegate :name, to: :classification, prefix: true, allow_nil: true
