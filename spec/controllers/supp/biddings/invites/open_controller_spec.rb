@@ -9,11 +9,11 @@ RSpec.describe Supp::Biddings::Invites::OpenController, type: :controller do
   let(:approved_invite) do
     create(:invite, provider: provider, status: :approved)
   end
-  let!(:biddings) do
-    create_list(:bidding, 2, covenant: covenant, modality: :open_invite,
-                             invites: [approved_invite])
+
+  let!(:bidding) do
+    create(:bidding, covenant: covenant, modality: :open_invite,
+      invites: [approved_invite], status: :ongoing)
   end
-  let(:bidding) { biddings.first }
 
   before { oauth_token_sign_in user }
 
