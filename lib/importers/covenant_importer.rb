@@ -29,7 +29,7 @@ module Importers
 
       save_resource!(@covenant)
       
-      make_all_items_unavailable(@covenant)
+      make_all_items_unavailable
 
       import_groups
 
@@ -50,7 +50,8 @@ module Importers
     end
     
     def make_all_items_unavailable(@covenant)
-      @covenant.groups.each do |group|
+      covenant = Covenant.find_by(number: covenant_number)
+      covenant.groups.each do |group|
         group.group_items.each do |group_item|
           group_item.quantity = group_item.quantity - group_item.available_quantity
           save_resource!(group_item)
