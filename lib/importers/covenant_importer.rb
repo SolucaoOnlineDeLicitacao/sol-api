@@ -54,6 +54,7 @@ module Importers
       covenant.groups.each do |group|
         group.group_items.each do |group_item|
           group_item.quantity = group_item.quantity - group_item.available_quantity
+          group_item.available_quantity = group_item.quantity
           save_resource!(group_item)
         end
       end
