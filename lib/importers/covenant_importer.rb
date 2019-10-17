@@ -49,7 +49,7 @@ module Importers
       squish(resource[:number])
     end
     
-    def make_all_items_unavailable(@covenant)
+    def make_all_items_unavailable
       covenant = Covenant.find_by(number: covenant_number)
       covenant.groups.each do |group|
         group.group_items.each do |group_item|
