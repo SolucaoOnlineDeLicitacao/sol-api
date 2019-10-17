@@ -31,22 +31,19 @@ module ReportsService::Supplier
       ]
     end
 
-    def name_file
-      @name_file ||= "storage/fornecedores_licitacao_#{DateTime.current.strftime('%d%m%Y%H%M')}.xlsx"
-    end
-
     def summary
       i = 2
       suppliers_biddings.each do |provider|
-        @sheet.row(i).replace [provider[:document], provider[:name], provider[:count]]
+        @book.replace_row(@sheet, i, summary_values(provider))
         i += 1
       end
     end
 
     def detailing
       i = 0
-      @sheet1.row(i).concat sheet_detailing_title_columns
+      @book.concat_row(@sheet1, i, sheet_detailing_title_columns)
       i += 1
+
       @providers.each do |provider|
         biddings = bidding_by_provider(provider)
         next unless biddings.present?
@@ -57,14 +54,32 @@ module ReportsService::Supplier
       end
     end
 
+    def summary_values(provider)
+      [
+        provider[:document],
+        provider[:name],
+        provider[:count]
+      ]
+    end
+
     def sheet_rows_detailing(bidding, provider, i)
-      @sheet1.row(i).replace [
-        bidding.title, provider.name, provider.document, provider.address.city.name,
-        bidding.cooperative.name, bidding.cooperative.cnpj, bidding.cooperative.address.city.name,
+      @book.replace_row(@sheet1, i, sheet_rows_detailing_values(bidding, provider))
+    end
+
+    def sheet_rows_detailing_values(bidding, provider)
+      [
+        bidding.title,
+        provider.name,
+        provider.document,
+        provider.address.city.name,
+        bidding.cooperative.name,
+        bidding.cooperative.cnpj,
+        bidding.cooperative.address.city.name,
         I18n.t("services.download.supplier.biddings.kind.#{bidding.kind}"),
         I18n.t("services.download.supplier.biddings.modality.#{bidding.modality}"),
         I18n.t("services.download.supplier.biddings.#{bidding.status}"),
-        I18n.l(bidding.start_date), I18n.l(bidding.closing_date)
+        I18n.l(bidding.start_date),
+        I18n.l(bidding.closing_date)
       ]
     end
 
@@ -114,5 +129,8 @@ module ReportsService::Supplier
       Bidding.joins(:proposals).where(proposals: { provider_id: provider.id }).order(:id).uniq
     end
 
+    def name_key
+      'fornecedores_licitacao_'
+    end
   end
 end

@@ -39,7 +39,7 @@ RSpec.describe ReportsService::Biddings::Status::Download, type: :service do
 
       describe 'file' do
         it { expect(report.success?).to be_truthy }
-        it { expect(report.url).to match /storage\/licitacao_status_/ }
+        it { expect(report.url).to match /storage\/licitacao_status_.*\.xls$/ }
         it { expect(report.error_message).to be_nil }
         it { expect(report.error_backtrace).to be_nil }
         it { expect(file_xlsx).to be_present  }

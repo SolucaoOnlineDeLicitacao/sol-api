@@ -50,8 +50,9 @@ module ReportsService::Contracts
 
     def detailing
       i = 0
-      @sheet1.row(i).concat sheet_detailing_title_columns
+      @book.concat_row(@sheet1, i, sheet_detailing_title_columns)
       i += 1
+
       contracts_classification.each do |contract_class|
         contract_class[:contracts].each do |contract|
           sheet_rows_detailing(contract, contract_class, i)
@@ -69,7 +70,11 @@ module ReportsService::Contracts
     end
 
     def sheet_rows_detailing(contract, contract_class, i)
-      @sheet1.row(i).replace [
+      @book.replace_row(@sheet1, i, sheet_rows_detailing_values(contract, contract_class))
+    end
+
+    def sheet_rows_detailing_values(contract, contract_class)
+      [
         "##{contract.id}", contract_class[:classification].name,
         contract.proposal.bidding.cooperative.name,
         contract.proposal.bidding.cooperative.cnpj,
@@ -80,8 +85,8 @@ module ReportsService::Contracts
       ]
     end
 
-    def name_file
-      @name_file ||= "storage/classificacao_contrato_#{DateTime.current.strftime('%d%m%Y%H%M')}.xlsx"
+    def name_key
+      'classificacao_contrato_'
     end
 
     def contracts

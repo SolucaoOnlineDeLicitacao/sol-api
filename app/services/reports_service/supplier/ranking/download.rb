@@ -31,29 +31,38 @@ module ReportsService::Supplier
       ]
     end
 
-    def name_file
-      @name_file ||= "storage/ranking_fornecedores_#{DateTime.current.strftime('%d%m%Y%H%M')}.xlsx"
+    def name_key
+      'ranking_fornecedores_'
     end
 
     def summary
       i = 2
       @providers.each do |provider|
         next if contracts(provider).count == 0
-        @sheet.row(i).replace [provider.name, contracts(provider).count, price_total_contracts(provider)]
+        @book.replace_row @sheet, i, summary_values(provider)
         i += 1
       end
     end
 
     def detailing
       i = 0
-      @sheet1.row(i).concat sheet_detailing_title_columns
+      @book.concat_row(@sheet1, i, sheet_detailing_title_columns)
       i += 1
+
       @providers.each do |provider|
         contracts(provider).each do |contract|
           sheet_rows_detailing(contract, provider, i)
           i += 1
         end
       end
+    end
+
+    def summary_values(provider)
+      [
+        provider.name,
+        contracts(provider).count,
+        price_total_contracts(provider)
+      ]
     end
 
     def sheet_detailing_title_columns
@@ -69,10 +78,18 @@ module ReportsService::Supplier
     end
 
     def sheet_rows_detailing(contract, provider, i)
-      @sheet1.row(i).replace [
-        provider.name, provider.document, "##{contract.id}",
-        cooperative(contract).name, cooperative(contract).cnpj,
-        bidding(contract).title, price_total_contract(contract)
+      @book.replace_row(@sheet1, i, sheet_rows_detailing_values(contract, provider))
+    end
+
+    def sheet_rows_detailing_values(contract, provider)
+      [
+        provider.name,
+        provider.document,
+        "##{contract.id}",
+        cooperative(contract).name,
+        cooperative(contract).cnpj,
+        bidding(contract).title,
+        price_total_contract(contract)
       ]
     end
 
@@ -98,6 +115,10 @@ module ReportsService::Supplier
 
     def provider_all
       @providers = Provider.all
+    end
+
+    def name_key
+      'ranking_fornecedores_'
     end
   end
 end

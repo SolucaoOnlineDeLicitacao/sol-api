@@ -35,6 +35,24 @@ RSpec.describe Spreadsheet::Write::Xlsx do
     it { is_expected.to eq('foo') }
   end
 
+  describe '#concat_row' do
+    subject { instance.concat_row(sheet, 0, ['foo', 'bar']) }
+
+    it { expect { subject }.to raise_error NotImplementedError }
+  end
+
+  describe '#replace_row' do
+    subject { instance.replace_row(sheet, 0, 'foo') }
+
+    it { expect { subject }.to raise_error NotImplementedError }
+  end
+
+  describe '#file_extension' do
+    subject { instance.file_extension }
+
+    it { is_expected.to eq 'xlsx' }
+  end
+
   describe '#clear_sheets' do
     subject do
       sheet
