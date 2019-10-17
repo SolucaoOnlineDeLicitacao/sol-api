@@ -18,7 +18,7 @@ class GroupItem < ApplicationRecord
   has_many :proposals, through: :lot_group_items, source: :proposals
   has_many :accepted_lot_group_item_lot_proposals, -> { where(proposals: { status: 'accepted' }).distinct }, through: :proposals, source: :lot_group_item_lot_proposals
 
-  validates :quantity, presence: true, numericality: { greater_than: 0 }
+  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :available_quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   validates :estimated_cost, presence: true, numericality: { greater_than: 0 }
