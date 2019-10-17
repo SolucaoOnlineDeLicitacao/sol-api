@@ -2,6 +2,8 @@ module Spreadsheet::Write
   class Xls
     attr_accessor :book
 
+    FILE_EXTENSION = 'xls'.freeze
+
     def initialize
       @book = Spreadsheet::Workbook.new
     end
@@ -20,6 +22,18 @@ module Spreadsheet::Write
 
     def add_cell(sheet, line, column, value)
       sheet.row(line)[column] = value
+    end
+
+    def concat_row(sheet, row, values)
+      sheet.row(row).concat Array.wrap(values)
+    end
+
+    def replace_row(sheet, row, values)
+      sheet.row(row).replace Array.wrap(values)
+    end
+
+    def file_extension
+      self.class::FILE_EXTENSION
     end
 
     def clear_sheets; end

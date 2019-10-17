@@ -26,7 +26,7 @@ module ReportsService::Biddings
 
     def detailing
       i = 0
-      @sheet1.row(i).concat sheet_detailing_title_columns
+      @book.concat_row(@sheet1, i, sheet_detailing_title_columns)
       i += 1
 
       @bidding_kinds.each do |values|
@@ -40,7 +40,11 @@ module ReportsService::Biddings
     end
 
     def sheet_rows_summary(key, value, i)
-      @sheet.row(i).replace [
+      @book.replace_row(@sheet, i, sheet_rows_summary_values(key, value))
+    end
+
+    def sheet_rows_summary_values(key, value)
+      [
         I18n.t("services.download.biddings.status.#{key}"),
         value[:countable],
         format_money(value[:estimated_cost]),
@@ -49,13 +53,20 @@ module ReportsService::Biddings
     end
 
     def sheet_rows_detailing(bidding, i)
-      @sheet1.row(i).replace [
-        bidding.cooperative.name, bidding.cooperative.address.city.name,
-        bidding.title, bidding.description,
+      @book.replace_row(@sheet1, i, sheet_rows_detailing_values(bidding))
+    end
+
+    def sheet_rows_detailing_values(bidding)
+      [
+        bidding.cooperative.name,
+        bidding.cooperative.address.city.name,
+        bidding.title,
+        bidding.description,
         I18n.t("services.download.biddings.status.kind.#{bidding.kind}"),
         I18n.t("services.download.biddings.status.modality.#{bidding.modality}"),
         I18n.t("services.download.biddings.status.#{bidding.status}"),
-        I18n.l(bidding.start_date), I18n.l(bidding.closing_date),
+        I18n.l(bidding.start_date),
+        I18n.l(bidding.closing_date),
         format_money(bidding.lot_group_items.map(&:group_item).sum(&:estimated_cost)),
         format_money(bidding.proposals.accepted.sum(&:price_total))
       ]
@@ -94,8 +105,8 @@ module ReportsService::Biddings
       ]
     end
 
-    def name_file
-      @name_file ||= "storage/licitacao_status_#{DateTime.current.strftime('%d%m%Y%H%M')}.xlsx"
+    def name_key
+      'licitacao_status_'
     end
 
     def bidding_kinds

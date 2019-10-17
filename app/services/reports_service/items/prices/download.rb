@@ -31,10 +31,6 @@ module ReportsService::Items
       ]
     end
 
-    def name_file
-      @name_file ||= "storage/variacao_preco_itens_#{DateTime.current.strftime('%d%m%Y%H%M')}.xlsx"
-    end
-
     def item_similars
       @row_arr = []
       GroupItem.by_proposals_accepted.sorted(:id).distinct.find_each do |group_item|
@@ -58,14 +54,21 @@ module ReportsService::Items
     def sheet_load_rows
       i = 2
       @row_arr.each do |row|
-        @sheet.row(i).replace [
-          row[:title], row[:name_lot],
-          row[:price], row[:bidding_title], row[:name_provider],
-          row[:document], row[:name_cooperative], row[:cnpj_cooperative]
-        ]
+        @book.replace_row(@sheet, i, sheet_load_rows_values(row))
         i += 1
       end
     end
 
+    def sheet_load_rows_values(row)
+      [
+        row[:title], row[:name_lot],
+        row[:price], row[:bidding_title], row[:name_provider],
+        row[:document], row[:name_cooperative], row[:cnpj_cooperative]
+      ]
+    end
+
+    def name_key
+      'variacao_preco_itens_'
+    end
   end
 end

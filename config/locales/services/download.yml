@@ -2,6 +2,8 @@ pt-BR:
   services:
     download:
       money: 'R$ %{value}'
+      summary: 'Sumário'
+      details: Detalhes
 
       biddings:
         status:
@@ -17,6 +19,7 @@ pt-BR:
           finnished: Concluída
           ongoing: Aberta
           under_review: Em análise
+          reopened: Reaberta
           waiting: Aguardando liberação
           suspended: Suspensa
           draw: Aguardando desempate
@@ -34,7 +37,7 @@ pt-BR:
           column_14: Preço total estimado
           column_15: Preço total propostas
 
-          kind: 
+          kind:
             global: Preço global
             lot: Preço por lote
             unitary: Preço individual
@@ -42,7 +45,7 @@ pt-BR:
             unrestricted: Aberta/Pública
             open_invite: Convite aberto
             closed_invite: Convite fechado
-        
+
         time:
           worksheet: Tempos de realização de licitações
           column_1: Titulo
@@ -64,7 +67,7 @@ pt-BR:
           column_13: Total de dias
           column_14: Preço total
 
-          kind: 
+          kind:
             global: Preço global
             lot: Preço por lote
             unitary: Preço individual
@@ -72,7 +75,7 @@ pt-BR:
             unrestricted: Aberta/Pública
             open_invite: Convite aberto
             closed_invite: Convite fechado
-      
+
       contracts:
         kind:
           worksheet: Classificação por contrato
@@ -88,11 +91,11 @@ pt-BR:
           column_9: Fornecedor
           column_10: Documento Fornecedor
           column_11: Valor total do contrato
-      
+
       items:
         prices:
           worksheet: Variação de preços entre itens semelhantes
-          
+
           column_1: Item
           column_2: Lote
           column_3: Valor unitário
@@ -101,14 +104,14 @@ pt-BR:
           column_6: Documento Fornecedor
           column_7: Associação
           column_8: CNPJ Associação
-          
+
       supplier:
         biddings:
           worksheet: Fornecedores que mais participam de licitações
           column_1: Documento
           column_2: Nome fornecedor
           column_3: Quantidade de licitações
-          
+
           column_4: Número Licitação
           column_5: Fornecedor
           column_6: Documento Fornecedor
@@ -122,7 +125,7 @@ pt-BR:
           column_14: Data de início
           column_15: Data de encerramento
 
-          kind: 
+          kind:
             global: Preço global
             lot: Preço por lote
             unitary: Preço individual
@@ -136,18 +139,19 @@ pt-BR:
           finnished: Concluída
           ongoing: Aberta
           under_review: Em análise
+          reopened: Reaberta
           waiting: Aguardando liberação
           suspended: Suspensa
           draw: Aguardando desempate
           draft: Em rascunho
           desert: Deserto
-        
+
         ranking:
           worksheet: Ranking de fornecedores com maior número e valor de contratos
           column_1: Nome
           column_2: Quantidade
           column_3: Valor
-          
+
           column_4: Fornecedor
           column_5: Documento Fornecedor
           column_6: Contrato
@@ -155,4 +159,4 @@ pt-BR:
           column_8: CNPJ Associação
           column_9: Número Licitação
           column_10: Valor total do contrato
-          
+

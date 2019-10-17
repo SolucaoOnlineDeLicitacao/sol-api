@@ -17,8 +17,9 @@ module ReportsService::Biddings
 
     def detailing
       i = 0
-      @sheet1.row(i).concat sheet_detailing_title_columns
+      @book.concat_row(@sheet1, i, sheet_detailing_title_columns)
       i += 1
+
       Bidding.finnished.order(title: :desc).map do |bidding|
         sheet_rows_detailing(bidding, i)
         i += 1
@@ -26,13 +27,20 @@ module ReportsService::Biddings
     end
 
     def sheet_rows_detailing(bidding, i)
-      @sheet1.row(i).replace [
-        bidding.cooperative.name, bidding.cooperative.address.city.name,
-        bidding.title, bidding.description,
+      @book.replace_row(@sheet1, i, sheet_rows_detailing_values(bidding))
+    end
+
+    def sheet_rows_detailing_values(bidding)
+      [
+        bidding.cooperative.name,
+        bidding.cooperative.address.city.name,
+        bidding.title,
+        bidding.description,
         I18n.t("services.download.biddings.time.kind.#{bidding.kind}"),
         I18n.t("services.download.biddings.time.modality.#{bidding.modality}"),
         I18n.t("services.download.biddings.time.#{bidding.status}"),
-        I18n.l(bidding.start_date), I18n.l(bidding.closing_date),
+        I18n.l(bidding.start_date),
+        I18n.l(bidding.closing_date),
         count_days(bidding),
         format_money(bidding.proposals.accepted.sum(&:price_total))
       ]
@@ -69,14 +77,10 @@ module ReportsService::Biddings
       ]
     end
 
-    def name_file
-      @name_file ||= "storage/licitacao_time_#{DateTime.current.strftime('%d%m%Y%H%M')}.xlsx"
-    end
-
     def list_biddings_finnished_time
       i = 2
       Bidding.finnished.order(title: :desc).map do |bidding|
-        @sheet.row(i).replace [bidding.title, count_days(bidding)]
+        @book.replace_row(@sheet, i, [bidding.title, count_days(bidding)])
         i += 1
       end
     end
@@ -84,6 +88,10 @@ module ReportsService::Biddings
     def count_days(bidding)
       I18n.t('services.download.biddings.time.days', day:
         (bidding.start_date...bidding.closing_date).count)
+    end
+
+    def name_key
+      'licitacao_time_'
     end
   end
 end
