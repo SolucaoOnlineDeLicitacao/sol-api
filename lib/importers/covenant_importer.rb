@@ -32,6 +32,8 @@ module Importers
       make_all_items_unavailable
 
       import_groups
+      
+      delete_all_items_unavailable
 
     end
 
@@ -57,6 +59,17 @@ module Importers
           group_item.available_quantity = 0
           
           save_resource!(group_item)
+        end
+      end
+    end
+    
+    def delete_all_items_unavailable
+      covenant = Covenant.find_by(number: covenant_number)
+      covenant.groups.each do |group|
+        group.group_items.each do |group_item|
+          if group_item.quantity == 0 and group_item.available_quantity == 0
+            group_item.delete!
+          end
         end
       end
     end
