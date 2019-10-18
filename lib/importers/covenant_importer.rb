@@ -68,7 +68,7 @@ module Importers
       covenant.groups.each do |group|
         group.group_items.each do |group_item|
           if group_item.quantity == 0 and group_item.available_quantity == 0
-            group_item.delete!
+            group_item.destroy!
           end
         end
       end
