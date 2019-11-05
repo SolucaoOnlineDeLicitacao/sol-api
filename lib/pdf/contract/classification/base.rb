@@ -97,9 +97,18 @@ module Pdf::Contract::Classification
     end
 
     def lots_list
-      contract.proposal.lot_group_item_lot_proposals.map do |lot_group_item_lot_proposal|
+      return lots_list_global if global?
+      contract.lot_group_item_lot_proposals.map do |lot_group_item_lot_proposal|
         annex_lots(lot_group_item_lot_proposal)
       end
+    end
+
+    def lots_list_global
+      contract.proposal.bidding.lots.map do |lot|
+        lot.lot_group_items.map do |lot_group_item|
+          annex_lots(lot_group_item.lot_group_item_lot_proposals.first)
+        end
+      end.flatten
     end
 
     def annex_lots(lot_group_item_lot_proposal)
@@ -127,8 +136,17 @@ module Pdf::Contract::Classification
     end
 
     def rows_table
-      contract.proposal.lot_group_item_lot_proposals.map do |lot_group_item_lot_proposal|
+      return rows_table_global if global?
+      contract.lot_group_item_lot_proposals.map do |lot_group_item_lot_proposal|
         fill_table_row(lot_group_item_lot_proposal)
+      end
+    end
+
+    def rows_table_global
+      contract.proposal.bidding.lots.map do |lot|
+        lot.lot_group_items.map do |lot_group_item|
+          fill_table_row(lot_group_item.lot_group_item_lot_proposals.first)
+        end
       end
     end
 
