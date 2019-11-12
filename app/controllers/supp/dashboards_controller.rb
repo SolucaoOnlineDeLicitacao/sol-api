@@ -15,7 +15,7 @@ module Supp
     end
 
     def find_biddings
-      Bidding.active.sorted
+      Bidding.by_provider(current_provider).accessible_by(current_ability).sorted.distinct('biddings.id')
     end
   end
 end
