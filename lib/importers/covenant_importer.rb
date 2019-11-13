@@ -55,7 +55,7 @@ module Importers
       covenant = Covenant.find_by(number: covenant_number)
       covenant.groups.each do |group|
         group.group_items.each do |group_item|
-          group_item.quantity = group_item.quantity - group_item.available_quantity
+          group_item.quantity = (group_item.quantity - group_item.available_quantity) < 0 ? 0 : group_item.quantity - group_item.available_quantity
           group_item.available_quantity = 0
           
           save_resource!(group_item)
