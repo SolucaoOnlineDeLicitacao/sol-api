@@ -54,14 +54,22 @@ RSpec.describe Supp::BiddingsController, type: :controller do
       end
 
       describe 'exposes' do
+        let(:stub_biddings) { Bidding.all }
+        let(:current_ability) { Abilities::SupplierAbility.new(user) }
+
         before do
-          allow(Bidding).to receive(:by_provider).with(provider) { Bidding.all }
+          allow(controller).to receive(:current_ability) { current_ability }
+  
+          allow(Bidding).to receive(:by_provider).with(provider) { stub_biddings }
+          allow(stub_biddings).to receive(:accessible_by).with(current_ability) { stub_biddings }
+          allow(stub_biddings).to receive(:distinct).with('biddings.id') { Bidding.all }
 
           get_index
         end
 
         it { expect(Bidding).to have_received(:by_provider).with(provider) }
-        it { expect(controller.biddings).to match_array biddings }
+        it { expect(stub_biddings).to have_received(:accessible_by).with(current_ability) }
+        it { expect(stub_biddings).to have_received(:distinct).with('biddings.id') }
       end
 
       describe 'JSON' do
