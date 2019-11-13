@@ -26,7 +26,7 @@ module Supp
     end
 
     def find_biddings
-      Bidding.by_provider(current_provider).accessible_by(current_ability)
+      Bidding.by_provider(current_provider).accessible_by(current_ability).distinct('biddings.id')
     end
   end
 end
