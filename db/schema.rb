@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_140224) do
+ActiveRecord::Schema.define(version: 2019_11_28_123138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,11 +205,11 @@ ActiveRecord::Schema.define(version: 2019_09_19_140224) do
   create_table "group_items", force: :cascade do |t|
     t.bigint "group_id"
     t.bigint "item_id"
-    t.integer "quantity"
+    t.decimal "quantity", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "estimated_cost"
-    t.integer "available_quantity"
+    t.decimal "available_quantity", precision: 10, scale: 2
     t.index ["group_id"], name: "index_group_items_on_group_id"
     t.index ["item_id"], name: "index_group_items_on_item_id"
   end
@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_140224) do
   create_table "lot_group_items", force: :cascade do |t|
     t.bigint "lot_id"
     t.bigint "group_item_id"
-    t.integer "quantity"
+    t.decimal "quantity", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_item_id"], name: "index_lot_group_items_on_group_item_id"
@@ -319,6 +319,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_140224) do
     t.bigint "supplier_id"
     t.decimal "delivery_price"
     t.bigint "parent_id"
+    t.index ["lot_id", "supplier_id"], name: "index_lot_proposals_on_lot_id_and_supplier_id", unique: true
     t.index ["lot_id"], name: "index_lot_proposals_on_lot_id"
     t.index ["proposal_id"], name: "index_lot_proposals_on_proposal_id"
     t.index ["supplier_id"], name: "index_lot_proposals_on_supplier_id"
@@ -453,7 +454,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_140224) do
   end
 
   create_table "returned_lot_group_items", force: :cascade do |t|
-    t.integer "quantity"
+    t.decimal "quantity", precision: 10, scale: 2
     t.bigint "contract_id"
     t.bigint "lot_group_item_id"
     t.datetime "created_at", null: false

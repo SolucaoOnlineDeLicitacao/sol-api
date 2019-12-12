@@ -38,10 +38,10 @@ RSpec.describe Supp::LotGroupItemSerializer, type: :serializer do
     it { is_expected.to include 'item_short_name' => object.group_item.item.title }
     it { is_expected.to include 'item_name' => object.group_item.item.text }
     it { is_expected.to include 'item_unit' => object.group_item.unit.name }
-    it { is_expected.to include 'quantity' => object.quantity }
-    it { is_expected.to include 'total_quantity' => object.group_item.quantity }
-    it { is_expected.to include 'available_quantity' => object.group_item.available_quantity }
-    it { is_expected.to include 'current_quantity' => object.quantity }
+    it { is_expected.to include 'quantity' => object.quantity.to_s }
+    it { is_expected.to include 'total_quantity' => object.group_item.quantity.to_s }
+    it { is_expected.to include 'available_quantity' => object.group_item.available_quantity.to_s }
+    it { is_expected.to include 'current_quantity' => object.quantity.to_s }
     it { is_expected.to include '_destroy' => object._destroy }
     it { is_expected.to include 'lot_group_item_count' => lot_group_item_count }
     it { is_expected.to include 'lot_group_item_lot_proposals' => lot_group_item_lot_proposals }
