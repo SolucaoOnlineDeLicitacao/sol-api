@@ -29,6 +29,12 @@ RSpec.describe TransactionMethods do
         it { is_expected.to be_falsey }
       end
 
+      context 'and raises ActiveRecord::RecordNotUnique error' do
+        before { expect(record). to receive(:save).and_raise(ActiveRecord::RecordNotUnique) }
+
+        it { is_expected.to be_falsey }
+      end
+
       context 'and raises BlockchainError error' do
         before { expect(record). to receive(:save).and_raise(BlockchainError) }
 
@@ -37,6 +43,18 @@ RSpec.describe TransactionMethods do
 
       context 'and raises RecalculateItemError error' do
         before { expect(record). to receive(:save).and_raise(RecalculateItemError) }
+
+        it { is_expected.to be_falsey }
+      end
+
+      context 'and raises ArgumentError error' do
+        before { expect(record). to receive(:save).and_raise(ArgumentError) }
+
+        it { is_expected.to be_falsey }
+      end
+
+      context 'and raises CreateContractError error' do
+        before { expect(record). to receive(:save).and_raise(CreateContractError) }
 
         it { is_expected.to be_falsey }
       end

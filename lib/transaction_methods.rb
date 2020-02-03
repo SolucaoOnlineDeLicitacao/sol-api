@@ -2,6 +2,7 @@ module TransactionMethods
   EXCEPTIONS = [
     ActiveRecord::RecordInvalid,
     ActiveRecord::RecordNotDestroyed,
+    ActiveRecord::RecordNotUnique,
     BlockchainError,
     RecalculateItemError,
     ArgumentError,
