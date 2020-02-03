@@ -22,6 +22,8 @@ class LotProposal < ApplicationRecord
             :supplier,
             presence: true
 
+  validates :lot_id, uniqueness: { scope: :supplier_id }
+
   validates :delivery_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   validate :validate_price_total

@@ -4,7 +4,10 @@ RSpec.shared_examples 'services/concerns/contract_classification' do
 
   let!(:providers) { create_list(:provider, 2, :skip_validation, skip_classification: true) }
   let!(:provider) { providers.first }
+  let!(:provider_2) { providers.last }
+
   let!(:supplier) { create(:supplier, provider: provider) }
+  let!(:supplier_2) { create(:supplier, provider: provider_2) }
 
   let!(:item_1) { create(:item, classification: classification_1) }
   let!(:item_2) { create(:item, classification: classification_2) }
@@ -117,14 +120,14 @@ RSpec.shared_examples 'services/concerns/contract_classification' do
 
   let!(:proposal_5) do
     proposal = create(:proposal, build_lot_proposal: false, bidding: bidding_4,
-        provider: provider)
+        provider: provider_2)
     proposal.update_column(:price_total, 4)
     proposal
   end
 
   let!(:proposal_6) do
     proposal = create(:proposal, build_lot_proposal: false, bidding: bidding_3,
-        provider: provider)
+        provider: provider_2)
     proposal.update_column(:price_total, 3)
     proposal
   end
@@ -151,12 +154,12 @@ RSpec.shared_examples 'services/concerns/contract_classification' do
 
   let!(:lot_proposal_5) do
     create(:lot_proposal, build_lot_group_item_lot_proposal: false,
-        lot: lot_4, proposal: proposal_5, supplier: supplier)
+        lot: lot_4, proposal: proposal_5, supplier: supplier_2)
   end
 
   let!(:lot_proposal_6) do
     create(:lot_proposal, build_lot_group_item_lot_proposal: false,
-        lot: lot_3, proposal: proposal_6, supplier: supplier)
+        lot: lot_3, proposal: proposal_6, supplier: supplier_2)
   end
 
   let!(:lot_group_item_lot_proposal_1) do

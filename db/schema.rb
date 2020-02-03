@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_140224) do
+ActiveRecord::Schema.define(version: 2019_11_19_141502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,6 +319,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_140224) do
     t.bigint "supplier_id"
     t.decimal "delivery_price"
     t.bigint "parent_id"
+    t.index ["lot_id", "supplier_id"], name: "index_lot_proposals_on_lot_id_and_supplier_id", unique: true
     t.index ["lot_id"], name: "index_lot_proposals_on_lot_id"
     t.index ["proposal_id"], name: "index_lot_proposals_on_proposal_id"
     t.index ["supplier_id"], name: "index_lot_proposals_on_supplier_id"
