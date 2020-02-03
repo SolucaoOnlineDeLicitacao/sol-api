@@ -28,8 +28,12 @@ module Importers
       import_covenant
 
       save_resource!(@covenant)
+      
+      make_all_items_unavailable
 
       import_groups
+      
+      delete_all_items_unavailable
 
     end
 
@@ -45,6 +49,31 @@ module Importers
 
     def covenant_number
       squish(resource[:number])
+    end
+    
+    def make_all_items_unavailable
+      covenant = Covenant.find_by(number: covenant_number)
+      covenant.groups.each do |group|
+        group.group_items.each do |group_item|
+          group_item.quantity = (group_item.quantity - group_item.available_quantity) < 0 ? 0 : group_item.quantity - group_item.available_quantity
+          group_item.available_quantity = 0
+          
+          save_resource!(group_item)
+        end
+      end
+    end
+    
+    def delete_all_items_unavailable
+      covenant = Covenant.find_by(number: covenant_number)
+      covenant.groups.each do |group|
+        group.group_items.each do |group_item|
+          if group_item.quantity == 0 and group_item.available_quantity == 0
+            if LotGroupItem.where('group_item_id = ?', group_item.id).count == 0 
+              group_item.destroy!
+            end
+          end
+        end
+      end
     end
 
     def import_covenant
