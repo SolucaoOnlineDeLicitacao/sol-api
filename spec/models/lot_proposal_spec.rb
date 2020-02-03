@@ -27,6 +27,12 @@ RSpec.describe LotProposal, type: :model do
     it { is_expected.to validate_presence_of :lot }
     it { is_expected.to validate_presence_of :proposal }
     it { is_expected.to validate_presence_of :supplier }
+    
+    context 'uniqueness' do
+      before { build(:lot_proposal) }
+
+      it { is_expected.to validate_uniqueness_of(:lot_id).scoped_to(:supplier_id) }
+    end
 
     describe 'delivery_price' do
       let(:lot_proposal) { create(:lot_proposal, delivery_price: 10) }

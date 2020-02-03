@@ -10,6 +10,14 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
       create(:bidding, status: :draft, kind: 2, covenant: covenant, build_lot: false)
     end
 
+    let!(:provider_1) { create(:provider) }
+    let!(:provider_2) { create(:provider) }
+    let!(:provider_3) { create(:provider) }
+
+    let!(:supplier1) { create(:supplier, provider: provider_1) }
+    let!(:supplier2) { create(:supplier, provider: provider_2) }
+    let!(:supplier3) { create(:supplier, provider: provider_3) }
+
     let(:item1) do
       create(:item, title: "Telha metálica trapezoidal",
         description: "Fornecimento de telhas metálica trapezoidal")
@@ -20,6 +28,11 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
         description: "Regador de plástico capacidade 5 Litros")
     end
 
+    let(:item3) do
+      create(:item, title: "Regador de plástico 15 Litros",
+        description: "Regador de plástico capacidade 15 Litros")
+    end
+
     let(:group) do
       group = Group.new(covenant: covenant); group.save(validate: false);
       group
@@ -27,6 +40,7 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
 
     let(:group_item1) { create(:group_item, group: group, item: item1) }
     let(:group_item2) { create(:group_item, group: group, item: item2) }
+    let(:group_item3) { create(:group_item, group: group, item: item3) }
 
     let!(:lot1) do
       lot = Lot.new(id: 1, bidding: bidding, name: 'Lote A'); lot.save(validate: false); lot
@@ -34,6 +48,10 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
 
     let!(:lot2) do
       lot = Lot.new(id: 2, bidding: bidding, name: 'Lote B'); lot.save(validate: false); lot
+    end
+
+    let!(:lot3) do
+      lot = Lot.new(id: 3, bidding: bidding, name: 'Lote C'); lot.save(validate: false); lot
     end
 
     let!(:lot_group_item1) do
@@ -44,22 +62,21 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
       create(:lot_group_item, id: 2, lot: lot2, group_item: group_item2)
     end
 
+    let!(:lot_group_item3) do
+      create(:lot_group_item, id: 3, lot: lot3, group_item: group_item3)
+    end
+
     let!(:proposal1) do
-      create(:proposal, provider: providers.first, bidding: bidding, status: :accepted)
+      create(:proposal, provider: provider_1, bidding: bidding, status: :accepted)
     end
 
     let!(:proposal2) do
-      create(:proposal, provider: providers.last, bidding: bidding, status: :accepted)
+      create(:proposal, provider: provider_2, bidding: bidding, status: :accepted)
     end
 
     let!(:proposal3) do
-      create(:proposal, provider: providers.last, bidding: bidding, status: :accepted)
+      create(:proposal, provider: provider_3, bidding: bidding, status: :accepted)
     end
-
-    let(:providers) { create_list(:provider, 2) }
-
-    let!(:supplier1) { create(:supplier, provider: providers.first) }
-    let!(:supplier2) { create(:supplier, provider: providers.last) }
 
     let!(:lot_proposal1) do
       create(:lot_proposal, lot: lot1, proposal: proposal1, supplier: supplier1)
@@ -70,7 +87,7 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
     end
 
     let!(:lot_proposal3) do
-      create(:lot_proposal, lot: lot2, proposal: proposal1, supplier: supplier1)
+      create(:lot_proposal, lot: lot3, proposal: proposal3, supplier: supplier3)
     end
 
     let!(:bidding_finnished) { bidding.finnished! }
@@ -86,6 +103,10 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
         lot_group_item_lot_proposal.update!(price: new_price + 10)
       end
 
+      group_item3.accepted_lot_group_item_lot_proposals.each_with_index do |lot_group_item_lot_proposal, new_price|
+        lot_group_item_lot_proposal.update!(price: new_price + 20)
+      end
+
       @group_item1_accepted = group_item1.accepted_lot_group_item_lot_proposals.map do |item|
         ActionController::Base.helpers.number_to_currency(item.price)
       end
@@ -93,6 +114,11 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
       @group_item2_accepted = group_item2.accepted_lot_group_item_lot_proposals.map do |item|
         ActionController::Base.helpers.number_to_currency(item.price)
       end
+
+      @group_item3_accepted = group_item3.accepted_lot_group_item_lot_proposals.map do |item|
+        ActionController::Base.helpers.number_to_currency(item.price)
+      end
+
     end
 
     context 'when it runs successfully' do
@@ -110,10 +136,10 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
       context 'line 2' do
         it { expect(sheet.row(2)[0]).to eq item1.title }
         it { expect(sheet.row(2)[1]).to eq lot1.name }
-        it { expect(@group_item2_accepted).to include sheet.row(2)[2] }
+        it { expect(@group_item1_accepted).to include sheet.row(2)[2] }
         it { expect(sheet.row(2)[3]).to eq bidding.title }
-        it { expect(sheet.row(2)[4]).to eq providers.first.name }
-        it { expect(sheet.row(2)[5]).to eq providers.first.document }
+        it { expect(sheet.row(2)[4]).to eq provider_1.name }
+        it { expect(sheet.row(2)[5]).to eq provider_1.document }
         it { expect(sheet.row(2)[6]).to eq bidding.cooperative.name }
         it { expect(sheet.row(2)[7]).to eq bidding.cooperative.cnpj }
       end
@@ -123,8 +149,8 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
         it { expect(sheet.row(3)[1]).to eq lot1.name }
         it { expect(@group_item2_accepted).to include sheet.row(3)[2] }
         it { expect(sheet.row(3)[3]).to eq bidding.title }
-        it { expect(sheet.row(3)[4]).to eq providers.last.name }
-        it { expect(sheet.row(3)[5]).to eq providers.last.document }
+        it { expect(sheet.row(3)[4]).to eq provider_2.name }
+        it { expect(sheet.row(3)[5]).to eq provider_2.document }
         it { expect(sheet.row(3)[6]).to eq bidding.cooperative.name }
         it { expect(sheet.row(3)[7]).to eq bidding.cooperative.cnpj }
       end
@@ -132,10 +158,10 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
       context 'line 4' do
         it { expect(sheet.row(4)[0]).to eq item1.title }
         it { expect(sheet.row(4)[1]).to eq lot1.name }
-        it { expect(@group_item1_accepted).to include sheet.row(4)[2] }
+        it { expect(@group_item3_accepted).to include sheet.row(4)[2] }
         it { expect(sheet.row(4)[3]).to eq bidding.title }
-        it { expect(sheet.row(4)[4]).to eq providers.last.name }
-        it { expect(sheet.row(4)[5]).to eq providers.last.document }
+        it { expect(sheet.row(4)[4]).to eq provider_3.name }
+        it { expect(sheet.row(4)[5]).to eq provider_3.document }
         it { expect(sheet.row(4)[6]).to eq bidding.cooperative.name }
         it { expect(sheet.row(4)[7]).to eq bidding.cooperative.cnpj }
       end
@@ -143,10 +169,10 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
       context 'line 5' do
         it { expect(sheet.row(5)[0]).to eq item1.title }
         it { expect(sheet.row(5)[1]).to eq lot1.name }
-        it { expect(@group_item2_accepted).to include sheet.row(5)[2] }
+        it { expect(@group_item1_accepted).to include sheet.row(5)[2] }
         it { expect(sheet.row(5)[3]).to eq bidding.title }
-        it { expect(sheet.row(5)[4]).to eq providers.first.name }
-        it { expect(sheet.row(5)[5]).to eq providers.first.document }
+        it { expect(sheet.row(5)[4]).to eq provider_1.name }
+        it { expect(sheet.row(5)[5]).to eq provider_1.document }
         it { expect(sheet.row(5)[6]).to eq bidding.cooperative.name }
         it { expect(sheet.row(5)[7]).to eq bidding.cooperative.cnpj }
       end
@@ -156,19 +182,19 @@ RSpec.describe ReportsService::Items::Prices::Download, type: :service do
         it { expect(sheet.row(6)[1]).to eq lot2.name }
         it { expect(@group_item2_accepted).to include sheet.row(6)[2] }
         it { expect(sheet.row(6)[3]).to eq bidding.title }
-        it { expect(sheet.row(6)[4]).to eq providers.last.name }
-        it { expect(sheet.row(6)[5]).to eq providers.last.document }
+        it { expect(sheet.row(6)[4]).to eq provider_2.name }
+        it { expect(sheet.row(6)[5]).to eq provider_2.document }
         it { expect(sheet.row(6)[6]).to eq bidding.cooperative.name }
         it { expect(sheet.row(6)[7]).to eq bidding.cooperative.cnpj }
       end
 
       context 'line 7' do
-        it { expect(sheet.row(7)[0]).to eq item2.title }
-        it { expect(sheet.row(7)[1]).to eq lot2.name }
-        it { expect(@group_item2_accepted).to include sheet.row(7)[2] }
+        it { expect(sheet.row(7)[0]).to eq item3.title }
+        it { expect(sheet.row(7)[1]).to eq lot3.name }
+        it { expect(@group_item3_accepted).to include sheet.row(7)[2] }
         it { expect(sheet.row(7)[3]).to eq bidding.title }
-        it { expect(sheet.row(7)[4]).to eq providers.first.name }
-        it { expect(sheet.row(7)[5]).to eq providers.first.document }
+        it { expect(sheet.row(7)[4]).to eq provider_3.name }
+        it { expect(sheet.row(7)[5]).to eq provider_3.document }
         it { expect(sheet.row(7)[6]).to eq bidding.cooperative.name }
         it { expect(sheet.row(7)[7]).to eq bidding.cooperative.cnpj }
       end
