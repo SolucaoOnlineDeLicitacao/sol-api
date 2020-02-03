@@ -13,7 +13,7 @@ RSpec.shared_examples "a group_serializer" do
     it { is_expected.to include 'id' => object.id }
     it { is_expected.to include 'name' => object.name }
     it { is_expected.to include 'group_items_count' => object.group_items_count }
-    it { is_expected.to include 'group_items_value_count' => total_expected_value }
+    it { is_expected.to include 'group_items_value_count' => total_expected_value.to_s }
   end
 
   describe 'associations' do

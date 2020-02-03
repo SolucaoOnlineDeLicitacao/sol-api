@@ -89,7 +89,7 @@ RSpec.describe Importers::CovenantImporter do
               "description": "Fornecimento de telhas metálica trapezoidal",
               "unit": unit.name,
               "classification": 1_000_000_000,
-              "quantity": 800,
+              "quantity": 800.50,
               "estimated_cost": 15.50
             },
             {
@@ -98,7 +98,7 @@ RSpec.describe Importers::CovenantImporter do
               "description": "Regador de plástico capacidade 5 Litros",
               "unit": unit.name,
               "classification": 1_000_000_000,
-              "quantity": 1000,
+              "quantity": 1000.001,
               "estimated_cost": 10.50
             }
           ]
@@ -216,7 +216,7 @@ RSpec.describe Importers::CovenantImporter do
                   let(:imported_group_item1) { first_group.group_items.first }
                   let(:item) { imported_group_item1.item }
 
-                  it { expect(imported_group_item1.quantity).to eq 800 }
+                  it { expect(imported_group_item1.quantity).to eq 800.50 }
                   it { expect(imported_group_item1.estimated_cost).to eq 15.50 }
 
                   describe 'item' do
@@ -282,7 +282,7 @@ RSpec.describe Importers::CovenantImporter do
                   let(:imported_group_item1) { first_group.group_items.first }
                   let(:item) { imported_group_item1.item }
 
-                  it { expect(imported_group_item1.quantity).to eq 800 }
+                  it { expect(imported_group_item1.quantity).to eq 800.50 }
                   it { expect(imported_group_item1.estimated_cost).to eq 15.50 }
 
                   describe 'item' do
@@ -368,14 +368,14 @@ RSpec.describe Importers::CovenantImporter do
           end
 
           context 'when import quantity >= available_quantity' do
-            let(:quantity) { 20 }
+            let(:quantity) { 20.95 }
             let(:available_quantity) { 5 }
             let(:resource_quantity) { 30 }
 
             before { importer.import }
 
             it { expect(imported_group_item.quantity).to eq 30 }
-            it { expect(imported_group_item.available_quantity).to eq 15 }
+            it { expect(imported_group_item.available_quantity).to eq 14.05 }
           end
 
           context 'when import quantity < available_quantity' do

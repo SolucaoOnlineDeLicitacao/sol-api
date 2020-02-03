@@ -14,9 +14,6 @@ RSpec.describe GroupItem, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of :quantity }
-    it { is_expected.to validate_presence_of :available_quantity }
-
     context 'uniqueness' do
       # skips ForeignKeyViolation error - validate_uniqueness_of uses id 0 for uniqueness test
       before { create(:item, id: 0) }
@@ -28,16 +25,32 @@ RSpec.describe GroupItem, type: :model do
       subject { group_item }
 
       describe 'quantity' do
-        context 'when < 0' do
-          let(:group_item) { build(:group_item, quantity: -1) }
+        context 'when nil' do
+          let(:group_item) { build(:group_item, quantity: nil) }
 
           before { group_item.valid? }
 
           it { is_expected.to include_error_key_for(:quantity, :greater_than) }
         end
 
-        context 'when = 0' do
-          let(:group_item) { build(:group_item, quantity: 0) }
+        context 'when < 0' do
+          let(:group_item) { build(:group_item, quantity: -0.01) }
+
+          before { group_item.valid? }
+
+          it { is_expected.to include_error_key_for(:quantity, :greater_than) }
+        end
+
+        context 'when = 0.0' do
+          let(:group_item) { build(:group_item, quantity: 0.00) }
+
+          before { group_item.valid? }
+
+          it { is_expected.to include_error_key_for(:quantity, :greater_than) }
+        end
+
+        context 'when = 0.001' do
+          let(:group_item) { build(:group_item, quantity: 0.001) }
 
           before { group_item.valid? }
 
@@ -45,7 +58,7 @@ RSpec.describe GroupItem, type: :model do
         end
 
         context 'when > 0' do
-          let(:group_item) { build(:group_item, quantity: 1) }
+          let(:group_item) { build(:group_item, quantity: 0.01) }
 
           before { group_item.valid? }
 
@@ -59,7 +72,7 @@ RSpec.describe GroupItem, type: :model do
         context 'when < 0' do
           before do
             group_item.save
-            group_item.update_column(:available_quantity, -1)
+            group_item.update_column(:available_quantity, -0.1)
             group_item.valid?
           end
 
@@ -69,7 +82,7 @@ RSpec.describe GroupItem, type: :model do
         context 'when = 0' do
           before do
             group_item.save
-            group_item.update_column(:available_quantity, 0)
+            group_item.update_column(:available_quantity, 0.00)
             group_item.valid?
           end
 
@@ -117,6 +130,12 @@ RSpec.describe GroupItem, type: :model do
         before { group_item.estimated_cost = '10,05'; group_item.valid? }
 
         it { expect(group_item.estimated_cost).to eq 10.05 }
+      end
+
+      describe 'ensure_quantity' do
+        before { group_item.quantity = '10,05'; group_item.valid? }
+
+        it { expect(group_item.quantity).to eq 10.05 }
       end
 
       describe 'ensure_available_quantity' do

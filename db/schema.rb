@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_141502) do
-
+ActiveRecord::Schema.define(version: 2019_11_28_123138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -205,11 +204,11 @@ ActiveRecord::Schema.define(version: 2019_11_19_141502) do
   create_table "group_items", force: :cascade do |t|
     t.bigint "group_id"
     t.bigint "item_id"
-    t.integer "quantity"
+    t.decimal "quantity", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "estimated_cost"
-    t.integer "available_quantity"
+    t.decimal "available_quantity", precision: 10, scale: 2
     t.index ["group_id"], name: "index_group_items_on_group_id"
     t.index ["item_id"], name: "index_group_items_on_item_id"
   end
@@ -287,7 +286,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_141502) do
   create_table "lot_group_items", force: :cascade do |t|
     t.bigint "lot_id"
     t.bigint "group_item_id"
-    t.integer "quantity"
+    t.decimal "quantity", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_item_id"], name: "index_lot_group_items_on_group_item_id"
@@ -454,7 +453,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_141502) do
   end
 
   create_table "returned_lot_group_items", force: :cascade do |t|
-    t.integer "quantity"
+    t.decimal "quantity", precision: 10, scale: 2
     t.bigint "contract_id"
     t.bigint "lot_group_item_id"
     t.datetime "created_at", null: false

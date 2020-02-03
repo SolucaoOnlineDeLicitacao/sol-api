@@ -70,11 +70,11 @@ module Dashboards
     end
 
     def cooperatives
-      ::Cooperative.by_viewport(bounds)
+      ::Cooperative.by_viewport(bounds).includes(:address)
     end
 
     def providers
-      ::Provider.by_viewport(bounds)
+      ::Provider.by_viewport(bounds).includes(:address)
     end
   end
 end

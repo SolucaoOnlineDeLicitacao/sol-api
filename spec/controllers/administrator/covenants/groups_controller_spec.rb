@@ -127,13 +127,12 @@ RSpec.describe Administrator::Covenants::GroupsController, type: :controller do
 
       context 'when not updated' do
         let(:group_item) { build(:group_item, group: group, quantity: nil) }
-        let(:group_item_errors) do
-          { "group_items_errors"=>[{}, {"available_quantity" => "missing", "quantity"=>"missing"}] }
+        before do
+          allow(controller.group).to receive(:errors_as_json) { { error: 'value' } }
+          post_update
         end
 
-        before { post_update }
-
-        it { expect(json['errors']).to include group_item_errors }
+        it { expect(json.dig('errors', 'error')).to eq 'value' }
         it { expect(response).to have_http_status :unprocessable_entity }
       end
     end

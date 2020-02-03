@@ -1,4 +1,6 @@
 RSpec.shared_examples 'services/concerns/lot_rows' do
+  include ActionView::Helpers::NumberHelper
+
   context 'and is the first row' do
     let(:unit) do
       lot.lot_group_items.first.group_item.item.unit_name
@@ -11,7 +13,7 @@ RSpec.shared_examples 'services/concerns/lot_rows' do
     it { expect(sheet_cell(2, 4)).to eq lot.lot_group_items.first.group_item.item.classification.name }
     it { expect(sheet_cell(2, 5)).to eq lot.lot_group_items.first.group_item.item.description }
     it { expect(sheet_cell(2, 6)).to eq unit }
-    it { expect(sheet_cell(2, 7)).to eq lot.lot_group_items.first.quantity }
+    it { expect(sheet_cell(2, 7)).to eq number_with_delimiter(lot.lot_group_items.first.quantity) }
   end
 
   context 'and is the second row' do

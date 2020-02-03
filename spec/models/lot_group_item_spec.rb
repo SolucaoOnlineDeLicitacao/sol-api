@@ -14,7 +14,6 @@ RSpec.describe LotGroupItem, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of :quantity }
     it { is_expected.to validate_presence_of :lot }
     it { is_expected.to validate_presence_of :group_item }
 
@@ -29,8 +28,16 @@ RSpec.describe LotGroupItem, type: :model do
       describe 'quantity' do
         subject { lot_group_item.errors.details.dig(:quantity, 0, :error) }
 
+        context 'when nil' do
+          let(:lot_group_item) { build(:lot_group_item, quantity: nil) }
+
+          before { lot_group_item.valid? }
+
+          it { is_expected.to eq :greater_than }
+        end
+
         context 'when < 0' do
-          let(:lot_group_item) { build(:lot_group_item, quantity: -1) }
+          let(:lot_group_item) { build(:lot_group_item, quantity: -0.1) }
 
           before { lot_group_item.valid? }
 
@@ -38,7 +45,15 @@ RSpec.describe LotGroupItem, type: :model do
         end
 
         context 'when = 0' do
-          let(:lot_group_item) { build(:lot_group_item, quantity: 0) }
+          let(:lot_group_item) { build(:lot_group_item, quantity: 0.00) }
+
+          before { lot_group_item.valid? }
+
+          it { is_expected.to eq :greater_than }
+        end
+
+        context 'when = 0.001' do
+          let(:lot_group_item) { build(:lot_group_item, quantity: 0.001) }
 
           before { lot_group_item.valid? }
 
@@ -46,7 +61,7 @@ RSpec.describe LotGroupItem, type: :model do
         end
 
         context 'when > 0' do
-          let(:lot_group_item) { build(:lot_group_item, quantity: 1) }
+          let(:lot_group_item) { build(:lot_group_item, quantity: 0.01) }
 
           before { lot_group_item.valid? }
 
@@ -160,6 +175,12 @@ RSpec.describe LotGroupItem, type: :model do
   end
 
   describe 'callbacks' do
+    describe 'ensure_quantity' do
+      before { lot_group_item.quantity = '10,05'; lot_group_item.valid? }
+
+      it { expect(lot_group_item.quantity).to eq 10.05 }
+    end
+
     describe 'recount_group_item_quantity' do
       let!(:group_item) { create(:group_item, quantity: 100) }
       let!(:bidding) { create(:bidding, status: :draft) }
