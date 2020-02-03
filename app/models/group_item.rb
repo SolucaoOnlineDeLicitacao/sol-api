@@ -4,10 +4,10 @@ class GroupItem < ApplicationRecord
 
   versionable
 
-  before_validation :ensure_estimated_cost
-  before_validation :ensure_available_quantity, on: :create
+  MINIMUM_QUANTITY_VALUE = 0.freeze
 
-  attribute :estimated_cost, :money
+  before_validation :ensure_estimated_cost, :ensure_quantity
+  before_validation :ensure_available_quantity, on: :create
 
   belongs_to :group, counter_cache: true
   belongs_to :item
@@ -18,8 +18,12 @@ class GroupItem < ApplicationRecord
   has_many :proposals, through: :lot_group_items, source: :proposals
   has_many :accepted_lot_group_item_lot_proposals, -> { where(proposals: { status: 'accepted' }).distinct }, through: :proposals, source: :lot_group_item_lot_proposals
 
-  validates :quantity, presence: true, numericality: { greater_than: 0 }
-  validates :available_quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :quantity, presence: true
+  # custom numericality validation since it uses attr_before_type_cast to compair allowing
+  # values such as 0.001 to pass its validations (being greater_than 0) but afterwards been rounded to 0.00 
+  validate :minimum_quantity
+
+  validates :available_quantity, presence: true, numericality: { greater_than_or_equal_to: 0.0 }
 
   validates :estimated_cost, presence: true, numericality: { greater_than: 0 }
 
@@ -42,6 +46,10 @@ class GroupItem < ApplicationRecord
     self.estimated_cost = estimated_cost_before_type_cast.to_s.gsub(',', '.').to_f
   end
 
+  def ensure_quantity
+    self.quantity = quantity_before_type_cast.to_s.gsub(',', '.').to_f
+  end
+
   def ensure_available_quantity
     self.available_quantity = quantity
   end
@@ -56,6 +64,16 @@ class GroupItem < ApplicationRecord
 
   def self.by_proposals_accepted
     joins(:proposals).where(proposals: { status: :accepted })
+  end
+
+  private 
+
+  def minimum_quantity
+    errors.add(:quantity, :greater_than, count: MINIMUM_QUANTITY_VALUE) unless quantity_greater_than_minimum?
+  end
+
+  def quantity_greater_than_minimum?
+    quantity.present? && quantity > MINIMUM_QUANTITY_VALUE
   end
 
 end

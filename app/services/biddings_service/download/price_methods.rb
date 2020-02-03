@@ -1,5 +1,7 @@
 module BiddingsService::Download
   module PriceMethods
+    include ActionView::Helpers::NumberHelper
+
     HEADER_PRICE_COLUMNS = [
       I18n.t('services.biddings.download.header.price.title'),
       I18n.t('services.biddings.download.header.price.columns')
@@ -22,7 +24,7 @@ module BiddingsService::Download
         lot_group_item.group_item.item.classification.name,
         lot_group_item.group_item.item.description,
         unit(lot_group_item),
-        lot_group_item.quantity
+        number_with_delimiter(lot_group_item.quantity)        
       ]
     end
 

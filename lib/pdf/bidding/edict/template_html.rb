@@ -1,6 +1,7 @@
 module Pdf::Bidding
   class Edict::TemplateHtml
     include Call::Methods
+    include ActionView::Helpers::NumberHelper
 
     attr_accessor :html, :tables_content, :table
 
@@ -92,7 +93,7 @@ module Pdf::Bidding
           "<td>#{lot_group_item.item.title}</td>"\
           "<td>#{lot_group_item.item.description}</td>"\
           "<td>#{lot_group_item.classification.name}</td>"\
-          "<td>#{lot_group_item.quantity}</td>"\
+          "<td>#{formatted_number(lot_group_item.quantity)}</td>"\
           "<td>#{lot_group_item.item.unit_name}</td>"\
         "</tr>"
       )
@@ -113,6 +114,10 @@ module Pdf::Bidding
 
     def format_date(date)
       date.strftime("%d/%m/%Y")
+    end
+
+    def formatted_number(value)
+      number_with_delimiter(value)
     end
 
     def bidding_not_able_to_generate?

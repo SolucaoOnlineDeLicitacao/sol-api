@@ -154,7 +154,7 @@ module Pdf::Contract::Classification
         "<td>#{lot_group_item_lot_proposal.item.description}</td>"\
         "<td>#{lot_group_item_lot_proposal.item.classification.name}</td>"\
         "<td>#{lot_group_item_lot_proposal.item.unit.name}</td>"\
-        "<td>#{lot_group_item_lot_proposal.lot_group_item.quantity}</td>"\
+        "<td>#{formatted_number(lot_group_item_lot_proposal.lot_group_item.quantity)}</td>"\
         "<td>#{formatted_currency(lot_group_item_lot_proposal.price)}</td>"\
         "<td>#{price_total_lot(lot_group_item_lot_proposal)}</td>"\
       "</tr>"
@@ -162,6 +162,10 @@ module Pdf::Contract::Classification
 
     def formatted_currency(value)
       number_to_currency(value)
+    end
+
+    def formatted_number(value)
+      number_with_delimiter(value)
     end
 
     def prepare_currency(value)

@@ -12,9 +12,9 @@ RSpec.describe RecalculateQuantityService do
   let!(:another_lot_group_item) do
     create(:lot_group_item, group_item: group_item, lot: another_lot, quantity: 50)
   end
-  let(:group_item_quantity) { 200 }
+  let(:group_item_quantity) { 200.5 }
   let(:params) { { covenant: covenant } }
-  let(:expected) { 100 }
+  let(:expected) { 100.5 }
 
   describe '#initialize' do
     subject { described_class.new(params) }
