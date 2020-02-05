@@ -28,7 +28,7 @@ A autorização de acesso à api pela aplicação front-end e pelo usuário é r
 doorkeeper. Então apenas rode:
 
 ```bash
-  oauth:applications:load
+  rake oauth:applications:load
 ```
 
 Para consultar as credenciais é necessário entrar no console da aplicação, então rorode o comando:
