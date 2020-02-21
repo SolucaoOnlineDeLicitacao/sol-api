@@ -25,12 +25,13 @@ RSpec.describe GroupItem, type: :model do
       subject { group_item }
 
       describe 'quantity' do
-        context 'when nil' do
+        context 'when nil - rounded to 0.0' do
           let(:group_item) { build(:group_item, quantity: nil) }
 
           before { group_item.valid? }
 
-          it { is_expected.to include_error_key_for(:quantity, :greater_than) }
+          it { expect(group_item.quantity).to eq 0.0 }
+          it { is_expected.not_to include_error_key_for(:quantity, :greater_than) }
         end
 
         context 'when < 0' do
@@ -46,15 +47,7 @@ RSpec.describe GroupItem, type: :model do
 
           before { group_item.valid? }
 
-          it { is_expected.to include_error_key_for(:quantity, :greater_than) }
-        end
-
-        context 'when = 0.001' do
-          let(:group_item) { build(:group_item, quantity: 0.001) }
-
-          before { group_item.valid? }
-
-          it { is_expected.to include_error_key_for(:quantity, :greater_than) }
+          it { is_expected.not_to include_error_key_for(:quantity, :greater_than) }
         end
 
         context 'when > 0' do

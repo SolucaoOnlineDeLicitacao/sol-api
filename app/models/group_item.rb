@@ -20,7 +20,7 @@ class GroupItem < ApplicationRecord
 
   validates :quantity, presence: true
   # custom numericality validation since it uses attr_before_type_cast to compair allowing
-  # values such as 0.001 to pass its validations (being greater_than 0) but afterwards been rounded to 0.00 
+  # values such as 0.001 to pass its validations (being greater_than 0) but afterwards been rounded to 0.00
   validate :minimum_quantity
 
   validates :available_quantity, presence: true, numericality: { greater_than_or_equal_to: 0.0 }
@@ -66,14 +66,14 @@ class GroupItem < ApplicationRecord
     joins(:proposals).where(proposals: { status: :accepted })
   end
 
-  private 
+  private
 
   def minimum_quantity
     errors.add(:quantity, :greater_than, count: MINIMUM_QUANTITY_VALUE) unless quantity_greater_than_minimum?
   end
 
   def quantity_greater_than_minimum?
-    quantity.present? && quantity > MINIMUM_QUANTITY_VALUE
+    quantity.present? && quantity >= MINIMUM_QUANTITY_VALUE
   end
 
 end
