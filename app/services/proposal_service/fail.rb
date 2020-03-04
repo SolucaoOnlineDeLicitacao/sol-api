@@ -33,13 +33,16 @@ module ProposalService
     def change_proposals_statuses!
       bidding&.proposals&.not_failure.not_draft_or_abandoned&.map(&:sent!)
       bidding&.proposals&.sent&.lower&.triage!
-      bidding&.proposals&.lower&.reload
+      bidding&.proposals&.map(&:reload)
     end
 
     def update_proposal_at_blockchain!
-      response = Blockchain::Proposal::Update.call(bidding&.proposals&.lower)
-      raise BlockchainError unless response.success?
       proposal.reload
+
+      bidding&.proposals&.not_failure.not_draft_or_abandoned&.each do |current|
+        response = Blockchain::Proposal::Update.call(current)
+        raise BlockchainError unless response.success?
+      end
     end
 
     def notify
