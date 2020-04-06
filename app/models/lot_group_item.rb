@@ -18,7 +18,7 @@ class LotGroupItem < ApplicationRecord
 
   validates :quantity, presence: true
   # custom numericality validation since it uses attr_before_type_cast to compair allowing
-  # values such as 0.001 to pass its validations (being greater_than 0) but afterwards been rounded to 0.00 
+  # values such as 0.001 to pass its validations (being greater_than 0) but afterwards been rounded to 0.00
   validate :minimum_quantity
 
   validates :quantity, numericality: { less_than_or_equal_to: :max_quantity }, if: :bidding_draft?
@@ -48,7 +48,7 @@ class LotGroupItem < ApplicationRecord
   end
 
   def max_quantity
-    new_record? ? group_item.available_quantity : group_item.available_quantity + quantity_was.to_i
+    new_record? ? group_item.available_quantity : group_item.available_quantity + quantity_was.to_f
   end
 
   def recount_group_item_quantity

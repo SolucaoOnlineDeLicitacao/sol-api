@@ -147,23 +147,23 @@ RSpec.describe LotGroupItem, type: :model do
           end
 
           context 'when persisted' do
-            let!(:group_item) { create(:group_item, quantity: 100) }
+            let!(:group_item) { create(:group_item, quantity: 100.72) }
             let!(:bidding) { create(:bidding, status: :draft) }
             let(:lot) { create(:lot, bidding: bidding) }
 
             let!(:lot_group_item) do
-              create(:lot_group_item, group_item: group_item, lot: lot, quantity: 30)
+              create(:lot_group_item, group_item: group_item, lot: lot, quantity: 100.72)
             end
 
             before do
               allow(lot_group_item).to receive(:new_record?) { false }
 
-              group_item.update_attribute(:available_quantity, 50)
+              group_item.update_attribute(:available_quantity, 0)
 
               lot_group_item.reload
             end
 
-            it { expect(lot_group_item.send(:max_quantity)).to eq 80 }
+            it { expect(lot_group_item.send(:max_quantity)).to eq 100.72 }
           end
         end
       end
