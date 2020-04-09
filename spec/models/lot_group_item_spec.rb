@@ -138,12 +138,12 @@ RSpec.describe LotGroupItem, type: :model do
             before do
               allow(lot_group_item).to receive(:new_record?) { true }
 
-              group_item.update_attribute(:available_quantity, 50)
+              group_item.update_attribute(:available_quantity, 50.29)
 
               lot_group_item.reload
             end
 
-            it { expect(lot_group_item.send(:max_quantity)).to eq 50 }
+            it { expect(lot_group_item.send(:max_quantity)).to eq 50.29 }
           end
 
           context 'when persisted' do

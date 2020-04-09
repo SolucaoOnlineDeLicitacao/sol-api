@@ -50,7 +50,7 @@ module Coop
       ActiveRecord::Base.transaction do
         super && RecalculateQuantityService.call!(covenant: bidding.covenant)
 
-      rescue ActiveRecord::RecordInvalid
+      rescue => error
         raise ActiveRecord::Rollback
         return false
       end
