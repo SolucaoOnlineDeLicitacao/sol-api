@@ -59,7 +59,7 @@ class RecalculateQuantityService
   end
 
   def active_lot_group_items_sum(group_item)
-    group_item.lot_group_items.active.sum(:quantity).to_f
+    group_item.lot_group_items.active.sum(:quantity).to_d
   end
 
   def active_returned_lot_group_items_sum(group_item)
@@ -93,6 +93,6 @@ class RecalculateQuantityService
   end
 
   def returned_items_sum(returned_lot_group_items)
-    @returned_items_sum[returned_lot_group_items.ids.join('-')] ||= returned_lot_group_items.sum(:quantity).to_f
+    @returned_items_sum[returned_lot_group_items.ids.join('-')] ||= returned_lot_group_items.sum(:quantity).to_d
   end
 end

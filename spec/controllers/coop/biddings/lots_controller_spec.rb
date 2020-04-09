@@ -247,7 +247,7 @@ RSpec.describe Coop::Biddings::LotsController, type: :controller do
             allow(RecalculateQuantityService).
               to receive(:call!).
               with(covenant: lot.bidding.covenant).
-              and_raise(ActiveRecord::RecordInvalid)
+              and_raise(RecalculateItemError)
 
             post_update
           end

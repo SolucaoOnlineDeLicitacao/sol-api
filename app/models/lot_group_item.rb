@@ -36,7 +36,7 @@ class LotGroupItem < ApplicationRecord
   private
 
   def ensure_quantity
-    self.quantity = quantity_before_type_cast.to_s.gsub(',', '.').to_f
+    self.quantity = quantity_before_type_cast.to_s.gsub(',', '.').to_d
   end
 
   def minimum_quantity
@@ -48,7 +48,7 @@ class LotGroupItem < ApplicationRecord
   end
 
   def max_quantity
-    new_record? ? group_item.available_quantity : group_item.available_quantity + quantity_was.to_f
+    new_record? ? group_item.available_quantity.to_d : group_item.available_quantity + quantity_was.to_d
   end
 
   def recount_group_item_quantity
