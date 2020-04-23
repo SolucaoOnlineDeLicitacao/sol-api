@@ -16,11 +16,14 @@ module Blockchain
         request
       end
 
-       def id
+      # gets doenst need params
+      def params; end
+
+      def id
         proposal.id
       end
 
-       def verb
+      def verb
         'GET'
       end
     end
