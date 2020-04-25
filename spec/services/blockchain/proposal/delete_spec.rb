@@ -5,7 +5,7 @@ require './lib/api_blockchain/client'
 RSpec.describe Blockchain::Proposal::Delete do
   let(:proposal) { create(:proposal) }
   let(:lot_proposal) { proposal.lot_proposals.first }
-  let(:lot_group_item_lp) { lot_proposal.lot_group_item_lot_proposals.first } 
+  let(:lot_group_item_lp) { lot_proposal.lot_group_item_lot_proposals.first }
 
   let!(:service) { described_class.new(proposal) }
   let!(:verb) { 'DELETE' }
@@ -23,8 +23,11 @@ RSpec.describe Blockchain::Proposal::Delete do
   let(:endpoint) { described_class::ENDPOINT + "/#{proposal.id}" }
 
   describe 'endpoint' do
-
     it { expect(service.send(:endpoint)).to eq endpoint }
+  end
+
+  describe 'params' do
+    it { expect(service.send(:params)).to be_nil }
   end
 
   describe 'call' do

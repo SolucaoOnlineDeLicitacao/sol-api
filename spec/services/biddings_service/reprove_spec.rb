@@ -25,6 +25,8 @@ RSpec.describe BiddingsService::Reprove, type: :service do
   describe 'call' do
     context 'when success' do
       before do
+        # forçando a bidding a ser inválida para testar o update_attribute
+        bidding.update_attribute(:deadline, nil)
         allow(Notifications::Biddings::Reproved).to receive(:call).with(bidding).and_call_original
 
         service.call
@@ -37,7 +39,7 @@ RSpec.describe BiddingsService::Reprove, type: :service do
 
     context 'when failure' do
       before do
-        allow(bidding).to receive(:update_attributes) { raise ActiveRecord::RecordInvalid }
+        allow(service.event).to receive(:save!) { raise ActiveRecord::RecordInvalid }
         allow(Notifications::Biddings::Reproved).to receive(:call).with(bidding).and_call_original
 
         service.call

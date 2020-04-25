@@ -23,9 +23,10 @@ module BiddingsService
     end
 
     def updates_bidding_to_review
-      # we just update_attributes instead of draft! because we can get
-      # a record invalid from validate_start_date/closing_date (unwanted)
-      bidding.update_attributes(status: :draft)
+      # atualizando a situação com update_attribute para que a atualização seja
+      # possível mesmo que a licitação seja inválida - como por exemplo uma reprovação
+      # depois do seu dia de abertura
+      bidding.update_attribute(:status, :draft)
     end
 
     def attributes

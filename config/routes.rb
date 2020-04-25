@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
-
   concern :notifiable do
     resources :notifications, only: [:index, :show] do
       patch :mark_as_read, on: :member
@@ -19,7 +17,7 @@ Rails.application.routes.draw do
 
   devise_for :users,
     module: 'coop',
-    path: 'cooperative', # removing /users from path]
+    path: 'cooperative', # removing /users from path
     skip: %i[sessions registrations] # we're using doorkeeper with tokens
 
   devise_for :suppliers,
@@ -221,5 +219,4 @@ Rails.application.routes.draw do
       resources :providers, only: :index
     end
   end
-
 end
