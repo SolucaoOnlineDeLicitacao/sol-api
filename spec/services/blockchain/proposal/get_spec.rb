@@ -49,8 +49,14 @@ RSpec.describe Blockchain::Proposal::Get do
     }
   end
 
+  let(:endpoint) { described_class::ENDPOINT + "/#{proposal.id}" }
+
+  describe 'endpoint' do
+    it { expect(service.send(:endpoint)).to eq endpoint }
+  end
+
   describe 'params' do
-    it { expect(service.send(:params)).to eq fake_body }
+    it { expect(service.send(:params)).to be_nil }
   end
 
    describe 'call' do
