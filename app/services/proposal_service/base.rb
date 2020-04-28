@@ -9,6 +9,9 @@ module ProposalService
     end
 
     def draft_and_update_blockchain!
+      # não criamos/atualizamos/deletamos propostas em rascunho
+      return true if proposal.draft?
+
       proposal.draft!
       raise BlockchainError unless blockchain_update.success?
       true

@@ -20,34 +20,56 @@ RSpec.describe ProposalService::Destroy, type: :service do
     context 'when it runs successfully' do
       context 'and the proposal is successfully destroyed' do
         context 'and the modality is not closed invite' do
-          it { is_expected.to be_truthy }
+          describe "service" do
+            it { is_expected.to be_truthy }
+          end
 
           describe 'when the proposal is destroyed' do
             before { subject }
 
             it { expect { proposal.reload }.to raise_error(ActiveRecord::RecordNotFound) }
+          end
 
-            describe 'and validating blockchain call' do
-              it { expect(Blockchain::Proposal::Delete).to have_received(:call).with(proposal) }
+          describe "blockchain" do
+            context "when proposal isnt draft" do
+              before { proposal.sent!; proposal.reload; subject }
+
               it { expect(Blockchain::Proposal::Update).not_to have_received(:call).with(proposal) }
+              it { expect(Blockchain::Proposal::Delete).to have_received(:call).with(proposal) }
+            end
+
+            context "when proposal is draft" do
+              before { subject }
+
+              it { expect(Blockchain::Proposal::Update).not_to have_received(:call).with(proposal) }
+              it { expect(Blockchain::Proposal::Delete).not_to have_received(:call).with(proposal) }
             end
           end
         end
 
         context 'and the modality is closed invite' do
           let(:invite) { create(:invite, status: :approved) }
-          let(:bidding) { create(:bidding, modality: :closed_invite, invites: [invite])}
-          let(:proposal) { create(:proposal, bidding: bidding) }
+          let(:bidding) { create(:bidding, modality: :closed_invite, invites: [invite]) }
+          let(:proposal) { create(:proposal, bidding: bidding, status: :sent) }
 
           it { is_expected.to be_truthy }
           it { expect { subject }.not_to change { proposal.reload } }
-          it { expect { subject }.to change { proposal.status }.from('draft').to('abandoned') }
+          it { expect { subject }.to change { proposal.status }.from('sent').to('abandoned') }
 
-          describe 'and validating blockchain call' do
-            before { subject }
+          describe "blockchain" do
+            context "when proposal isnt draft" do
+              before { subject }
 
-            it { expect(Blockchain::Proposal::Update).to have_received(:call).with(proposal) }
-            it { expect(Blockchain::Proposal::Delete).not_to have_received(:call).with(proposal) }
+              it { expect(Blockchain::Proposal::Update).to have_received(:call).with(proposal) }
+              it { expect(Blockchain::Proposal::Delete).not_to have_received(:call).with(proposal) }
+            end
+
+            context "when proposal is draft" do
+              before { proposal.draft!; proposal.reload; subject }
+
+              it { expect(Blockchain::Proposal::Update).not_to have_received(:call).with(proposal) }
+              it { expect(Blockchain::Proposal::Delete).not_to have_received(:call).with(proposal) }
+            end
           end
         end
       end
@@ -56,9 +78,7 @@ RSpec.describe ProposalService::Destroy, type: :service do
     context 'when it runs with failures' do
       context 'and the proposal is not destroyed' do
         before do
-          allow(proposal).
-            to receive(:destroy!).
-            and_raise(ActiveRecord::RecordNotDestroyed)
+          allow(proposal).to receive(:destroy!).and_raise(ActiveRecord::RecordNotDestroyed)
         end
 
         it { is_expected.to be_falsey }
@@ -66,10 +86,11 @@ RSpec.describe ProposalService::Destroy, type: :service do
       end
 
       context 'and the blockchain call has errors' do
+        let(:invite) { create(:invite, status: :approved) }
+        let(:bidding) { create(:bidding, modality: :closed_invite, invites: [invite]) }
+        let(:proposal) { create(:proposal, bidding: bidding, status: :sent) }
+
         context 'and blockchain update' do
-          let(:invite) { create(:invite, status: :approved) }
-          let(:bidding) { create(:bidding, modality: :closed_invite, invites: [invite])}
-          let(:proposal) { create(:proposal, bidding: bidding) }
           let(:blockchain_response_update) { false }
 
           before { subject }
@@ -83,7 +104,7 @@ RSpec.describe ProposalService::Destroy, type: :service do
         context 'and blockchain delete' do
           let(:blockchain_response_delete) { false }
 
-          before { subject }
+          before { proposal.triage!; proposal.reload; subject }
 
           it { is_expected.to be_falsey }
           it { expect { subject }.not_to change { proposal.reload.sent_updated_at } }
