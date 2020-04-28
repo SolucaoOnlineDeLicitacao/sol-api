@@ -72,7 +72,7 @@ RSpec.describe ProposalService::LotProposal::Destroy, type: :service do
               before { subject }
 
               it { expect(Blockchain::Proposal::Update).not_to have_received(:call).with(proposal) }
-              it { expect(Blockchain::Proposal::Delete).to have_received(:call).with(proposal) }
+              it { expect(Blockchain::Proposal::Delete).not_to have_received(:call).with(proposal) }
             end
           end
         end

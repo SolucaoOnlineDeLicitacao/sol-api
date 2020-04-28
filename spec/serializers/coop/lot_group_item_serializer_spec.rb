@@ -6,11 +6,12 @@ RSpec.describe Coop::LotGroupItemSerializer, type: :serializer do
   subject { format_json(described_class, object) }
 
   describe 'attributes' do
+    let(:lot_name) { object.lot.name }
+
     let(:lot_group_item_count) do
       object.bidding.lots.joins(:group_items)
-      .where(group_items: { item_id: object.group_item.item_id }).count
+      .where(group_items: { item_id: object.group_item.item_id }).uniq.count
     end
-    let(:lot_name) { object.lot.name }
 
     it { is_expected.to include 'id' => object.id }
     it { is_expected.to include 'lot_id' => object.lot_id }
