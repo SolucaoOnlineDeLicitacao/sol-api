@@ -19,6 +19,9 @@ module ProposalService::LotProposal
         return draft_and_update_blockchain! if proposal_has_others_lots?
 
         proposal.destroy!
+        # não criamos/atualizamos/deletamos propostas em rascunho
+        return true if proposal.draft?
+
         raise BlockchainError unless blockchain_delete.success?
       end
     end

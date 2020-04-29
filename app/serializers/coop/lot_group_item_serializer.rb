@@ -9,7 +9,7 @@ module Coop
     end
 
     def lot_group_item_count
-      object.bidding.lots.joins(:group_items).where(group_items: { item_id: object.group_item.item_id }).count
+      object.bidding.lots.joins(:group_items).where(group_items: { item_id: object.group_item.item_id }).uniq.count
     end
 
     def item_name

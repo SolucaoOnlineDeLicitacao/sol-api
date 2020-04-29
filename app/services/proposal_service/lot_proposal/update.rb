@@ -19,6 +19,9 @@ module ProposalService::LotProposal
     end
 
     def blockchain_update!
+      # não criamos/atualizamos/deletamos propostas em rascunho
+      return true if proposal&.draft?
+
       response = Blockchain::Proposal::Update.call(proposal)
       raise BlockchainError unless response.success?
     end
