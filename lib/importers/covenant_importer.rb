@@ -29,11 +29,11 @@ module Importers
 
       save_resource!(@covenant)
       
-      make_all_items_unavailable
+      # make_all_items_unavailable
 
       import_groups
       
-      delete_all_items_unavailable
+      # delete_all_items_unavailable
 
     end
 
