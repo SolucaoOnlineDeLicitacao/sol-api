@@ -1,0 +1,48 @@
+﻿es-PY:
+  notifications:
+    proposal:
+      coop_accepted:
+        title: Propuesta aceptada.
+        body: La licitación <strong>%s</strong> tiene una propuesta ganadora y puede revisarse.
+
+      coop_refused:
+        title: Propuesta rechazada.
+        body: La licitación <strong>%s</strong> tiene una propuesta rechazada y puede revisarse.
+
+      accepted:
+        title: Propuesta ganadora.
+        body: El revisor ha aceptado la propuesta del proveedor <strong>%s</strong> de la licitación <strong>%s</strong>.
+
+      refused:
+        title: Propuesta rechazada aceptada.
+        body: El revisor ha aceptado el rechazo de la propuesta del proveedor <strong>%s</strong> de la licitación <strong>%s</strong>.
+
+      fail:
+        title: Se requiere revisión de las propuestas.
+        body: 'La propuesta del proveedor <strong>%s</strong> de la licitación <strong>%s</strong> ha sido rechazada, motivo: <strong>%s</strong>. Será necesario revisar las propuestas nuevamente.'
+
+
+
+      lot_coop_accepted:
+        title: Propuesta aceptada.
+        body: El lote <strong>%s</strong> de la licitación <strong>%s</strong> tiene una propuesta ganadora y puede revisarse.
+
+      lot_coop_refused:
+        title: Propuesta rechazada.
+        body: El lote <strong>%s</strong> de la licitación <strong>%s</strong> tiene una propuesta rechazada y puede revisarse.
+
+      lot_accepted:
+        title: Propuesta ganadora.
+        body: El revisor ha aceptado la propuesta del proveedor <strong>%s</strong> para el lote <strong>%s</strong> de la licitación <strong>%s</strong>.
+
+      lot_refused:
+        title: Propuesta rechazada aceptada.
+        body: El revisor ha aceptado el rechazo de la propuesta del proveedor <strong>%s</strong> para el lote <strong>%s</strong> de la licitación <strong>%s</strong>.
+
+      lot_fail:
+        title: Se requiere revisión de las propuestas.
+        body: 'La propuesta del proveedor <strong>%s</strong> para el lote <strong>%s</strong> de la licitación <strong>%s</strong> ha sido rechazada, motivo: <strong>%s</strong>. Será necesario revisar las propuestas nuevamente.'
+
+      supplier_accepted:
+        title: Felicitaciones, usted es el ganador.
+        body: Felicitaciones, usted es el ganador del/de los <strong>%s</strong>, haga clic aquí para más detalles

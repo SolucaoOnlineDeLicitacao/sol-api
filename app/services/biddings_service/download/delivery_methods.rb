@@ -1,11 +1,15 @@
 module BiddingsService::Download
   module DeliveryMethods
-    HEADER_DELIVERY_COLUMNS = [
-      I18n.t('services.biddings.download.header.delivery.title'),
-      I18n.t('services.biddings.download.header.delivery.columns')
-    ].freeze
-
     private
+
+    # do not use this array on const definition,
+    # use on method, for `with_locale` to work.
+    def header_delivery_columns
+      [
+        I18n.t('services.biddings.download.header.delivery.title'),
+        I18n.t('services.biddings.download.header.delivery.columns')
+      ]
+    end
 
     def delivery_sheet
       @delivery_sheet ||= book.create_sheet(

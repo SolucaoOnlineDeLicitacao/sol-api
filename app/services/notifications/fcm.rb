@@ -76,7 +76,9 @@ module Notifications
     end
 
     def locale_sanitize(key, args)
-      sanitize(I18n.t("notifications.#{action}.#{key}") % args)
+      I18n.with_locale(receivable.locale) do
+        sanitize(I18n.t("notifications.#{action}.#{key}") % args)
+      end
     end
 
     def sanitize(html)

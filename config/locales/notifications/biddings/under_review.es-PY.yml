@@ -1,0 +1,13 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      under_review_admin: &under_review_admin
+        title: Licitación %s en revisión.
+        body: La licitación <strong>%s</strong> está en revisión. Aguarde el análisis de las propuestas por parte de la asociación <strong>%s</strong>.
+
+      under_review_provider:
+        <<: *under_review_admin
+
+      under_review_cooperative:
+        <<: *under_review_admin
+        body: La licitación <strong>%s</strong> está en revisión. Las propuestas están disponibles para su análisis

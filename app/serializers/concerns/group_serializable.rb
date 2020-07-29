@@ -8,6 +8,6 @@ module GroupSerializable
   def group_items_value_count
     object.group_items.inject(0) do |total, group_item|
       total += group_item.estimated_cost * group_item.quantity
-    end
+    end.to_f
   end
 end

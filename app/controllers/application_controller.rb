@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::API
   include AbstractController::Translation
-  include HttpAcceptLanguage::AutoLocale
+
+  before_action :set_locale
+
+  def set_locale
+    I18n.locale = current_user.try(:locale) || locale_from_params || I18n.default_locale
+  end
 
   def current_user
     return nil unless doorkeeper_token
@@ -31,5 +36,9 @@ class ApplicationController < ActionController::API
   def doorkeeper_forbidden_render_options(error:, **options)
     # doorkeeper adds http status :forbidden
     { json: { error: error.name || :forbidden } }
+  end
+
+  def locale_from_params
+    return params[:locale] if I18n.available_locales.map(&:to_s).include?(params[:locale])
   end
 end

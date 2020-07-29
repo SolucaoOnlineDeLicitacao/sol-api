@@ -4,7 +4,6 @@ class LotProposal < ApplicationRecord
 
   versionable
 
-  before_validation :ensure_delivery_price
   before_save :update_price_total
 
   belongs_to :lot, counter_cache: true
@@ -116,10 +115,5 @@ class LotProposal < ApplicationRecord
 
   def proposal_draw?
     proposal.present? && (proposal.draw? || proposal.was_draw?)
-  end
-
-  def ensure_delivery_price
-    return unless delivery_price_before_type_cast.present?
-    self.delivery_price = delivery_price_before_type_cast.to_s.gsub(',', '.').to_f
   end
 end

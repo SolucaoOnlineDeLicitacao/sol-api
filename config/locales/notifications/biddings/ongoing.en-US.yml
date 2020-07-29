@@ -1,0 +1,14 @@
+﻿en-US:
+  notifications:
+    bidding:
+      ongoing_cooperative:
+        title: Procurement process %s open.
+        body: The procurement process <strong>%s</strong> was successfully opened!
+
+      ongoing_invited_provider:
+        title: New call for bids for procurement process %s.
+        body: You were called to join procurement process <strong>%s</strong>.
+
+      ongoing_classification_provider:
+        title: New procurement process %s open.
+        body: A new procurement process (<strong>%s</strong>) you may be interested in was opened.

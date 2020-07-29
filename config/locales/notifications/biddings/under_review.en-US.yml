@@ -1,0 +1,13 @@
+﻿en-US:
+  notifications:
+    bidding:
+      under_review_admin: &under_review_admin
+        title: Procurement process %s under review.
+        body: Procurement process <strong>%s</strong> is under review. Please wait until the cooperative <strong>%s</strong> reviews the proposals.
+
+      under_review_provider:
+        <<: *under_review_admin
+
+      under_review_cooperative:
+        <<: *under_review_admin
+        body: Procurement process <strong>%s</strong> is under review. Proposals available for review

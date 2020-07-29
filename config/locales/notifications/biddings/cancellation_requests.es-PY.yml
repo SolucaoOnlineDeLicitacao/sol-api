@@ -1,0 +1,19 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      cancellation_request_new: &cancellation_request_new
+        title: Pedido de cancelación de la licitación %s.
+        body: Hay un pedido de cancelación de la licitación <strong>%s</strong>. La revisión está disponible.
+
+      cancellation_request_approved_cooperative:
+        <<: *cancellation_request_new
+        body: El pedido de cancelación de la licitación <strong>%s</strong> ha sido aceptado.
+
+      cancellation_request_approved_provider:
+        <<: *cancellation_request_new
+        title: Cancelación de la licitación.
+        body: 'La licitación <strong>%s</strong> ha sido cancelada, motivo: <strong>%s</strong>'
+
+      cancellation_request_reproved:
+        <<: *cancellation_request_new
+        body: El pedido de cancelación de la licitación <strong>%s</strong> ha sido rechazado. La justificación está disponible para su análisis.

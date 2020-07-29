@@ -3,7 +3,7 @@ module BaseProfilesController
   include TransactionMethods
 
   PROFILE_PERMITTED_PARAMS = [
-    :avatar, :password, :password_confirmation
+    :avatar, :password, :password_confirmation, :locale
   ].freeze
 
   def profile
@@ -20,15 +20,9 @@ module BaseProfilesController
     execute_or_rollback do
       current_user.update!(profile_params)
       if params_with_password?
-        current_user.access_tokens.map do |access_token|
-          update_access_token!(access_token)
-        end
+        current_user.access_tokens.update_all(revoked_at: DateTime.current)
       end
     end
-  end
-
-  def update_access_token!(token)
-    token.update!(revoked_at: DateTime.current)
   end
 
   def klass_sym
@@ -36,6 +30,8 @@ module BaseProfilesController
   end
 
   def profile_json
+    return base_profile_json.merge(role_and_rules_params) if current_user.is_a? Admin
+
     base_profile_json.merge(profile_avatar_json)
   end
 
@@ -44,11 +40,18 @@ module BaseProfilesController
       'id'       => current_user.id,
       'name'     => current_user.name,
       'username' => current_user.email,
+      'locale'   => current_user.locale
+    }
+  end
+
+  def role_and_rules_params
+    {
+      'role'  => current_user.role,
+      'rules' => rules
     }
   end
 
   def profile_avatar_json
-    return {} if current_user.is_a? Admin
     { 'avatar' => { 'url' => current_user.avatar.url } }
   end
 
@@ -66,4 +69,7 @@ module BaseProfilesController
       params.dig(klass_sym, :password_confirmation).present?
   end
 
+  def rules
+    Abilities::Strategy.call(user: current_user).as_json
+  end
 end

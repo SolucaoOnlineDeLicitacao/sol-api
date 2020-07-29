@@ -1,0 +1,20 @@
+﻿en-US:
+  activerecord:
+    models:
+      cooperative:
+        one: Cooperative
+        other: Cooperatives
+    attributes:
+      cooperative:
+        name: Name
+        cnpj: CNPJ
+        email: Email
+
+    errors:
+      models:
+        cooperative:
+          attributes:
+            name:
+              blank: 'required'
+            cnpj:
+              taken: '(%{value}) is already in use'

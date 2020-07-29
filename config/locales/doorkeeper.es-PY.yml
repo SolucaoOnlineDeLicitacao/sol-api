@@ -1,0 +1,138 @@
+﻿es-PY:
+  activerecord:
+    attributes:
+      doorkeeper/application:
+        name: 'Nombre'
+        redirect_uri: 'URI de redireccionamiento'
+        scopes:
+          public:   Público
+          admin:    Administración
+          supplier: Proveedor
+          user:     Usuario
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'No puede contener un fragmento.'
+              invalid_uri: 'debe ser una URI válida.'
+              relative_uri: 'deber ser una URI absoluta.'
+              secured_uri: 'debe ser una URI HTTPS/SSL.'
+              forbidden_uri: 'es forbidden en el servidor.'
+            scopes:
+              not_match_configured: "no coincide con la configuración del servidor."
+
+  doorkeeper:
+    applications:
+      confirmations:
+        destroy: '¿Está seguro?'
+      buttons:
+        edit: 'Editar'
+        destroy: 'Remover'
+        submit: 'Enviar'
+        cancel: 'Cancelar'
+        authorize: 'Autorizar'
+      form:
+        error: '¡Apa! Vea el formulario con posibles errores'
+      help:
+        confidential: 'La aplicación se usará mientras el secreto del cliente pueda mantenerse confidencial. Las aplicaciones móviles nativas y las aplicaciones de página única se consideran no confidenciales.'
+        redirect_uri: 'Use una línea por URI'
+        native_redirect_uri: 'Use %{native_redirect_uri} para pruebas locales'
+        scopes: ~
+      edit:
+        title: 'Editar aplicación'
+      index:
+        title: 'Sus aplicaciones'
+        new: 'Nueva aplicación'
+        name: 'Nombre'
+        callback_url: 'URL de Callback'
+        actions: 'Acciones'
+        confidential: '¿Confidencial?'
+        confidentiality:
+          'yes': 'Sí'
+          'no': 'No'
+      new:
+        title: 'Nueva aplicación'
+      show:
+        title: 'Aplicación: %{name}'
+        application_id: 'ID de la aplicación (Application UID)'
+        secret: 'Secreto (Secret)'
+        scopes: ~
+        confidential: 'Confidencial'
+        callback_urls: 'urls de Callback'
+        actions: 'Acciones'
+
+    authorizations:
+      buttons:
+        authorize: 'Autorizar'
+        deny: 'Rechazar'
+      error:
+        title: 'Ha ocurrido un error'
+      new:
+        title: 'Autorización necesaria'
+        prompt: '¿Autorizar %{client_name} el uso de su cuenta?'
+        able_to: '¿Esa aplicación será capaz de'
+      show:
+        title: 'Código de autorización'
+
+    authorized_applications:
+      confirmations:
+        revoke: '¿Está seguro?'
+      buttons:
+        revoke: 'Revocar'
+      index:
+        title: 'Sus aplicaciones autorizadas'
+        application: 'Aplicación'
+        created_at: 'Creado el'
+        date_format: '%Y-%m-%d %H:%M:%S'
+
+    errors:
+      messages:
+        # Common error messages
+        invalid_request: 'La solicitud no tiene un parámetro obligatorio, pues incluye un parámetro inválido o está malformada.'
+        invalid_redirect_uri: 'La URI de redireccionamiento incluida no es válida.'
+        unauthorized_client: 'El cliente no está autorizado a realizar esa solicitud usando este método.'
+        access_denied: 'El dueño del recurso (resource owner) o servidor de autorización (authorization server) ha negado la solicitud.'
+        invalid_scope: 'El objetivo solicitado es inválido, desconocido o está malformado.'
+        server_error: 'El servidor de autorización (authorization server) ha encontrado una condición inesperada que lo impidió de completar la solicitud.'
+        temporarily_unavailable: 'El servidor de autorización (authorization server) no ha sido capaz de procesar la solicitud debido a un problema temporario de recargo o mantenimiento.'
+
+        #configuration error messages
+        credential_flow_not_configured: 'Resource Owner Password Credentials flow ha fallado porque el Doorkeeper.configure.resource_owner_from_credentials no ha sido configurado.'
+        resource_owner_authenticator_not_configured: 'Resource Owner find falló porque el Doorkeeper.configure.resource_owner_authenticator no ha sido configurado.'
+
+        # Access grant errors
+        unsupported_response_type: 'El servidor de autorización no soporta este tipo de respuesta.'
+
+        # Access token errors
+        invalid_client: 'La autenticación del cliente ha fallado debido a un cliente desconocido, la falta de inclusión de la autenticación del cliente o a un método no soportado de autenticación.'
+        invalid_grant: 'El permiso de autorización (authorization grant) informado es inválido, está vencido, rechazado, no se corresponde con la URI de redireccionamiento usada en la solicitud de autorización o fue dato a otro cliente.'
+        unsupported_grant_type: 'El tipo de permiso de autorización (authorization Grant) no es soportado por el servidor de autorización (authorization server).'
+        blocked: 'Usuario bloqueado por el sistema'
+
+        invalid_token:
+          revoked: "El token de acceso (access token) ha sido rechazado"
+          expired: "El token de acceso (access token) ha expirado"
+          unknown: "El token de acceso (access token) es inválido"
+
+    flash:
+      applications:
+        create:
+          notice: 'Aplicación creada.'
+        destroy:
+          notice: 'Aplicación removida.'
+        update:
+          notice: 'Aplicación actualizada.'
+      authorized_applications:
+        destroy:
+          notice: 'Aplicación rechazada.'
+
+    layouts:
+      admin:
+        title: 'Doorkeeper'
+        nav:
+          oauth2_provider: 'Proveedor OAuth2 (OAuth2 Provider)'
+          applications: 'Aplicaciones'
+          home: 'Página de inicio'
+      application:
+        title: 'Se requiere autorización OAuth'

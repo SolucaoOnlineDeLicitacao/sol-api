@@ -33,7 +33,7 @@ RSpec.describe LotGroupItem, type: :model do
 
           before { lot_group_item.valid? }
 
-          it { is_expected.to eq :greater_than }
+          it { is_expected.to eq :blank }
         end
 
         context 'when < 0' do
@@ -175,12 +175,6 @@ RSpec.describe LotGroupItem, type: :model do
   end
 
   describe 'callbacks' do
-    describe 'ensure_quantity' do
-      before { lot_group_item.quantity = '10,05'; lot_group_item.valid? }
-
-      it { expect(lot_group_item.quantity).to eq 10.05 }
-    end
-
     describe 'recount_group_item_quantity' do
       let!(:group_item) { create(:group_item, quantity: 100) }
       let!(:bidding) { create(:bidding, status: :draft) }

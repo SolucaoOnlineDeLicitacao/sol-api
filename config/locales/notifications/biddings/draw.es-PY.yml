@@ -1,0 +1,17 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      draw_admin: &draw_admin
+        title: Licitación %s empatada.
+        body: La licitación <strong>%s</strong> ha finalizado con un empate en dos o más propuestas. Los proveedores empatados podrán actualizar sus propuestas hasta el día <strong>%s</strong>\"
+
+      draw_cooperative:
+        <<: *draw_admin
+
+      draw_sent_provider:
+        <<: *draw_admin
+        title: ¡Propuesta empatada!
+
+      draw_draw_provider:
+        title: ¡Propuesta empatada!
+        body: "¡Atención! Una o más propuestas de la licitación <strong>%s</strong> están empatadas. Puede actualizar su propuesta hasta el día <strong>%s</strong>"

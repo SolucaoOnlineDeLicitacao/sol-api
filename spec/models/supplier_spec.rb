@@ -15,6 +15,10 @@ RSpec.describe Supplier, type: :model do
     include_examples 'concerns/notifiable'
   end
 
+  describe 'enums' do
+    it { is_expected.to define_enum_for(:locale).with_values(enum_locales) }
+  end
+
   context 'associations' do
     it { is_expected.to belong_to :provider }
     it { is_expected.to have_one(:contract) }

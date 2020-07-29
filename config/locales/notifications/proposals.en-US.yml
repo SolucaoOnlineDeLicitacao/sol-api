@@ -1,0 +1,48 @@
+﻿en-US:
+  notifications:
+    proposal:
+      coop_accepted:
+        title: Proposal accepted.
+        body: Procurement process <strong>%s</strong> has a winning proposal available for review.
+
+      coop_refused:
+        title: Proposal rejected.
+        body: Procurement process <strong>%s</strong> has a rejected proposal available for review.
+
+      accepted:
+        title: Winning proposal.
+        body: The proposal by vendor <strong>%s</strong> of procurement process <strong>%s</strong> was accepted by the reviewer.
+
+      refused:
+        title: Rejected proposal accepted.
+        body: The reviewer accepted the rejection of the proposal by vendor <strong>%s</strong> of procurement process <strong>%s</strong>.
+
+      fail:
+        title: Proposals must be reviewed.
+        body: 'The proposal by vendor <strong>%s</strong> of procurement process <strong>%s</strong> was rejected. Reason: <strong>%s</strong>. Proposals must be reviewed once again.'
+
+
+
+      lot_coop_accepted:
+        title: Proposal accepted.
+        body: Lot <strong>%s</strong> of procurement process <strong>%s</strong> has a winning proposal available for review.
+
+      lot_coop_refused:
+        title: Proposal rejected.
+        body: Lot <strong>%s</strong> of procurement process <strong>%s</strong> has a rejected proposal available for review.
+
+      lot_accepted:
+        title: Winning proposal.
+        body: The proposal by vendor <strong>%s</strong> of lot <strong>%s</strong> of procurement process <strong>%s</strong> was accepted by the reviewer.
+
+      lot_refused:
+        title: Rejected proposal accepted.
+        body: The reviewer accepted the rejection of the proposal by vendor <strong>%s</strong> of lot <strong>%s</strong> of procurement process <strong>%s</strong>.
+
+      lot_fail:
+        title: Proposals must be reviewed.
+        body: 'The proposal by vendor <strong>%s</strong> of lot <strong>%s</strong> of procurement process <strong>%s</strong> was rejected. Reason: <strong>%s</strong>. Proposals must be reviewed once again.'
+
+      supplier_accepted:
+        title: Congratulations, you’re the winner.
+        body: Congratulations, you won the <strong>%s</strong>. Click here to learn more.

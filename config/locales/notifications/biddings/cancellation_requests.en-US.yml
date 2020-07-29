@@ -1,0 +1,19 @@
+﻿en-US:
+  notifications:
+    bidding:
+      cancellation_request_new: &cancellation_request_new
+        title: Procurement process %s cancellation request.
+        body: There is a cancellation request for procurement process <strong>%s</strong>. Review is available.
+
+      cancellation_request_approved_cooperative:
+        <<: *cancellation_request_new
+        body: The cancellation request for procurement process <strong>%s</strong> was accepted.
+
+      cancellation_request_approved_provider:
+        <<: *cancellation_request_new
+        title: Procurement process cancellation.
+        body: 'The procurement process <strong>%s</strong> was cancelled. Reason: <strong>%s</strong>'
+
+      cancellation_request_reproved:
+        <<: *cancellation_request_new
+        body: The cancellation request for procurement process <strong>%s</strong> was rejected. The justification is available for review.

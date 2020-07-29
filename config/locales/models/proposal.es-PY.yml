@@ -1,0 +1,11 @@
+﻿es-PY:
+  activerecord:
+    errors:
+      models:
+        proposal:
+          attributes:
+            bidding:
+              already_abandoned_proposal: ya existe una propuesta abandonada para esta licitación
+              invalid_modality_change: no puede modificar la propuesta, pues la licitación es de invitación cerrada
+              already_importing: ya existe una propuesta que se está importando para esta licitación
+              can_not_edit: no es posible editar la propuesta.

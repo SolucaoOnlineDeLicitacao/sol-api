@@ -1,0 +1,14 @@
+﻿es-PY:
+  notifications:
+    invite:
+      approved:
+        title: Invitación aceptada.
+        body: Su pedido para participar en la licitación <strong>%s</strong> ha sido aprobado por la asociación <strong>%s</strong>.
+
+      pending:
+        title: Análisis de invitación pendiente.
+        body: ¡El proveedor <strong>%s</strong> desea participar en la licitación <strong>%s</strong>! Analice el pedido.
+
+      reproved:
+        title: Invitación reprobada.
+        body: Su pedido para participar en la licitación <strong>%s</strong> ha sido negado por la asociación <strong>%s</strong>.

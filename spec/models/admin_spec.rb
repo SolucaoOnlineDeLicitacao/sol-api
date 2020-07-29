@@ -11,6 +11,7 @@ RSpec.describe Admin, type: :model do
     let(:roles) { { viewer: 0, reviewer: 1, general: 2 } }
 
     it { is_expected.to define_enum_for(:role).with_values(roles) }
+    it { is_expected.to define_enum_for(:locale).with_values(enum_locales) }
   end
 
   describe 'behaviors' do

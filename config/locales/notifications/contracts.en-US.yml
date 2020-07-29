@@ -1,0 +1,31 @@
+﻿en-US:
+  notifications:
+    contract:
+      refused_supplier:
+        title: Contract rejected by vendor.
+        body: The contract for procurement process <strong>%s</strong> was rejected by the vendor <strong>%s</strong>.
+      refused_user:
+        title: Contract rejected by cooperative.
+        body: The contract for procurement process <strong>%s</strong> was rejected by the cooperative <strong>%s</strong>.
+      refused_all:
+        title: Contract rejected by the system.
+        body: The contract for procurement process <strong>%s</strong> was automatically rejected by the system.
+      sign_admin_user:
+        title: Contract signed by vendor.
+        body: Contract <strong>%s</strong> of procurement process <strong>%s</strong> was signed by the vendor <strong>%s</strong>
+      
+      total_inexecution:
+        title: Contract with complete nonperformance.
+        body: Contract <strong>%s</strong> of procurement process <strong>%s</strong> was marked as complete nonperformance.
+
+      completed:
+        title: Contract completed.
+        body: Contract <strong>%s</strong> of procurement process <strong>%s</strong> was completed.
+
+      partial_execution:
+        title: Contract with partial execution.
+        body: Contract <strong>%s</strong> of procurement process <strong>%s</strong> was marked as partial execution.
+
+      created:
+        title: Contract created.
+        body: New contract <strong>%s</strong> generated. Click here to learn more.
