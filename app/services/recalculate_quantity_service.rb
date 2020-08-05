@@ -32,7 +32,6 @@ class RecalculateQuantityService
         else
           debit_the_available_quantity(lot_group_item.group_item)
         end
-        credit_the_returned_items(lot_group_item.group_item)
       end
     end
   end
@@ -44,18 +43,12 @@ class RecalculateQuantityService
   end
 
   def debit_the_available_quantity(group_item)
-    group_item.update!(available_quantity: group_item.quantity - active_lot_group_items_sum(group_item))
+    returned_items_sum = active_lot_group_items_sum(group_item) - active_returned_lot_group_items_sum(group_item)
+    group_item.update!(available_quantity: group_item.quantity - returned_items_sum)
   end
 
   def credit_the_available_quantity(group_item, quantity)
     group_item.update!(available_quantity: group_item.available_quantity + quantity)
-  end
-
-  def credit_the_returned_items(group_item)
-    returned_items_sum = active_returned_lot_group_items_sum(group_item)
-    if returned_items_sum > 0
-      group_item.update!(available_quantity: group_item.available_quantity + returned_items_sum)
-    end
   end
 
   def active_lot_group_items_sum(group_item)
