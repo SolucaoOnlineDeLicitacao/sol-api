@@ -1,0 +1,31 @@
+﻿es-PY:
+  notifications:
+    contract:
+      refused_supplier:
+        title: Contrato rechazado por el proveedor.
+        body: El contrato de la licitación <strong>%s</strong> ha sido rechazado por el proveedor <strong>%s</strong>.
+      refused_user:
+        title: Contrato rechazado por la asociación.
+        body: El contrato de la licitación <strong>%s</strong> ha sido rechazado por la asociación <strong>%s</strong>.
+      refused_all:
+        title: Contrato rechazado por el sistema.
+        body: El contrato de la licitación <strong>%s</strong> ha sido rechazado automáticamente por el sistema.
+      sign_admin_user:
+        title: Contrato firmado por el proveedor.
+        body: El contrato <strong>%s</strong> de la licitación <strong>%s</strong> ha sido firmado por el proveedor <strong>%s</strong>
+      
+      total_inexecution:
+        title: Contrato con falta de ejecución total.
+        body: El contrato <strong>%s</strong> de la licitación <strong>%s</strong> ha sido marcado con falta de ejecución total.
+
+      completed:
+        title: Contrato finalizado.
+        body: El contrato <strong>%s</strong> de la licitación <strong>%s</strong> ha sido finalizado.
+
+      partial_execution:
+        title: Contrato con ejecución parcial.
+        body: El contrato <strong>%s</strong> de la licitación <strong>%s</strong> ha sido marcado con ejecución parcial.
+
+      created:
+        title: Contrato creado.
+        body: Nuevo contrato <strong>%s</strong> ha sido generado, haga clic aquí para obtener más detalles.

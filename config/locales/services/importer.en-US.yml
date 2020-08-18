@@ -1,0 +1,14 @@
+﻿en-US:
+  services:
+    importer:
+      log:
+        end: Import completed
+        error: "Import failure: %{e}"
+        fail: 'Import failure in line %{line}'
+        start: Import started
+        api_fault:  'Communication failure with api "%{value}"'
+        validation_fail: 'Import failure in record %{line} - %{error}'
+
+        resources:
+          cooperative: "Cooperative CNPJ %{value}"
+          covenant: "Covenant %{value}"

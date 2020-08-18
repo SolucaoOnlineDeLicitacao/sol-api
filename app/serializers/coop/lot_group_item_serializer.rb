@@ -4,8 +4,12 @@ module Coop
                 :item_name, :item_unit, :quantity, :current_quantity, :total_quantity,
                 :available_quantity, :lot_group_item_count, :_destroy, :lot_name
 
+    def quantity
+      object.quantity.to_f
+    end
+
     def current_quantity
-      object.quantity
+      object.quantity.to_f
     end
 
     def lot_group_item_count
@@ -25,11 +29,11 @@ module Coop
     end
 
     def total_quantity
-      object.group_item.quantity
+      object.group_item.quantity.to_f
     end
 
     def available_quantity
-      object.group_item.available_quantity
+      object.group_item.available_quantity.to_f
     end
 
     def lot_name

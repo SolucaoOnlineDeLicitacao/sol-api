@@ -1,0 +1,20 @@
+﻿en-US:
+  notifications:
+    bidding:
+      failure_cooperative: &failure_cooperative
+        title: Procurement process %s failed.
+        body: 'The reviewer failed the procurement process <strong>%s</strong>. Reason: <strong>%s</strong>'
+
+      failure_provider:
+        <<: *failure_cooperative
+        body: 'Procurement process <strong>%s</strong> failed. Please wait until a new procurement process begins'
+      
+      failure_all_admin: &failure_all_without_proposals
+        <<: *failure_cooperative
+        body: 'Procurement process <strong>%s</strong> did not have any winning proposals and failed.'
+
+      failure_all_provider:
+        <<: *failure_all_without_proposals
+      
+      failure_all_cooperative:
+        <<: *failure_all_without_proposals

@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Notifications::Fcm, type: [:service, :notification] do
+  let(:locale)        { 'pt-BR' }
   let!(:bidding)      { create(:bidding, kind: :global, status: :approved) }
   let(:service)       { described_class.new(notification.id) }
 
   let(:covenant)      { bidding.covenant }
   let(:cooperative)   { covenant.cooperative }
-  let!(:user)         { create(:user, cooperative: cooperative) }
+  let!(:user)         { create(:user, cooperative: cooperative, locale: locale) }
   let!(:device_token) { create(:device_token, owner: user) }
   let!(:admin)        { covenant.admin }
 
@@ -96,7 +97,6 @@ RSpec.describe Notifications::Fcm, type: [:service, :notification] do
 
       describe 'attributes' do
         let(:response) { { not_registered_ids: [] } }
-
         let(:attributes) do
           {
             "data": {
@@ -117,6 +117,19 @@ RSpec.describe Notifications::Fcm, type: [:service, :notification] do
         end
 
         it { expect(fcm).to have_received(:send).with(tokens, attributes) }
+        it { expect(attributes[:data][:title]).to include(locale) }
+        it { expect(attributes[:data][:body]).to include(locale) }
+
+        context 'with another locale' do
+          let(:locale) { 'en-US' }
+          let!(:user) do
+            create(:user, cooperative: cooperative, locale: locale)
+          end
+
+          it { expect(fcm).to have_received(:send).with(tokens, attributes) }
+          it { expect(attributes[:data][:title]).to include(locale) }
+          it { expect(attributes[:data][:body]).to include(locale) }
+        end
       end
 
       context 'when not_registered_ids' do

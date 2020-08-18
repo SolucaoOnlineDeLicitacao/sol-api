@@ -3,6 +3,7 @@ class Supplier < ApplicationRecord
   include ::Sortable
   include ::Notifiable
   include ::PasswordSkippable
+  include ::I18nable
 
   mount_uploader :avatar, AvatarUploader
 

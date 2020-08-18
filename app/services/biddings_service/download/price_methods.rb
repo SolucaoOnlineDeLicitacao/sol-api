@@ -2,12 +2,16 @@ module BiddingsService::Download
   module PriceMethods
     include ActionView::Helpers::NumberHelper
 
-    HEADER_PRICE_COLUMNS = [
-      I18n.t('services.biddings.download.header.price.title'),
-      I18n.t('services.biddings.download.header.price.columns')
-    ].freeze
-
     private
+
+    # do not use this array on const definition,
+    # use on method, for `with_locale` to work.
+    def header_price_columns
+      [
+        I18n.t('services.biddings.download.header.price.title'),
+        I18n.t('services.biddings.download.header.price.columns')
+      ]
+    end
 
     def price_sheet
       @price_sheet ||= book.create_sheet(

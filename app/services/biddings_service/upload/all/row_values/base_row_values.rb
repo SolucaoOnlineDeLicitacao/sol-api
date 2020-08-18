@@ -14,7 +14,22 @@ module BiddingsService::Upload::All::RowValues
 
     def convert_value(value)
       return if value.blank?
-      value.to_s.gsub(/[^(0-9|\.|\,)]/, '').gsub('.', '').gsub(',','.').to_f
+
+      I18n.with_locale(I18n.default_locale) do
+        value.to_s.
+          gsub(/[^(0-9|\"#{delimiter}"|\"#{separator}")]/, '').
+          gsub(delimiter, '').
+          gsub(separator, ".").
+          to_f
+      end
+    end
+
+    def delimiter
+      @delimiter ||= I18n.t('number.currency.format.delimiter')
+    end
+
+    def separator
+      @separator ||= I18n.t('number.currency.format.separator')
     end
   end
 end

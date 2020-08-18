@@ -18,15 +18,17 @@ module BiddingsService::Download
     private
 
     def generate_file
-      fill_headers
-      iterate_and_fill_rows
-      book_clear_and_write
-      file_path
+      I18n.with_locale(I18n.default_locale) do
+        fill_headers
+        iterate_and_fill_rows
+        book_clear_and_write
+        file_path
+      end
     end
 
     def fill_headers
       %w[price delivery].each do |type|
-        Base.const_get("HEADER_#{type.upcase}_COLUMNS").each_with_index do |columns, i|
+        send("header_#{type}_columns").each_with_index do |columns, i|
           book.add_header(send("#{type}_sheet"), i, columns)
         end
       end

@@ -1,0 +1,6 @@
+﻿en-US:
+  notifications:
+    bidding:
+      additive_created:
+        title: Procurement process %s end date changed.
+        body: "Additive created for procurement process <strong>%s</strong>. Updated end date: <strong>%s</strong>."

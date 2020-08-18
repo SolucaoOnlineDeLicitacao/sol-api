@@ -1,0 +1,18 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      waiting_approval:
+        title: Licitación %s pendiente de liberación.
+        body: La licitación <strong>%s</strong> ha sido creada y está pendiente de liberación.
+
+      approved:
+        title: Licitación %s liberada.
+        body: El revisor ha liberado la licitación <strong>%s</strong>! Se iniciará el día <strong>%s</strong>.
+
+      finished:
+        title: Licitación %s finalizada.
+        body: ¡La licitación <strong>%s</strong> ha sido finalizada con éxito!
+
+      reproved:
+        title: Licitación %s reprobada.
+        body: ¡El revisor ha reprobado la licitación <strong>%s</strong>!

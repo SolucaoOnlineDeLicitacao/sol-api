@@ -1,7 +1,7 @@
 def reset_password_token
   message = ActionMailer::Base.deliveries.last.body.raw_source
   rpt_index = message.index("reset_password_token")+"reset_password_token".length+1
-  return message[rpt_index...message.index("\"", rpt_index)]
+  return message[rpt_index...message.index("\"", rpt_index)].split("&amp;locale").first
 end
 
 RSpec.shared_examples "a password operations to" do |user_type|
@@ -34,9 +34,12 @@ RSpec.shared_examples "a password operations to" do |user_type|
           end
 
           before do
+            link_pattern = 'href'
+            url_pattern = '/password'
             body = @email.body.raw_source
-            href_index = body.index("href")+"href".length+2
-            @domain = body[href_index...body.index("/#", href_index)] + "/#"
+            href_index = body.index(link_pattern) + link_pattern.length + 2
+            domain_with_password = body[href_index...body.index(url_pattern, href_index)] + url_pattern
+            @domain = domain_with_password.split(url_pattern).first
           end
 
           it { expect(@domain).to eq(domain) }

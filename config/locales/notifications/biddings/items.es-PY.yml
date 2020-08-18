@@ -1,0 +1,6 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      item_cooperative:
+        title: Licitación %s con ítem modificado.
+        body: En la licitación <strong>%s</strong> se ha modificado el ítem <strong>%s</strong>.

@@ -1,0 +1,6 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      additive_created:
+        title: Modificación en la fecha de cierre de la licitación %s.
+        body: Se ha creado un aditivo para la licitación <strong>%s</strong>. La nueva fecha de cierre es <strong>%s</strong>.

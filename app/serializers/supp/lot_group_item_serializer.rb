@@ -29,6 +29,11 @@ module Supp
         hash << _lot_group_item_lot_proposal
       end
 
+      hash.each do |h|
+        h.deep_symbolize_keys!
+        h[:price] = h[:price].to_f
+      end
+
       hash
     end
 

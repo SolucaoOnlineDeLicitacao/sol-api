@@ -1,0 +1,18 @@
+﻿en-US:
+  notifications:
+    bidding:
+      waiting_approval:
+        title: Procurement process %s pending clearance.
+        body: The procurement process <strong>%s</strong> was created and is pending clearance.
+
+      approved:
+        title: Procurement process %s cleared.
+        body: The reviewer cleared the procurement process <strong>%s</strong>! The process will begin on <strong>%s</strong>.
+
+      finished:
+        title: Procurement process %s completed.
+        body: The procurement process <strong>%s</strong> was successfully completed!
+
+      reproved:
+        title: Procurement process %s rejected.
+        body: The reviewer rejected the procurement process <strong>%s</strong>!

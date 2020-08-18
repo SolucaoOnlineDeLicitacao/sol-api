@@ -21,4 +21,16 @@ module GroupItemSerializable
   def group_name
     object.group.name
   end
+
+  def quantity
+    object.quantity.to_f
+  end
+
+  def available_quantity
+    object.available_quantity.to_f
+  end
+
+  def estimated_cost
+    object.estimated_cost.to_f
+  end
 end

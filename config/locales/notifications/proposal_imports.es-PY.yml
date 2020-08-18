@@ -1,0 +1,19 @@
+﻿es-PY:
+  notifications:
+    proposal_import:
+
+      success:
+        title: Propuestas importadas.
+        body: Las propuestas de la licitación "%s" del archivo <strong>%s</strong> han sido importadas con éxito.
+
+      error:
+        title: Propuestas no importadas.
+        body: No se pudo realizar la importación de la propuesta de la licitación "%s". Verifique el archivo <strong>%s</strong> e intente nuevamente.
+
+      lot_success:
+        title: Propuesta importada.
+        body: La propuesta del lote "%s" del archivo <strong>%s</strong> ha sido importada con éxito.
+
+      lot_error:
+        title: Propuesta no importada.
+        body: No se pudo realizar la importación de la propuesta del lote "%s". Verifique el archivo <strong>%s</strong> e intente nuevamente.

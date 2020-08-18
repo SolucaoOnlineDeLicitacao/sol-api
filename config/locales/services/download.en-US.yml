@@ -1,0 +1,162 @@
+﻿en-US:
+  services:
+    download:
+      money: 'BRL %{value}'
+      summary: 'Summary'
+      details: Details
+
+      biddings:
+        status:
+          worksheet: Procurement Process by Status
+          column_1: Status
+          column_2: Quantity
+          column_3: Total estimated price
+          column_4: Total price of proposals
+
+          approved: Cleared
+          canceled: Canceled
+          failure: Failed
+          finnished: Completed
+          ongoing: Open
+          under_review: Under review
+          reopened: Reopened
+          waiting: Pending clearance
+          suspended: Suspended
+          draw: Pending tie-break
+          desert: Deserted
+
+          column_5: Cooperative
+          column_6: Municipality
+          column_7: Number
+          column_8: Description (purpose)
+          column_9: Procurement process type
+          column_10: Modality
+          column_11: Status
+          column_12: Start date
+          column_13: End date
+          column_14: Total estimated price
+          column_15: Total price of proposals
+
+          kind:
+            global: Global price
+            lot: Price per lot
+            unitary: Unit price
+          modality:
+            unrestricted: Open/Public
+            open_invite: Open call for bids
+            closed_invite: Closed call for bids
+
+        time:
+          worksheet: Procurement completion times
+          column_1: Title
+          column_2: Time
+
+          finnished: Completed
+
+          days: '%{day} days'
+
+          column_4: Cooperative
+          column_5: Municipality
+          column_6: Number
+          column_7: Description (purpose)
+          column_8: Procurement process type
+          column_9: Modality
+          column_10: Status
+          column_11: Start date
+          column_12: End date
+          column_13: Total days
+          column_14: Total price
+
+          kind:
+            global: Global price
+            lot: Price per lot
+            unitary: Unit price
+          modality:
+            unrestricted: Open/Public
+            open_invite: Open call for bids
+            closed_invite: Closed call for bids
+
+      contracts:
+        kind:
+          worksheet: Classification by contract
+          column_1: Classification Name
+          column_2: Contract Total
+          column_3: Total Price
+
+          column_4: Contract
+          column_5: Classifications
+          column_6: Cooperative
+          column_7: Cooperative CNPJ
+          column_8: Procurement Process Number
+          column_9: Vendor
+          column_10: Vendor Document
+          column_11: Total contract amount
+
+      items:
+        prices:
+          worksheet: Price variation between similar items
+
+          column_1: Item
+          column_2: Lot
+          column_3: Unit value
+          column_4: Procurement Process Number
+          column_5: Vendor
+          column_6: Vendor Document
+          column_7: Cooperative
+          column_8: Cooperative CNPJ
+
+      supplier:
+        biddings:
+          worksheet: Vendors most frequently involved in procurement processes
+          column_1: Document
+          column_2: Vendor name
+          column_3: Number of procurement processes
+
+          column_4: Procurement Process Number
+          column_5: Vendor
+          column_6: Vendor Document
+          column_7: Vendor municipality
+          column_8: Cooperative
+          column_9: Cooperative CNPJ
+          column_10: Cooperative municipality
+          column_11: Procurement process type
+          column_12: Modality
+          column_13: Status
+          column_14: Start date
+          column_15: End date
+
+          kind:
+            global: Global price
+            lot: Price per lot
+            unitary: Unit price
+          modality:
+            unrestricted: Open/Public
+            open_invite: Open call for bids
+            closed_invite: Closed call for bids
+          approved: Cleared
+          canceled: Canceled
+          failure: Failed
+          finnished: Completed
+          ongoing: Open
+          under_review: Under review
+          reopened: Reopened
+          waiting: Pending clearance
+          suspended: Suspended
+          draw: Pending tie-break
+          draft: In draft
+          desert: Deserted
+
+        ranking:
+          worksheet: Ranking of vendors with highest number and value of contracts
+          column_1: Name
+          column_2: Quantity
+          column_3: Value
+
+          column_4: Vendor
+          column_5: Vendor Document
+          column_6: Contract
+          column_7: Cooperative
+          column_8: Cooperative CNPJ
+          column_9: Procurement Process Number
+          column_10: Total contract amount
+

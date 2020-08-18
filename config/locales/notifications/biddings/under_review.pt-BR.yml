@@ -10,4 +10,4 @@ pt-BR:
 
       under_review_cooperative:
         <<: *under_review_admin
-        body: A licitação <strong>%s</strong> está em análise. As propostas estão disponíveis para análise"
+        body: A licitação <strong>%s</strong> está em análise. As propostas estão disponíveis para análise

@@ -1,4 +1,4 @@
-en:
+﻿en-US:
   activerecord:
     attributes:
       doorkeeper/application:
@@ -7,18 +7,18 @@ en:
         scopes:
           public:   Public
           admin:    Administration
-          supplier: Supplier
+          supplier: Vendor
           user:     User
     errors:
       models:
         doorkeeper/application:
           attributes:
             redirect_uri:
-              fragment_present: 'cannot contain a fragment.'
+              fragment_present: 'Cannot contain a fragment.'
               invalid_uri: 'must be a valid URI.'
               relative_uri: 'must be an absolute URI.'
               secured_uri: 'must be an HTTPS/SSL URI.'
-              forbidden_uri: 'is forbidden by the server.'
+              forbidden_uri: 'is forbidden in the server.'
             scopes:
               not_match_configured: "doesn't match configured on the server."
 
@@ -28,17 +28,17 @@ en:
         destroy: 'Are you sure?'
       buttons:
         edit: 'Edit'
-        destroy: 'Destroy'
+        destroy: 'Delete'
         submit: 'Submit'
         cancel: 'Cancel'
         authorize: 'Authorize'
       form:
-        error: 'Whoops! Check your form for possible errors'
+        error: 'Whoops! Check form for possible errors'
       help:
         confidential: 'Application will be used where the client secret can be kept confidential. Native mobile apps and Single Page Apps are considered non-confidential.'
         redirect_uri: 'Use one line per URI'
-        native_redirect_uri: 'Use %{native_redirect_uri} if you want to add localhost URIs for development purposes'
-        scopes: 'Separate scopes with spaces. Leave blank to use the default scopes.'
+        native_redirect_uri: 'Use %{native_redirect_uri} for local tests'
+        scopes: ~
       edit:
         title: 'Edit application'
       index:
@@ -46,8 +46,8 @@ en:
         new: 'New Application'
         name: 'Name'
         callback_url: 'Callback URL'
-        confidential: 'Confidential?'
         actions: 'Actions'
+        confidential: 'Confidential?'
         confidentiality:
           'yes': 'Yes'
           'no': 'No'
@@ -57,7 +57,7 @@ en:
         title: 'Application: %{name}'
         application_id: 'Application UID'
         secret: 'Secret'
-        scopes: 'Scopes'
+        scopes: ~
         confidential: 'Confidential'
         callback_urls: 'Callback urls'
         actions: 'Actions'
@@ -67,10 +67,10 @@ en:
         authorize: 'Authorize'
         deny: 'Deny'
       error:
-        title: 'An error has occurred'
+        title: 'An error occurred'
       new:
         title: 'Authorization required'
-        prompt: 'Authorize %{client_name} to use your account?'
+        prompt: 'Authorize %{client_name} to your use account?'
         able_to: 'This application will be able to'
       show:
         title: 'Authorization code'
@@ -83,27 +83,23 @@ en:
       index:
         title: 'Your authorized applications'
         application: 'Application'
-        created_at: 'Created At'
+        created_at: 'Created on'
         date_format: '%Y-%m-%d %H:%M:%S'
-
-    pre_authorization:
-      status: 'Pre-authorization'
 
     errors:
       messages:
         # Common error messages
-        invalid_request: 'The request is missing a required parameter, includes an unsupported parameter value, or is otherwise malformed.'
-        invalid_redirect_uri: "The requested redirect uri is malformed or doesn't match client redirect URI."
+        invalid_request: 'The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed.'
+        invalid_redirect_uri: 'The entered redirect uri is invalid.'
         unauthorized_client: 'The client is not authorized to perform this request using this method.'
         access_denied: 'The resource owner or authorization server denied the request.'
         invalid_scope: 'The requested scope is invalid, unknown, or malformed.'
-        invalid_code_challenge_method: 'The code challenge method must be plain or S256.'
-        server_error: 'The authorization server encountered an unexpected condition which prevented it from fulfilling the request.'
-        temporarily_unavailable: 'The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.'
+        server_error: 'The request could not be processed because the authorization server encountered an unexpected condition.'
+        temporarily_unavailable: 'The authorization server was unable to process the request due to a temporary overload or maintenance issue.'
 
-        # Configuration error messages
-        credential_flow_not_configured: 'Resource Owner Password Credentials flow failed due to Doorkeeper.configure.resource_owner_from_credentials being unconfigured.'
-        resource_owner_authenticator_not_configured: 'Resource Owner find failed due to Doorkeeper.configure.resource_owner_authenticator being unconfigured.'
+        #configuration error messages
+        credential_flow_not_configured: 'Resource Owner Password Credentials flow failed because Doorkeeper.configure.resource_owner_from_credentials is not configured.'
+        resource_owner_authenticator_not_configured: 'Resource Owner find failed because Doorkeeper.configure.resource_owner_authenticator is not configured.'
 
         # Access grant errors
         unsupported_response_type: 'The authorization server does not support this response type.'
@@ -112,6 +108,7 @@ en:
         invalid_client: 'Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.'
         invalid_grant: 'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.'
         unsupported_grant_type: 'The authorization grant type is not supported by the authorization server.'
+        blocked: 'User locked by the system'
 
         invalid_token:
           revoked: "The access token was revoked"

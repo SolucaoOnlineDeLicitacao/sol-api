@@ -6,7 +6,6 @@ class GroupItem < ApplicationRecord
 
   MINIMUM_QUANTITY_VALUE = 0.freeze
 
-  before_validation :ensure_estimated_cost, :ensure_quantity
   before_validation :ensure_available_quantity, on: :create
 
   belongs_to :group, counter_cache: true
@@ -41,14 +40,6 @@ class GroupItem < ApplicationRecord
   end
 
   private
-
-  def ensure_estimated_cost
-    self.estimated_cost = estimated_cost_before_type_cast.to_s.gsub(',', '.').to_f
-  end
-
-  def ensure_quantity
-    self.quantity = quantity_before_type_cast.to_s.gsub(',', '.').to_f
-  end
 
   def ensure_available_quantity
     self.available_quantity = quantity

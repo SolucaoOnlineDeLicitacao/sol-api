@@ -1,0 +1,8 @@
+﻿en-US:
+  activerecord:
+    errors:
+      models:
+        item:
+          attributes:
+            lot_group_items:
+              in_use: cannot be changed because the item is in use
