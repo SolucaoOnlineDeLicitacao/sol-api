@@ -28,13 +28,18 @@ module Importers
       import_covenant
 
       save_resource!(@covenant)
-      
-      make_all_items_unavailable
 
-      import_groups
-      
-      delete_all_items_unavailable
+      unless covenant_has_biddings?
+        destroy_all_groups!
 
+        import_groups
+      else
+        make_all_items_unavailable
+
+        import_groups
+        
+        delete_all_items_unavailable
+      end
     end
 
     def save_resource!(resource, params={})
@@ -50,7 +55,23 @@ module Importers
     def covenant_number
       squish(resource[:number])
     end
+
+    def covenant_persisted
+      Covenant.find_by(number: covenant_number)
+    end
+
+    def covenant_has_biddings?
+      covenant = covenant_persisted
+      covenant.biddings.present?
+    end
     
+    def destroy_all_groups!
+      covenant = covenant_persisted
+      covenant.groups.each do |g| 
+        g.destroy! 
+      end
+    end
+
     def make_all_items_unavailable
       covenant = Covenant.find_by(number: covenant_number)
       covenant.groups.each do |group|
