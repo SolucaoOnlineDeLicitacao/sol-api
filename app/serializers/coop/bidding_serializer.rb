@@ -3,7 +3,7 @@ module Coop
     include CurrentEventCancellable
 
     attributes :id, :title, :description, :kind, :status, :deadline, :link,
-        :start_date, :closing_date, :covenant_id, :covenant_name,
+        :start_date, :closing_date, :covenant_id, :covenant_name, :covenant_admin_name,
         :cancel_comment, :comment_response, :event_status, :event_id, :address,
         :can_finish, :supp_can_see, :modality, :draw_end_days, :refuse_comment,
         :failure_comment, :minute_pdf, :edict_pdf, :classification_id, :classification_name,
@@ -49,6 +49,10 @@ module Coop
 
     def covenant_name
       "#{object.covenant.number} - #{object.covenant.name}"
+    end
+
+    def covenant_admin_name
+      object.covenant.admin_name
     end
 
     def can_finish

@@ -5,6 +5,7 @@ Para que as associações e cooperativas realizem as licitações de aquisição
 ---
 
 Este repositório contém toda a API necessária para demais aplicações:
+
 - sol-admin-frontend;
 - sol-cooperative-frontend;
 - sol-supplier-frontend.
@@ -13,13 +14,35 @@ Este repositório contém toda a API necessária para demais aplicações:
 
 O executável `setup` deve realizar todo o trabalho necessário, então apenas rode:
 
-```
+```bash
   bin/setup
 ```
 
 Após a configuração inicial da aplicação, devemos rodar a task principal para configuração dos dados (`setup:load`).
 
 **Obs:** Não esqueça de setar na aplicação que irá consultar a API os valores de `uid` e `secret` gerados pelo comando acima.
+
+## Autorização de acesso
+
+A autorização de acesso à api pela aplicação front-end e pelo usuário é realizada utilizando a gem
+doorkeeper. Então apenas rode:
+
+```bash
+  rake oauth:applications:load
+```
+
+Para consultar as credenciais é necessário entrar no console da aplicação, então rorode o comando:
+
+```bash
+  bundle exec rails c
+```
+
+Por fim, liste todas as credenciais criadas, como comando:
+
+```bash
+  Doorkeeper::Application.all
+```
+
 
 ## Iniciando o servidor
 
@@ -33,6 +56,6 @@ O sistema conta com um Procfile e todos seus processos podem ser iniciados por u
 
 O projeto conta com a gem Guard que permite rodar os testes automaticamente ao editar um teste/arquivo, para isso basta executar:
 
-```
+```bash
  guard
 ```

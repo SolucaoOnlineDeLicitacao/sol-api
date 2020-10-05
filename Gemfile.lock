@@ -134,6 +134,7 @@ GEM
     doorkeeper (5.0.0.rc2)
       railties (>= 4.2)
     dry-inflector (0.1.2)
+    ed25519 (1.2.4)
     erubi (1.7.1)
     excon (0.62.0)
     factory_bot (4.10.0)
@@ -613,6 +614,7 @@ DEPENDENCIES
   deep_cloneable
   devise
   doorkeeper (~> 5.0.0.rc2)
+  ed25519 (~> 1.2)
   extensobr!
   factory_bot_rails
   faraday-cookie_jar

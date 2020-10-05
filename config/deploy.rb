@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "sdc-api"
-set :repo_url, "https://github.com/SolucaoOnlineDeLicitacao/sol-api.git"
+set :repo_url, "https://github.com/car-bahia/sol-api.git"
 
 # Default branch is :master
 if ENV['BRANCH']
