@@ -1,0 +1,39 @@
+﻿en-US:
+  services:
+    biddings:
+      download:
+        units:
+          meter: Meter(s)
+          liter: Liter(s)
+          kilogram: Kilo(s)
+          square_meter: Square meter(s)
+          cubic_meter: Cubic meter(s)
+          other: Unit(s)
+        file_name: procurement_lot_items
+        header:
+          price:
+            sheet: item price proposal
+            title:
+              - procurement items and lots
+            columns:
+              - procurement number
+              - lot code
+              - lot name
+              - item code in procurement
+              - item classification
+              - item description
+              - item unit
+              - item quantity
+              - proposal (unit value)
+          delivery:
+            sheet: value of the shipping fee proposal
+            title:
+              - procurement items and lots
+            columns:
+              - lot code
+              - lot name
+              - lot deadline (days)
+              - lot delivery location
+              - shipping fee (value)
+            rows:
+              deadline: "%s days"

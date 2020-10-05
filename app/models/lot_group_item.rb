@@ -4,7 +4,6 @@ class LotGroupItem < ApplicationRecord
   MINIMUM_QUANTITY_VALUE = 0.freeze
 
   before_destroy :recount_group_item_quantity, prepend: true
-  before_validation :ensure_quantity
 
   belongs_to :lot, counter_cache: true
   belongs_to :group_item
@@ -34,10 +33,6 @@ class LotGroupItem < ApplicationRecord
   scope :active, -> { joins(:lot).where.not(lots: { status: [:failure, :desert, :canceled] }) }
 
   private
-
-  def ensure_quantity
-    self.quantity = quantity_before_type_cast.to_s.gsub(',', '.').to_d
-  end
 
   def minimum_quantity
     errors.add(:quantity, :greater_or_equal_than, count: MINIMUM_QUANTITY_VALUE) unless quantity_greater_than_minimum?

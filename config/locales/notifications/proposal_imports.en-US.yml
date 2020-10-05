@@ -1,0 +1,19 @@
+﻿en-US:
+  notifications:
+    proposal_import:
+
+      success:
+        title: Imported proposals.
+        body: The proposals of procurement process "%s" in file <strong>%s</strong> were successfully imported.
+
+      error:
+        title: Proposals not imported.
+        body: The proposal of procurement process "%s" could not be imported. Check the file <strong>%s</strong> and try again.
+
+      lot_success:
+        title: Proposal imported.
+        body: The proposal of lot "%s" in file <strong>%s</strong> was successfully imported.
+
+      lot_error:
+        title: Proposal not imported.
+        body: The proposal of lot "%s" could not be imported. Check the file <strong>%s</strong> and try again.

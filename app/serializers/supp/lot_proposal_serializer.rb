@@ -21,8 +21,12 @@ module Supp
       proposal.triage?
     end
 
+    def price_total
+      object.price_total.to_f
+    end
+
     def delivery_price
-      ('%.2f' % object.delivery_price).to_s.gsub('.', ',')
+      object.delivery_price.to_f
     end
 
     def provider

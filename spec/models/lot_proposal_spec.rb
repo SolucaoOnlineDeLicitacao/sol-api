@@ -294,16 +294,6 @@ RSpec.describe LotProposal, type: :model do
         end
       end
     end
-
-    describe 'before_validation' do
-      describe 'ensure_delivery_price' do
-        let(:lot_proposal) { build(:lot_proposal) }
-
-        before { lot_proposal.delivery_price = '10,05'; lot_proposal.valid? }
-
-        it { expect(lot_proposal.delivery_price).to eq 10.05 }
-      end
-    end
   end
 
   context 'when trying to update lot_proposal in a bidding that is drawed and global' do

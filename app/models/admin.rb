@@ -3,8 +3,7 @@ class Admin < ApplicationRecord
   include ::Sortable
   include ::Notifiable
   include ::PasswordSkippable
-
-  enum role: { viewer: 0, reviewer: 1, general: 2 }
+  include ::I18nable
 
   versionable ignore: %i[
     confirmation_token confirmation_sent_at confirmed_at current_sign_in_at
@@ -15,6 +14,8 @@ class Admin < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  enum role: { viewer: 0, reviewer: 1, general: 2 }
 
   has_many :access_grants,
     -> { where 'scopes ~ :scope', scope: :admin },

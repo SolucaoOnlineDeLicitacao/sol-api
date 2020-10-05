@@ -1,3 +1,5 @@
+require 'sidekiq/middleware/i18n'
+
 YAML::load_file(Rails.root.join('config', 'sidekiq.yml')).tap do |yaml|
   sidekiq_yaml = {}
   fetch_config = ->(rails_env, *keys) { yaml.dig(rails_env, *keys) || yaml.dig(*keys) }

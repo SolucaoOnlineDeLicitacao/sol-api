@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_123138) do
+ActiveRecord::Schema.define(version: 2020_06_08_184243) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_123138) do
     t.datetime "updated_at", null: false
     t.string "name", null: false
     t.integer "role", default: 2
+    t.integer "locale", default: 0, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -492,6 +494,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_123138) do
     t.datetime "updated_at", null: false
     t.bigint "provider_id"
     t.string "avatar"
+    t.integer "locale", default: 0, null: false
     t.index ["email"], name: "index_suppliers_on_email", unique: true
     t.index ["provider_id"], name: "index_suppliers_on_provider_id"
     t.index ["reset_password_token"], name: "index_suppliers_on_reset_password_token", unique: true
@@ -528,6 +531,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_123138) do
     t.string "cpf"
     t.bigint "role_id"
     t.string "avatar"
+    t.integer "locale", default: 0, null: false
     t.index ["cooperative_id"], name: "index_users_on_cooperative_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

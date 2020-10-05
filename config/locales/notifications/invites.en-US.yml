@@ -1,0 +1,14 @@
+﻿en-US:
+  notifications:
+    invite:
+      approved:
+        title: Call for bid accepted.
+        body: Your request to participate in the procurement process <strong>%s</strong> was approved by the cooperative <strong>%s</strong>.
+
+      pending:
+        title: Pending call review.
+        body: Vendor <strong>%s</strong> wishes to participate in procurement process <strong>%s</strong>! Review the request.
+
+      reproved:
+        title: Call rejected.
+        body: Your request to participate in procurement process <strong>%s</strong> was denied by the cooperative <strong>%s</strong>.

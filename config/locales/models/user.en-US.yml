@@ -1,0 +1,19 @@
+﻿en-US:
+  activerecord:
+    models:
+      user:
+        one: User
+        other: Users
+    attributes:
+      user:
+        name: Name
+        email: Email
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: '%{attribute} must be informed'
+            email:
+              taken: '(%{value}) is already in use'

@@ -19,6 +19,10 @@ RSpec.describe User, type: :model do
     it { is_expected.to be_versionable }
   end
 
+  describe 'enums' do
+    it { is_expected.to define_enum_for(:locale).with_values(enum_locales) }
+  end
+
   describe 'associations' do
     it { is_expected.to have_many(:access_tokens).dependent(:destroy) }
     it { is_expected.to have_many(:access_grants).dependent(:destroy) }
@@ -31,17 +35,6 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :cpf }
-
-    xcontext 'when skip_integration_validations' do
-      before { subject.skip_integration_validations! }
-
-      it { is_expected.not_to validate_phone_for(:phone) }
-    end
-
-    xcontext 'when not skip_integration_validations' do
-      it { is_expected.to validate_phone_for(:phone) }
-    end
-
     it { is_expected.to validate_cpf_for(:cpf) }
   end
 

@@ -21,10 +21,6 @@ module Administrator
       admin.skip_password_validation!
     end
 
-    def params_with_password?
-      true # override since admin only changes password
-    end
-
     def resource
       admin
     end

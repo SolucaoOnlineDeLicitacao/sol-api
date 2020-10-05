@@ -1,0 +1,19 @@
+﻿es-PY:
+  activerecord:
+    models:
+      user:
+        one: Usuario
+        other: Usuarios
+    attributes:
+      user:
+        name: Nombre
+        email: Correo electrónico
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: '%{attribute} necesita ser informado'
+            email:
+              taken: '(%{value}) ya está en uso'

@@ -1,0 +1,162 @@
+﻿es-PY:
+  services:
+    download:
+      money: 'R$ %{value}'
+      summary: 'Sumario'
+      details: Detalles
+
+      biddings:
+        status:
+          worksheet: Licitación por situación
+          column_1: Situación
+          column_2: Cantidad
+          column_3: Precio total estimado
+          column_4: Precio total de las propuestas
+
+          approved: Liberada
+          canceled: Cancelada
+          failure: Fallida
+          finnished: Concluida
+          ongoing: Abierta
+          under_review: En revisión
+          reopened: Reabierta
+          waiting: Aguardando liberación
+          suspended: Suspendida
+          draw: Aguardando desempate
+          desert: Desierto
+
+          column_5: Asociación
+          column_6: Municipio
+          column_7: Número
+          column_8: Descripción (Objeto)
+          column_9: Tipo de licitación
+          column_10: Modalidad
+          column_11: Situación
+          column_12: Fecha de inicio
+          column_13: Fecha de cierre
+          column_14: Precio total estimado
+          column_15: Precio total de las propuestas
+
+          kind:
+            global: Precio global
+            lot: Precio por lote
+            unitary: Precio individual
+          modality:
+            unrestricted: Abierta/Pública
+            open_invite: Invitación abierta
+            closed_invite: Invitación cerrada
+
+        time:
+          worksheet: Tiempos de realización de licitaciones
+          column_1: Titulo
+          column_2: Tiempo
+
+          finnished: Concluida
+
+          days: '%{day} días'
+
+          column_4: Asociación
+          column_5: Municipio
+          column_6: Número
+          column_7: Descripción (Objeto)
+          column_8: Tipo de licitación
+          column_9: Modalidad
+          column_10: Situación
+          column_11: Fecha de inicio
+          column_12: Fecha de cierre
+          column_13: Total de días
+          column_14: Precio total
+
+          kind:
+            global: Precio global
+            lot: Precio por lote
+            unitary: Precio individual
+          modality:
+            unrestricted: Abierta/Pública
+            open_invite: Invitación abierta
+            closed_invite: Invitación cerrada
+
+      contracts:
+        kind:
+          worksheet: Clasificación por contrato
+          column_1: Nombre de la clasificación
+          column_2: Total del contrato
+          column_3: Precio total
+
+          column_4: Contrato
+          column_5: Clasificaciones
+          column_6: Asociación
+          column_7: CNPJ de la asociación
+          column_8: Número de licitación
+          column_9: Proveedor
+          column_10: Documento del proveedor
+          column_11: Valor total del contrato
+
+      items:
+        prices:
+          worksheet: Variación de precios entre ítems semejantes
+
+          column_1: Ítem
+          column_2: Lote
+          column_3: Valor unitario
+          column_4: Número de licitación
+          column_5: Proveedor
+          column_6: Documento del proveedor
+          column_7: Asociación
+          column_8: CNPJ de la asociación
+
+      supplier:
+        biddings:
+          worksheet: Proveedores que más participan de licitaciones
+          column_1: Documento
+          column_2: Nombre del proveedor
+          column_3: Cantidad de licitaciones
+
+          column_4: Número de licitación
+          column_5: Proveedor
+          column_6: Documento del proveedor
+          column_7: Municipio del proveedor
+          column_8: Asociación
+          column_9: CNPJ de la asociación
+          column_10: Municipio de la asociación
+          column_11: Tipo de licitación
+          column_12: Modalidad
+          column_13: Situación
+          column_14: Fecha de inicio
+          column_15: Fecha de cierre
+
+          kind:
+            global: Precio global
+            lot: Precio por lote
+            unitary: Precio individual
+          modality:
+            unrestricted: Abierta/Pública
+            open_invite: Invitación abierta
+            closed_invite: Invitación cerrada
+          approved: Liberada
+          canceled: Cancelada
+          failure: Fallida
+          finnished: Concluida
+          ongoing: Abierta
+          under_review: En revisión
+          reopened: Reabierta
+          waiting: Aguardando liberación
+          suspended: Suspendida
+          draw: Aguardando desempate
+          draft: En borrador
+          desert: Desierto
+
+        ranking:
+          worksheet: Ranking de proveedores con mayor número y valor de contratos
+          column_1: Nombre
+          column_2: Cantidad
+          column_3: Valor
+
+          column_4: Proveedor
+          column_5: Documento del proveedor
+          column_6: Contrato
+          column_7: Asociación
+          column_8: CNPJ de la asociación
+          column_9: Número de licitación
+          column_10: Valor total del contrato
+

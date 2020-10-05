@@ -1,0 +1,6 @@
+﻿en-US:
+  notifications:
+    bidding:
+      item_cooperative:
+        title: Item changes in procurement process %s.
+        body: The procurement process <strong>%s</strong> had changes in item <strong>%s</strong>.

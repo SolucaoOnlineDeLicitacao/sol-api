@@ -126,18 +126,6 @@ RSpec.describe GroupItem, type: :model do
 
   describe 'callbacks' do
     describe 'before_validation' do
-      describe 'ensure_estimated_cost' do
-        before { group_item.estimated_cost = '10,05'; group_item.valid? }
-
-        it { expect(group_item.estimated_cost).to eq 10.05 }
-      end
-
-      describe 'ensure_quantity' do
-        before { group_item.quantity = '10,05'; group_item.valid? }
-
-        it { expect(group_item.quantity).to eq 10.05 }
-      end
-
       describe 'ensure_available_quantity' do
         let(:group_item) { build(:group_item, quantity: 100, available_quantity: 50) }
 

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   include ::Sortable
   include ::Notifiable
   include ::PasswordSkippable
+  include ::I18nable
 
   mount_uploader :avatar, AvatarUploader
 
@@ -40,8 +41,6 @@ class User < ApplicationRecord
             presence: true
 
   validates :cpf, cpf: true
-
-  # validates :phone, phone: true, unless: :skip_integration_validations
 
   delegate :title, :id, to: :role, prefix: true, allow_nil: true
   delegate :name, to: :cooperative, prefix: true, allow_nil: true

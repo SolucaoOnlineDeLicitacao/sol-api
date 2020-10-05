@@ -49,7 +49,8 @@ module DoorkeeperExtensionResourceOwnerTokenResponse
     base_params = {
       'id'       => token.resource_owner_id,
       'name'     => resource_owner.name,
-      'username' => resource_owner.email
+      'username' => resource_owner.email,
+      'locale'   => resource_owner.locale
     }
 
     if resource_owner.is_a?(Admin) && resource_owner.respond_to?(:role)

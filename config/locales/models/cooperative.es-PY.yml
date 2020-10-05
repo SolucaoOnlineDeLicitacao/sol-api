@@ -1,0 +1,20 @@
+﻿es-PY:
+  activerecord:
+    models:
+      cooperative:
+        one: Asociación
+        other: Asociaciones
+    attributes:
+      cooperative:
+        name: Nombre
+        cnpj: CNPJ
+        email: Correo electrónico
+
+    errors:
+      models:
+        cooperative:
+          attributes:
+            name:
+              blank: 'debe informarse'
+            cnpj:
+              taken: '(%{value}) ya está en uso'

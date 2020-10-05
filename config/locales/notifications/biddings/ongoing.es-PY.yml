@@ -1,0 +1,14 @@
+﻿es-PY:
+  notifications:
+    bidding:
+      ongoing_cooperative:
+        title: Licitación %s abierta.
+        body: ¡La licitación <strong>%s</strong> ha sido abierta con éxito!
+
+      ongoing_invited_provider:
+        title: Nueva invitación para la licitación %s.
+        body: Ha sido invitado a participar en la licitación <strong>%s</strong>.
+
+      ongoing_classification_provider:
+        title: Nueva licitación %s abierta.
+        body: Una nueva licitación de su interés (<strong>%s</strong>) ha sido abierta.

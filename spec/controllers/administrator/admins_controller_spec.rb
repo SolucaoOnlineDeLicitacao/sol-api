@@ -211,63 +211,58 @@ RSpec.describe Administrator::AdminsController, type: :controller do
   end
 
   describe '#profile' do
-    let!(:user) { create(:admin) }
+    let(:locale) { 'es-PY' }
+    let(:user) { create :admin, locale: 'pt-BR' }
+    let(:json) { JSON.parse(response.body) }
+
     let(:params) do
       {
-        admin: { password: 'test1234', password_confirmation: 'test1234' }
+        admin: { password: 'test1234', password_confirmation: 'test1234', locale: locale }
       }
     end
 
-    let(:admin_json) do
+    let(:user_json) do
       {
         'id'       => user.id,
         'name'     => user.name,
         'username' => user.email,
+        'locale'   => user.locale,
+        'role'     => user.role,
+        'rules'    => Abilities::Strategy.call(user: user).as_json
       }
     end
 
-    subject(:patch_profile) { patch :profile, params: params, xhr: true }
+    before { oauth_token_sign_in user }
 
-    it_behaves_like 'an admin authorization to', 'user', 'write himself'
-
-    describe 'JSON' do
-      let(:json) { JSON.parse(response.body) }
-
+    describe 'when success' do
       before do
         allow(DateTime).to receive(:current) { DateTime.new(2018, 1, 1, 0, 0, 0) }
+        patch :profile, params: params, xhr: true
+
+        user.reload
       end
 
-      context 'when is a valid password' do
-        let(:admin_updated) { Admin.find(json['admin']['id']) }
+      it { expect(response).to have_http_status :ok }
+      it { expect(user.locale).to eq locale }
+      it { expect(user.access_tokens.map(&:revoked_at)).to eq [DateTime.current, DateTime.current] }
+      it { expect(json['admin'].deep_symbolize_keys).to include user_json.deep_symbolize_keys }
+    end
 
-        before { patch_profile }
+    describe 'when failure' do
+      before { patch :profile, params: params, xhr: true }
 
-        it { expect(response).to have_http_status :ok }
-        it { expect(json['admin']).to include admin_json }
-        it { expect(admin_updated.access_tokens.map(&:revoked_at)).to eq [DateTime.current] }
+      let!(:params) do
+        {
+          admin: { password: '',  password_confirmation: 'test12345' }
+        }
       end
 
-      context 'when is a invalid password' do
-        let(:params) do
-          {
-            admin: { password: 'test1234', password_confirmation: 'test12345' }
-          }
-        end
+      it { expect(response).to have_http_status :unprocessable_entity }
+      it { expect(json['errors']).to be_present }
+    end
 
-        before { patch_profile }
-
-        it { expect(response).to have_http_status :unprocessable_entity }
-        it { expect(json['errors']).to be_present }
-      end
-
-      context 'when is a invalid update token' do
-        before do
-          allow_any_instance_of(described_class).to receive(:update_access_token!).and_raise(ActiveRecord::RecordInvalid)
-          patch_profile
-        end
-
-        it { expect(response).to have_http_status :unprocessable_entity }
-      end
+    describe "authorization" do
+      it_behaves_like 'an admin authorization to', 'user', 'write himself'
     end
   end
 end

@@ -1,0 +1,39 @@
+﻿es-PY:
+  services:
+    biddings:
+      download:
+        units:
+          meter: Metro/s
+          liter: Litro/s
+          kilogram: Kilo/s
+          square_meter: Metro/s cuadrado/s
+          cubic_meter: Metro/s cúbico/s
+          other: Unidad/des)
+        file_name: licitacion_lote_itens
+        header:
+          price:
+            sheet: propuesta valor ítem
+            title:
+              - lotes y ítems de la licitación
+            columns:
+              - número de la licitación
+              - cód. del lote
+              - nombre del lote
+              - cód. del ítem en la licitación
+              - clasificación del ítem
+              - descripción del ítem
+              - unidad del ítem
+              - cantidad del ítem
+              - propuesta (valor unitario)
+          delivery:
+            sheet: propuesta valor flete
+            title:
+              - lotes y ítems de la licitación
+            columns:
+              - cód. del lote
+              - nombre del lote
+              - plazo del lote (días)
+              - lugar de entrega del lote
+              - flete (valor)
+            rows:
+              deadline: "%s días"

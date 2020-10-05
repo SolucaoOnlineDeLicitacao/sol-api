@@ -1,0 +1,11 @@
+﻿en-US:
+  activerecord:
+    errors:
+      models:
+        proposal:
+          attributes:
+            bidding:
+              already_abandoned_proposal: there is already an abandoned proposal for this procurement process
+              invalid_modality_change: unable to edit the proposal because the procurement process is "closed call for bids"
+              already_importing: there is already a proposal being imported for this procurement process
+              can_not_edit: unable to edit proposal.

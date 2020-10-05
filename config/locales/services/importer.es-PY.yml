@@ -1,0 +1,14 @@
+﻿es-PY:
+  services:
+    importer:
+      log:
+        end: Importación finalizada
+        error: "Falla en la importación: %{e}"
+        fail: 'Fallo de importación en la línea %{line}'
+        start: Importación iniciada
+        api_fault:  'Fallo de comunicación con api "%{value}"'
+        validation_fail: 'Falla de importación en el registro %{line} - %{error}'
+
+        resources:
+          cooperative: "Asociación CNPJ %{value}"
+          covenant: "Convenio %{value}"
