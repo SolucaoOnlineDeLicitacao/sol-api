@@ -44,7 +44,12 @@ class Item < ApplicationRecord
   end
 
   def item_modification
-    errors.add(:lot_group_items, :in_use) if locked_for_modification?
+    errors.add(
+      :lot_group_items, 
+      :in_use, 
+      title: title, 
+      code: code, 
+      changes: changes_messages) if locked_for_modification?
   end
 
   private
@@ -54,7 +59,7 @@ class Item < ApplicationRecord
   end
 
   def changed_forbidden_attributes?
-    title_changed? || description_changed? || unit_id_changed?
+    title_changed_insensitive? || description_changed_insensitive? || unit_id_changed?
   end
 
   def lot_group_items_in_use?
@@ -69,5 +74,35 @@ class Item < ApplicationRecord
 
   def bidding_by_lot_group_items
     Bidding.by_lot_group_items(lot_group_items.ids)
+  end
+
+  def unit_name_by_id(id)
+    Unit.find(id).name
+  end
+
+  def title_changed_insensitive?
+    title.to_s.downcase != title_was.to_s.downcase
+  end
+
+  def description_changed_insensitive?
+    description.to_s.downcase != description_was.to_s.downcase
+  end
+
+  def changes_messages
+    message = ""
+
+    if title_changed_insensitive?
+      message << " Título mudou de '#{title_was}' para '#{title}'"
+    end
+
+    if description_changed_insensitive?
+      message << " Descrição mudou de '#{description_was}' para '#{description}'"
+    end
+
+    if unit_id_changed?
+      message << " Unidade de Medida mudou de '#{unit_name_by_id(unit_id_was)}' para '#{unit_name_by_id(unit_id)}'"
+    end
+
+    message
   end
 end
