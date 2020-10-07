@@ -6,15 +6,19 @@ RSpec.describe Importers::CovenantImporter do
   let!(:city) { create(:city, code: 9999999) }
 
   let!(:cooperative) { create(:cooperative, name: "Associação teste", cnpj: "11.080.768/0001-39") }
+  
   let(:user) { create(:user, cooperative: cooperative, cpf: "764.918.511-76") }
 
   let(:admin) { create(:admin, name: 'Revisor', role: :general, email: "sdc+supervisor@caiena.net") }
+
+  let(:bidding) { build(:bidding) }
 
   let(:covenant) do
     create(:covenant, name: "Projeto de Apoio a Cadeia Produtiva",
       number: "2018/0001", status: :waiting, signature_date: "2018-10-10",
       validity_date: "2019-10-10", estimated_cost: 6_000_000.50,
-      cooperative: cooperative, admin: admin, group: false, city: city
+      cooperative: cooperative, admin: admin, group: false, city: city, 
+      biddings: [bidding]
     )
   end
 
@@ -318,7 +322,7 @@ RSpec.describe Importers::CovenantImporter do
           end
         end
 
-        describe 'available_quantity' do
+        describe 'available_quantity && has_biddings' do
           let(:group_items) { [group_item1] }
           let(:resource) do
             {
@@ -387,6 +391,77 @@ RSpec.describe Importers::CovenantImporter do
               expect { importer.import }.
                 to raise_error(ActiveRecord::RecordInvalid)
             end
+          end
+        end
+
+        describe 'available_quantity && has_no_biddings' do
+          let(:group_items) { [group_item1] }
+          let(:resource) do
+            {
+              "name": "Projeto de Apoio a Cadeia Produtiva Fruticultura Irrigada",
+              "number": "2018/0001",
+              "status": "running",
+              "signature_date": "2018-10-15",
+              "validity_date": "2019-10-15",
+              "estimated_cost": 5_000_000.50,
+              "covenant_cnpj": "11080768000139",
+              "city_code": 9999999,
+              "admin": {
+                "email": "sdc+supervisor@caiena.net",
+                "name": "Revisor"
+              },
+              "groups": [
+                {
+                  "name": "Grupo 1",
+                  "group_items": [
+                    {
+                      "code": 1_000,
+                      "title": "Telha metálica trapezoidal",
+                      "description": "Fornecimento de telhas metálica trapezoidal",
+                      "unit": unit.name,
+                      "classification": 1_000_000_000,
+                      "quantity": 800,
+                      "estimated_cost": 15.50,
+                      "status": "invalid"
+                    }
+                  ]
+                }
+              ]
+            }
+          end
+          let(:imported_covenant) { Covenant.find_by(number: "2018/0001") }
+          let(:covenant_groups) { imported_covenant.groups }
+          let(:group) { covenant_groups.first }
+          let(:imported_group_item) { group.group_items.first }
+
+          before do
+            group_items.map do |group_item|
+              group_item.update!(
+                quantity: quantity, available_quantity: available_quantity
+              )
+            end
+            resource[:groups][0][:group_items][0][:quantity] = resource_quantity
+            covenant.biddings= []
+          end
+
+          context 'when import quantity >= available_quantity' do
+            let(:quantity) { 20.95 }
+            let(:available_quantity) { 5 }
+            let(:resource_quantity) { 30 }
+
+            before { importer.import }
+
+            it { expect(imported_group_item.quantity).to eq 30 }
+            it { expect(imported_group_item.available_quantity).to eq 30 }
+          end
+
+          context 'when import quantity < available_quantity' do
+            let(:quantity) { 30 }
+            let(:available_quantity) { 15 }
+            let(:resource_quantity) { 10 }
+
+            it { expect(imported_group_item.quantity).to eq 30 }
+            it { expect(imported_group_item.available_quantity).to eq 15 }
           end
         end
       end
