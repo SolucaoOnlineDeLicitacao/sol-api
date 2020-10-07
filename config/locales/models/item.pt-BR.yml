@@ -15,4 +15,4 @@ pt-BR:
         item:
           attributes:
             lot_group_items:
-              in_use: " (Código: %{code} | Título: %{title}) não pode ser alterado, pois está em uso. Altetações: %{changes}."
+              in_use: " não pode ser alterado, pois está em uso. Código do item: %{code}. Altetações:%{changes}."
