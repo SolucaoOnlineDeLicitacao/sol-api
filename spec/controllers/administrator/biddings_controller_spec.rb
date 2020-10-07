@@ -50,7 +50,7 @@ RSpec.describe Administrator::BiddingsController, type: :controller do
 
       describe 'exposes' do
         let!(:bidding_draft) { create(:bidding, status: :draft) }
-        it { expect(controller.biddings).to eq Bidding.not_draft }
+        it { expect(controller.biddings).to eq Bidding.all }
       end
 
       describe 'JSON' do
