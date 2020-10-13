@@ -67,6 +67,8 @@ class Item < ApplicationRecord
   end
 
   def notify_users
+    return unless changed_forbidden_attributes?
+    
     bidding_by_lot_group_items.draft.each do |bidding|
       Notifications::Biddings::Items::Cooperative.call(bidding, self)
     end
