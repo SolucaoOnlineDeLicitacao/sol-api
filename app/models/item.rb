@@ -6,7 +6,7 @@ class Item < ApplicationRecord
 
   attr_accessor :children_classification_id
 
-  after_update_commit :notify_users
+  # after_update_commit :notify_users
 
   before_destroy do
     throw(:abort) if lot_group_items_in_use?
