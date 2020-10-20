@@ -22,6 +22,7 @@ module ContractsService
         change_contract_status!
         cancel_and_clone!
         update_contract_blockchain!
+        generate_spreadsheet_report
         notify
       end
     end
@@ -40,6 +41,10 @@ module ContractsService
     def cancel_and_clone_lots!
       LotsService::Cancel.call!(proposal: proposal)
       LotsService::Clone.call!(proposal: proposal)
+    end
+
+    def generate_spreadsheet_report
+      Bidding::SpreadsheetReportGenerateWorker.perform_async(bidding.id)
     end
 
     def generate_minute_addendum

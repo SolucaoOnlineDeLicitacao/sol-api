@@ -6,6 +6,26 @@
       details: Details
 
       biddings:
+        items:
+          worksheet: Procurement Process Items
+          header_row_1: Description (purpose)
+          header_row_2: Cooperative
+          header_row_3: Covenant
+          header_row_4: Procurement process type
+          header_row_5: Delivery/execution deadline (days)
+          column_1: Lot name
+          column_2: Item name
+          column_3: Item description
+          column_4: Estimated price
+          column_5: Quantity
+          column_6: Price
+          column_7: Total price
+          column_8: Provider name
+          kind:
+            global: Global price
+            lot: Price per lot
+            unitary: Unit price
+
         status:
           worksheet: Procurement Process by Status
           column_1: Status

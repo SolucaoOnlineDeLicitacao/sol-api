@@ -4,12 +4,14 @@ RSpec.describe LotsService::Clone, type: :service do
   let!(:pending_invite) { create(:invite, bidding: bidding, status: :pending) }
   let!(:invite) { create(:invite, bidding: bidding, status: :approved) }
   let(:edict_document) { create(:document) }
+  let(:spreadsheet_report) { create(:spreadsheet_document) }
   let(:minute_document) { create(:document) }
   let(:merged_minute_document) { create(:document) }
   let(:bidding) do
     create(:bidding, status: :canceled,
                      covenant: covenant,
                      edict_document: edict_document,
+                     spreadsheet_report: spreadsheet_report,
                      merged_minute_document: merged_minute_document,
                      minute_documents: [minute_document])
   end
@@ -44,7 +46,7 @@ RSpec.describe LotsService::Clone, type: :service do
       context 'when bidding is created' do
         let(:attributes) do
           %w[id title status created_at updated_at parent_id code position
-             edict_document_id merged_minute_document_id]
+             edict_document_id spreadsheet_report_id merged_minute_document_id]
         end
 
         let(:new_bidding_att) { new_bidding.attributes.except(*attributes) }
@@ -60,6 +62,7 @@ RSpec.describe LotsService::Clone, type: :service do
         it { expect(new_bidding.lots.map(&:name)).to include bidding.lots.first.name }
         it { expect(new_bidding.lots.map(&:lot_group_items_count)).to eq [1] }
         it { expect(new_bidding.edict_document).to be_nil }
+        it { expect(new_bidding.spreadsheet_report).to be_nil }
         it { expect(new_bidding.merged_minute_document).to be_nil }
         it { expect(new_bidding.minute_documents).to be_empty }
       end

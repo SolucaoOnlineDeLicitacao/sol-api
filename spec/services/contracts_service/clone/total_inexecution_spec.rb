@@ -16,6 +16,7 @@ RSpec.describe ContractsService::Clone::TotalInexecution, type: :service do
   context 'when the bidding type are lots' do
     describe '.call' do
       let(:worker) { Bidding::Minute::AddendumPdfGenerateWorker }
+      let(:report_worker) { Bidding::SpreadsheetReportGenerateWorker }
 
       include_examples 'services/concerns/init_contract_lot'
 
@@ -44,6 +45,7 @@ RSpec.describe ContractsService::Clone::TotalInexecution, type: :service do
             to have_received(:call).with(contract: contract)
         end
         it { expect(worker.jobs.size).to eq(1) }
+        it { expect(report_worker.jobs.size).to eq(1) }
       end
 
       context 'when RecordInvalid error' do
@@ -61,6 +63,7 @@ RSpec.describe ContractsService::Clone::TotalInexecution, type: :service do
             to_not have_received(:call).with(contract: contract)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'when BC error' do
@@ -80,6 +83,7 @@ RSpec.describe ContractsService::Clone::TotalInexecution, type: :service do
             to_not have_received(:call).with(contract: contract)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
     end
   end

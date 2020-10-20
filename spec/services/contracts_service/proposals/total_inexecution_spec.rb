@@ -34,6 +34,7 @@ RSpec.describe ContractsService::Proposals::TotalInexecution, type: :service do
       include_examples 'services/concerns/init_contract_lot'
 
       let(:contract_bidding) { contract.bidding }
+      let(:report_worker) { Bidding::SpreadsheetReportGenerateWorker }
 
       context 'when success' do
         let(:contract_proposal) { contract.proposal }
@@ -57,6 +58,7 @@ RSpec.describe ContractsService::Proposals::TotalInexecution, type: :service do
           expect(Notifications::Contracts::TotalInexecution).
             to have_received(:call).with(contract: contract)
         end
+        it { expect(report_worker.jobs.size).to eq(1) }
       end
 
       context 'when RecordInvalid error' do
@@ -75,6 +77,7 @@ RSpec.describe ContractsService::Proposals::TotalInexecution, type: :service do
           expect(Notifications::Contracts::TotalInexecution).
             to_not have_received(:call).with(contract: contract)
         end
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'when BC error' do
@@ -91,6 +94,7 @@ RSpec.describe ContractsService::Proposals::TotalInexecution, type: :service do
           expect(Notifications::Contracts::TotalInexecution).
             to_not have_received(:call).with(contract: contract)
         end
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
     end
   end

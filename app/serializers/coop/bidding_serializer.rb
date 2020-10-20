@@ -6,8 +6,9 @@ module Coop
         :start_date, :closing_date, :covenant_id, :covenant_name,
         :cancel_comment, :comment_response, :event_status, :event_id, :address,
         :can_finish, :supp_can_see, :modality, :draw_end_days, :refuse_comment,
-        :failure_comment, :minute_pdf, :edict_pdf, :classification_id, :classification_name,
-        :all_lots_failure, :code, :position, :estimated_cost_total, :proposal_import_file_url
+        :failure_comment, :minute_pdf, :edict_pdf, :spreadsheet_report, :classification_id,
+        :classification_name, :all_lots_failure, :code, :position, :estimated_cost_total,
+        :proposal_import_file_url
 
     has_one :cooperative, through: :covenant, serializer: Supp::CooperativeSerializer
 
@@ -33,6 +34,10 @@ module Coop
 
     def edict_pdf
       object.edict_document.try(:file).try(:url)
+    end
+
+    def spreadsheet_report
+      object.spreadsheet_report.try(:file).try(:url)
     end
 
     def cancel_comment

@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe Coop::BiddingSerializer, type: :serializer do
   let(:merged_minute_document) { create(:document) }
   let(:edict_document) { create(:document) }
+  let(:spreadsheet_report) { create(:spreadsheet_document) }
   let(:object) do
     create :bidding, merged_minute_document: merged_minute_document,
-                     edict_document: edict_document
+                     edict_document: edict_document,
+                     spreadsheet_report: spreadsheet_report
   end
 
   subject { format_json(described_class, object) }
@@ -45,6 +47,7 @@ RSpec.describe Coop::BiddingSerializer, type: :serializer do
     it { is_expected.to include 'proposal_import_file_url' => object.proposal_import_file&.url }
     it { expect(subject['minute_pdf']).to include('file.pdf')}
     it { expect(subject['edict_pdf']).to include('file.pdf')}
+    it { expect(subject['spreadsheet_report']).to include('.xls')}
 
 
     describe 'cancel_comment' do
