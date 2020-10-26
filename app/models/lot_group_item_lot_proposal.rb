@@ -26,6 +26,11 @@ class LotGroupItemLotProposal < ApplicationRecord
 
   validates_uniqueness_of :lot_group_item_id, scope: :lot_proposal_id
 
+  def self.first_proposal_accepted
+    joins(:lot_proposal, :proposal).
+      where(lot_proposals: { proposals: { status: :accepted } }).first
+  end
+
   private
 
   def ensure_group_itens_prices

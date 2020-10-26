@@ -25,13 +25,21 @@ module ReportsService::Biddings
     end
 
     def load_and_fill_rows
-      return load_proposals if bidding.proposals.any?
-
-      load_lot_group_items
-    end
-
-    def load_lot_group_items
       bidding.lot_group_items.each_with_index do |lot_group_item, i|
+        lot_group_item_lot_proposal =
+          lot_group_item.lot_group_item_lot_proposals.first_proposal_accepted
+
+        end_columns = if lot_group_item_lot_proposal.present?
+                        proposal = lot_group_item_lot_proposal.proposal
+                        [
+                          format_money(lot_group_item_lot_proposal.price),
+                          format_money(proposal.price_total),
+                          proposal.provider.name
+                        ]
+                      else
+                        [nil, nil, nil]
+                      end
+
         @book.replace_row(@sheet, i + header_rows.size + 2,
           [
             lot_group_item.lot.name,
@@ -39,31 +47,8 @@ module ReportsService::Biddings
             lot_group_item.item.description,
             format_money(lot_group_item.group_item.estimated_cost),
             number_with_delimiter(lot_group_item.quantity),
-            nil,
-            nil,
-            nil
-          ]
+          ] + end_columns
         )
-      end
-    end
-
-    def load_proposals
-      bidding.proposals.each do |proposal|
-        proposal.lot_group_item_lot_proposals.each_with_index do |lgi_lp, i|
-          lot_group_item = lgi_lp.lot_group_item
-          @book.replace_row(@sheet, i + header_rows.size + 2,
-            [
-              lot_group_item.lot.name,
-              lot_group_item.item.title,
-              lot_group_item.item.description,
-              format_money(lot_group_item.group_item.estimated_cost),
-              number_with_delimiter(lot_group_item.quantity),
-              format_money(lgi_lp.price),
-              format_money(proposal.price_total),
-              proposal.provider.name
-            ]
-          )
-        end
       end
     end
 

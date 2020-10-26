@@ -84,12 +84,34 @@ RSpec.describe ReportsService::Biddings::Items::Download, type: :service do
       end
 
       context 'and has proposal' do
-        let(:proposal) { create(:proposal) }
+        let(:lot_group_item) do 
+          create(
+            :lot_group_item,
+            lot_group_item_lot_proposals: [
+              build(
+                :lot_group_item_lot_proposal,
+                lot_proposal: build(
+                  :lot_proposal,
+                  build_lot_group_item_lot_proposal: false,
+                  proposal: build(
+                    :proposal,
+                    status: :accepted
+                  )
+                )
+              )
+            ]
+          )
+        end
+        let(:lot) do
+          build(:lot, build_lot_group_item: false,
+                      status: :accepted,
+                      lot_group_items: [lot_group_item])
+        end
         let(:bidding) do
-          create(:bidding,
-                 status: :under_review,
-                 kind: :global,
-                 proposals: [proposal])
+          create(:bidding, build_lot: false,
+                           lots: [lot],
+                           kind: :lot,
+                           status: :under_review)
         end
 
         describe 'file' do
@@ -139,8 +161,8 @@ RSpec.describe ReportsService::Biddings::Items::Download, type: :service do
           end
           let(:expected_column) do
             lot_group_item_lot_proposal =
-              proposal.lot_group_item_lot_proposals.last 
-            lot_group_item = lot_group_item_lot_proposal.lot_group_item
+              lot_group_item.lot_group_item_lot_proposals.last 
+            proposal = lot_group_item_lot_proposal.proposal
 
             [
               lot_group_item.lot.name,
