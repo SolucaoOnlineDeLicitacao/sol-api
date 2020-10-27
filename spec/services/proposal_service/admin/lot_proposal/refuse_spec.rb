@@ -4,12 +4,9 @@ RSpec.describe ProposalService::Admin::LotProposal::Refuse, type: :service do
   let(:bidding) { create(:bidding) }
   let(:lots) { bidding.lots }
   let(:lot) { lots.first }
-  let(:proposal) { create(:proposal, status: :sent) }
+  let(:proposal) { create(:proposal, status: proposal_status) }
   let(:lot_proposal) { create(:lot_proposal, lot: lot, proposal: proposal) }
-  let(:proposal2) { create(:proposal, status: :coop_refused) }
-  let!(:lot_proposal2) { create(:lot_proposal, lot: lot, proposal: proposal2) }
-  let(:proposal3) { create(:proposal, status: :sent) }
-  let(:lot_proposal3) { create(:lot_proposal, lot: lot, proposal: proposal3) }
+  let(:proposal_status) { :sent }
   let(:params) { { lot_proposal: lot_proposal } }
 
   describe '#initialize' do
@@ -31,11 +28,13 @@ RSpec.describe ProposalService::Admin::LotProposal::Refuse, type: :service do
     subject { described_class.call(params) }
 
     context 'when success' do
-      context 'and not all refused or abandoned' do
-        before do
-          subject
-          lot_proposal.reload
-        end
+      context 'and not all refused, abandoned or failure' do
+        let(:proposal2) { create(:proposal, status: :coop_refused) }
+        let!(:lot_proposal2) { create(:lot_proposal, lot: lot, proposal: proposal2) }
+        let(:proposal3) { create(:proposal, status: :triage) }
+        let!(:lot_proposal3) { create(:lot_proposal, lot: lot, proposal: proposal3) }
+
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(lot_proposal.proposal.refused?).to be_truthy }
@@ -51,11 +50,9 @@ RSpec.describe ProposalService::Admin::LotProposal::Refuse, type: :service do
       end
 
       context 'and only one refused' do
-        before do
-          proposal2.refused!
-          subject
-          lot_proposal.reload
-        end
+        let(:proposal_status) { :refused }
+
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(lot_proposal.proposal.refused?).to be_truthy }
@@ -71,11 +68,9 @@ RSpec.describe ProposalService::Admin::LotProposal::Refuse, type: :service do
       end
 
       context 'and only one abandoned' do
-        before do
-          proposal2.abandoned!
-          subject
-          lot_proposal.reload
-        end
+        let(:proposal_status) { :abandoned }
+
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(lot_proposal.proposal.refused?).to be_truthy }
@@ -90,13 +85,33 @@ RSpec.describe ProposalService::Admin::LotProposal::Refuse, type: :service do
         end
       end
 
-      context 'and all refused or abandoned' do
-        before do
-          proposal2.refused!
-          proposal3.abandoned!
-          subject
-          lot_proposal.reload
+      context 'and only one failure' do
+        let(:proposal_status) { :failure}
+
+        before { subject }
+
+        it { is_expected.to be_truthy }
+        it { expect(lot_proposal.proposal.refused?).to be_truthy }
+        it { expect(lot_proposal.lot.failure?).to be_truthy }
+        it do
+          expect(Blockchain::Proposal::Update).
+            to have_received(:call).with(proposal)
         end
+        it do
+          expect(Notifications::Proposals::Lots::Refused).
+            to have_received(:call).with(proposal, lot)
+        end
+      end
+
+      context 'and all refused, abandoned or failure' do
+        let(:proposal2) { create(:proposal, status: :refused) }
+        let!(:lot_proposal2) { create(:lot_proposal, lot: lot, proposal: proposal2) }
+        let(:proposal3) { create(:proposal, status: :abandoned) }
+        let!(:lot_proposal3) { create(:lot_proposal, lot: lot, proposal: proposal3) }
+        let(:proposal4) { create(:proposal, status: :failure) }
+        let!(:lot_proposal4) { create(:lot_proposal, lot: lot, proposal: proposal4) }
+
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(lot_proposal.proposal.refused?).to be_truthy }

@@ -5,7 +5,7 @@ module ProposalService::Admin::LotProposal
     private
 
     def refuse_lots!
-      lot.failure! if only_refused_or_abandoned_proposals?
+      lot.failure! if only_allowed_statuses?
     end
 
     def proposal_status
