@@ -3,7 +3,7 @@ module ProposalService::Admin
     include Call::Methods
     include TransactionMethods
 
-    ALLOWED_STATUSES = %w(refused abandoned).freeze
+    ALLOWED_STATUSES = %w(refused abandoned failure).freeze
 
     def main_method
       change_proposal_to_refused
@@ -20,7 +20,7 @@ module ProposalService::Admin
       end
     end
 
-    def only_refused_or_abandoned_proposals?
+    def only_allowed_statuses?
       proposal_status.all? { |status| ALLOWED_STATUSES.include? status }
     end
 
