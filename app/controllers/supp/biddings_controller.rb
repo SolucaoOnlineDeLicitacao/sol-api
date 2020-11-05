@@ -7,14 +7,6 @@ module Supp
     expose :biddings, -> { find_biddings }
     expose :bidding
 
-    def index
-      paginate json: paginated_resources, each_serializer: Coop::BiddingSerializer
-    end
-
-    def show
-      render json: bidding, serializer: Coop::BiddingSerializer
-    end
-
     private
 
     def resource
