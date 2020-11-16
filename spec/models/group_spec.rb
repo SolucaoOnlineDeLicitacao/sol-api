@@ -38,6 +38,10 @@ RSpec.describe Group, type: :model do
     it { is_expected.to accept_nested_attributes_for(:group_items).allow_destroy(true) }
   end
 
+  describe 'sortable' do
+    it { expect(described_class.default_sort_column).to eq 'groups.name' }
+  end
+
   describe 'behaviors' do
     it { is_expected.to be_versionable }
   end
