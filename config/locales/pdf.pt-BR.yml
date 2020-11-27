@@ -22,6 +22,8 @@ pt-BR:
               item_classification: Classificação do item
               item_quantity: Quantidade
               item_unit: Unidade
+              professional: Profissional
+              quantity: Quantidade
         minute:
           invites_providers: 'Empresas que foram convidadas por meio do aplicativo: '
           proposals_providers: 'Nome das empresas que enviaram propostas: '

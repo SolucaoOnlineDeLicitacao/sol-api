@@ -42,7 +42,14 @@ module BiddingsService
     end
 
     def edict_html_template
-      Pdf::Bidding::Edict::TemplateHtml.call(bidding: bidding)
+      case bidding.classification.downcase        
+      when 'bens'
+        Pdf::Bidding::Edict::TemplateHtml.call(bidding: bidding)
+      when 'serviços'
+        Pdf::Bidding::Edict::TemplateHtml.call(bidding: bidding)
+      when 'obras'
+        Pdf::Bidding::Edict::TemplateObraHtml.call(bidding: bidding)
+      end      
     end
   end
 end
