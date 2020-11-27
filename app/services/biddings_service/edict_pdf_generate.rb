@@ -42,7 +42,7 @@ module BiddingsService
     end
 
     def edict_html_template
-      case bidding.classification.downcase        
+      case bidding.classification.name.downcase        
       when 'bens'
         Pdf::Bidding::Edict::TemplateHtml.call(bidding: bidding)
       when 'serviços'
