@@ -41,7 +41,7 @@ module Pdf::Bidding
         '@@bidding.items@@' => bidding_items,
         '@@bidding.proposals@@' => fill_tables,
         '@@bidding.closing_date@@' => format_date(bidding.closing_date),
-        '@@current_date@@' => format_date(Date.current)
+        '@@current_date@@' => format_date(Date.current),
         '@@technical_team@@' => fill_table_technical_team
       }
     end
