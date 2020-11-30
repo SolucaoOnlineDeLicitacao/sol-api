@@ -239,4 +239,8 @@ class Bidding < ApplicationRecord
   def future_start_date?
     start_date <= Date.today
   end
+  
+  def classification_name
+    classification.name
+  end
 end
