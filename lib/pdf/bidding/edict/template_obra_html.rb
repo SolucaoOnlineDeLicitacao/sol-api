@@ -120,6 +120,8 @@ module Pdf::Bidding
           "<td>01</td>"\
         "</tr>"
       )
+      table2.unshift("<table>")
+      table2.push("</table><br/>")
     end
 
     def surrond_with_table_tag
