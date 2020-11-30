@@ -3,7 +3,7 @@ module Pdf::Bidding
     include Call::Methods
     include ActionView::Helpers::NumberHelper
 
-    attr_accessor :html, :tables_content, :table
+    attr_accessor :html, :tables_content, :table, :table2
 
     def initialize(*args)
       super
