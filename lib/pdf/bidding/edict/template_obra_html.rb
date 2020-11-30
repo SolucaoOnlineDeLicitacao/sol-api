@@ -101,19 +101,20 @@ module Pdf::Bidding
     end
 
     def fill_table_technical_team
-      table.push(
+      
+      table2.push(
         "<tr>"\
           "<th>#{I18n.t("document.pdf.bidding.edict.table.header.professional")}</th>"\
           "<th>#{I18n.t("document.pdf.bidding.edict.table.header.quantity")}</th>"\
         "</tr>"
       )
-      table.push(
+      table2.push(
         "<tr>"\
           "<td>Eng.º Civil ou Arquiteto</td>"\
           "<td>01</td>"\
         "</tr>"
       )
-      table.push(
+      table2.push(
         "<tr>"\
           "<td>Encarregado Geral</td>"\
           "<td>01</td>"\
