@@ -375,18 +375,7 @@ RSpec.describe Importers::CovenantImporter do
             before { importer.import }
 
             it { expect(imported_group_item.quantity).to eq 30 }
-            it { expect(imported_group_item.available_quantity).to eq 14.05 }
-          end
-
-          context 'when import quantity < available_quantity' do
-            let(:quantity) { 30 }
-            let(:available_quantity) { 15 }
-            let(:resource_quantity) { 10 }
-
-            it do
-              expect { importer.import }.
-                to raise_error(ActiveRecord::RecordInvalid)
-            end
+            it { expect(imported_group_item.available_quantity).to eq 30 }
           end
         end
       end
