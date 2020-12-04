@@ -30,7 +30,7 @@ RSpec.describe GroupItem, type: :model do
 
           before { group_item.valid? }
 
-          it { is_expected.not_to include_error_key_for(:quantity, :greater_than_or_equal_to) }
+          it { is_expected.to include_error_key_for(:quantity, :greater_than_or_equal_to) }
         end
 
         context 'when < 0' do

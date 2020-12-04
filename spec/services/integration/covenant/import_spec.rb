@@ -32,7 +32,7 @@ RSpec.describe Integration::Covenant::Import do
         allow_any_instance_of(Group).to receive(:save!) { true }
         allow_any_instance_of(Item).to receive(:save!) { true }
 
-        allow(Importers::CovenantImporter).to receive(:import).and_call_original
+        allow(Importers::CovenantImporter).to receive(:import).and_return(true)
         service.call
         configuration.reload
       end
