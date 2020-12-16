@@ -45,24 +45,11 @@ RSpec.describe Administrator::Biddings::ForceReviewsController, type: :controlle
       end
 
       context 'when not updated' do
-        context 'when service_response false' do
-          let(:service_response) { false }
+        let(:service_response) { false }
 
-          before { post_update }
+        before { post_update }
 
-          it { expect(response).to have_http_status :unprocessable_entity }
-        end
-
-        context 'when user isnt general' do
-          let(:service_response) { true }
-
-          before do
-            user.reviewer!
-            post_update
-          end
-
-          it { expect(response).to have_http_status :unprocessable_entity }
-        end
+        it { expect(response).to have_http_status :unprocessable_entity }
       end
     end
   end

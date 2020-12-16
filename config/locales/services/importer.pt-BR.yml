@@ -12,4 +12,3 @@ pt-BR:
         resources:
           cooperative: "Associação CNPJ %{value}"
           covenant: "Convênio %{value}"
-          lot_group_items: "Convênio %{value}"

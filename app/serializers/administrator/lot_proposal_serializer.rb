@@ -2,7 +2,7 @@ module Administrator
   class LotProposalSerializer < ActiveModel::Serializer
     include CurrentEventProposable
 
-    attributes :lot, :suppliers
+    attributes :lot
 
     has_many :lot_group_item_lot_proposals, serializer: Administrator::LotGroupItemLotProposalSerializer
 
@@ -20,10 +20,6 @@ module Administrator
 
     def bidding_title
       object.lot.bidding.title
-    end
-
-    def suppliers
-      object.proposal.provider.suppliers.as_json
     end
 
     private

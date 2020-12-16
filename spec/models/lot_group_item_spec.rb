@@ -33,7 +33,7 @@ RSpec.describe LotGroupItem, type: :model do
 
           before { lot_group_item.valid? }
 
-          it { is_expected.not_to eq :greater_or_equal_than }
+          it { is_expected.to eq :blank }
         end
 
         context 'when < 0' do
@@ -41,7 +41,7 @@ RSpec.describe LotGroupItem, type: :model do
 
           before { lot_group_item.valid? }
 
-          it { is_expected.to eq :greater_or_equal_than }
+          it { is_expected.to eq :greater_than }
         end
 
         context 'when = 0' do
@@ -49,7 +49,7 @@ RSpec.describe LotGroupItem, type: :model do
 
           before { lot_group_item.valid? }
 
-          it { is_expected.not_to eq :greater_or_equal_than }
+          it { is_expected.to eq :greater_than }
         end
 
         context 'when = 0.001' do
@@ -57,7 +57,7 @@ RSpec.describe LotGroupItem, type: :model do
 
           before { lot_group_item.valid? }
 
-          it { is_expected.not_to eq :greater_or_equal_than }
+          it { is_expected.to eq :greater_than }
         end
 
         context 'when > 0' do
