@@ -3,7 +3,7 @@ pt-BR:
     bidding:
       draw_admin: &draw_admin
         title: Licitação %s empatada.
-        body: A licitação <strong>%s</strong> chegou ao fim com empate em duas ou mais propostas. Os fornecedores empatados poderão atualizar suas propostas até o dia <strong>%s</strong>"
+        body: "A licitação <strong>%s</strong> chegou ao fim com empate em duas ou mais propostas. Os fornecedores empatados poderão atualizar suas propostas até o dia <strong>%s</strong>"
 
       draw_cooperative:
         <<: *draw_admin

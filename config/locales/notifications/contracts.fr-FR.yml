@@ -1,0 +1,31 @@
+﻿fr-FR:
+  notifications:
+    contract:
+      refused_supplier:
+        title: Contrat refusé par le fournisseur.
+        body: Le contrat de l'appel d'offres <strong>%s</strong> a été refusé par le fournisseur.
+      refused_user:
+        title: Contrat refusé par l'association.
+        body: Le contrat de l'appel d'offres <strong>%s</strong> a été refusé par l'association.
+      refused_all:
+        title: Contrat refusé par le système.
+        body: Le contrat de l'appel d'offres <strong>%s</strong> a été refusé automatiquement par le système.
+      sign_admin_user:
+        title: Contrat signé par le fournisseur.
+        body: Le contrat <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été signé par le fournisseur <strong>%s</strong>
+      
+      total_inexecution:
+        title: Contrat avec non réalisation totale
+        body: Le contrat <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été signalé avec non réalisation totale.
+
+      completed:
+        title: Contrat achevé.
+        body: Le contrat <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a achevé.
+
+      partial_execution:
+        title: Contrat avec réalisation partielle.
+        body: Le contrat <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été signalé avec réalisation partielle.
+
+      created:
+        title: Contrat créé.
+        body: Nouveau contrat <strong>%s</strong> créé, cliquez ici pour d'autres détails.

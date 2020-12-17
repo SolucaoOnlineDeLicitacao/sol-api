@@ -1,0 +1,8 @@
+﻿fr-FR:
+  activerecord:
+    errors:
+      models:
+        item:
+          attributes:
+            lot_group_items:
+              in_use: ne peut pas être modifié car ce poste est en utilisation

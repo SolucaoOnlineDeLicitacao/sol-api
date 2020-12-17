@@ -1,0 +1,162 @@
+﻿fr-FR:
+  services:
+    download:
+      money: 'R$ %{value}'
+      summary: 'Sommaire'
+      details: Détails
+
+      biddings:
+        status:
+          worksheet: Appel d'offres par situation
+          column_1: Situation
+          column_2: Quantité
+          column_3: Prix total estimé
+          column_4: Prix total des offres
+
+          approved: Libérée
+          canceled: Annulée
+          failure: Échouée
+          finnished: Achevée
+          ongoing: Ouverte
+          under_review: En analyse
+          reopened: Ré-ouverte
+          waiting: En attente de libération
+          suspended: En suspension
+          draw: En attente d'être départagée
+          desert: Déserte
+
+          column_5: Association
+          column_6: Commune
+          column_7: Numéro
+          column_8: Description (Objet)
+          column_9: Type d'appel d'offres
+          column_10: Modalité
+          column_11: Situation
+          column_12: Date du début
+          column_13: Date de la clôture
+          column_14: Prix total estimé
+          column_15: Prix total des offres
+
+          kind:
+            global: Prix global
+            lot: Prix par lot
+            unitary: Prix individuel
+          modality:
+            unrestricted: Ouverte/publique
+            open_invite: Invitation ouverte
+            closed_invite: Invitation fermée
+
+        time:
+          worksheet: Temps de réalisation d'appel d'offres
+          column_1: Titre
+          column_2: Temps
+
+          finnished: Achevée
+
+          days: '%{day} jours'
+
+          column_4: Association
+          column_5: Commune
+          column_6: Numéro
+          column_7: Description (Objet)
+          column_8: Type d'appel d'offres
+          column_9: Modalité
+          column_10: Situation
+          column_11: Date du début
+          column_12: Date de la clôture
+          column_13: Total de jours
+          column_14: Prix total
+
+          kind:
+            global: Prix global
+            lot: Prix par lot
+            unitary: Prix individuel
+          modality:
+            unrestricted: Ouverte/publique
+            open_invite: Invitation ouverte
+            closed_invite: Invitation fermée
+
+      contracts:
+        kind:
+          worksheet: Classement par contrat
+          column_1: Nom Classement
+          column_2: Total contrat
+          column_3: Prix total
+
+          column_4: Contrat
+          column_5: Classements
+          column_6: Association
+          column_7: CNPJ de l'association
+          column_8: Numéro de l'appel d'offres
+          column_9: Fournisseur
+          column_10: Document du fournisseur
+          column_11: Valeur totale du contrat
+
+      items:
+        prices:
+          worksheet: Variation de prix entre postes similaires
+
+          column_1: Poste
+          column_2: Lot
+          column_3: Valeur unitaire
+          column_4: Numéro de l'appel d'offres
+          column_5: Fournisseur
+          column_6: Document du fournisseur
+          column_7: Association
+          column_8: CNPJ de l'association
+
+      supplier:
+        biddings:
+          worksheet: Fournisseurs qui participent le plus des appels d'offres
+          column_1: Document
+          column_2: Nom du fournisseur
+          column_3: Quantité d'appel d'offres
+
+          column_4: Numéro de l'appel d'offres
+          column_5: Fournisseur
+          column_6: Document du fournisseur
+          column_7: Commune du fournisseur
+          column_8: Association
+          column_9: CNPJ de l'association
+          column_10: Commune de l'Association
+          column_11: Type d'appel d'offres
+          column_12: Modalité
+          column_13: Situation
+          column_14: Date du début
+          column_15: Date de la clôture
+
+          kind:
+            global: Prix global
+            lot: Prix par lot
+            unitary: Prix individuel
+          modality:
+            unrestricted: Ouverte/publique
+            open_invite: Invitation ouverte
+            closed_invite: Invitation fermée
+          approved: Libérée
+          canceled: Annulée
+          failure: Échouée
+          finnished: Achevée
+          ongoing: Ouverte
+          under_review: En analyse
+          reopened: Ré-ouverte
+          waiting: En attente de libération
+          suspended: En suspension
+          draw: En attente d'être départagée
+          draft: En brouillon
+          desert: Déserte
+
+        ranking:
+          worksheet: Classement des fournisseurs ayant le plus grand nombre et la plus grande valeur de contrats
+          column_1: Nom
+          column_2: Quantité
+          column_3: Valeur
+
+          column_4: Fournisseur
+          column_5: Document du fournisseur
+          column_6: Contrat
+          column_7: Association
+          column_8: CNPJ de l'association
+          column_9: Numéro de l'appel d'offres
+          column_10: Valeur totale du contrat
+

@@ -3,7 +3,7 @@
     bidding:
       draw_admin: &draw_admin
         title: Procurement process %s tied.
-        body: The procurement process <strong>%s</strong> was completed with a tie between two or more proposals. Tied vendors may updated their proposals by <strong>%s</strong>\"
+        body: "The procurement process <strong>%s</strong> was completed with a tie between two or more proposals. Tied vendors may updated their proposals by <strong>%s</strong>"
 
       draw_cooperative:
         <<: *draw_admin

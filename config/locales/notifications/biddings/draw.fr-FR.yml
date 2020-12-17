@@ -1,0 +1,17 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      draw_admin: &draw_admin
+        title: Appel d'offres %s à départager.
+        body: "L'appel d'offres <strong>%s</strong> est terminé avec deux ou plus offres à égalité. Les fournisseurs à départager pourront mettre à jour leurs offres jusqu'au jour <strong>%s</strong>"
+
+      draw_cooperative:
+        <<: *draw_admin
+
+      draw_sent_provider:
+        <<: *draw_admin
+        title: Offre à égalité!
+
+      draw_draw_provider:
+        title: Offre à égalité!
+        body: "Attention! Une ou plusieurs offres de l'appel d'offres <strong>%s</strong> sont À départager. Vous pourrez mettre à jour votre offre jusqu'au jour <strong>%s</strong>"

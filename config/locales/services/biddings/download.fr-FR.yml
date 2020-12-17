@@ -1,0 +1,39 @@
+﻿fr-FR:
+  services:
+    biddings:
+      download:
+        units:
+          meter: Mètre(s)
+          liter: Litre(s)
+          kilogram: Kilo(s)
+          square_meter: Mètre(s) carré(s)
+          cubic_meter: Mètre(s) cube(s)
+          other: Unité(s)
+        file_name: appeld'offres_lots_postes
+        header:
+          price:
+            sheet: offre valeur poste
+            title:
+              - lots et postes de l'appel d'offres
+            columns:
+              - numéro de l'appel d'offres
+              - code du lot
+              - nom du lot
+              - code poste dans l'appel d'offres
+              - classement poste
+              - description du poste
+              - unité du poste
+              - quantité du poste
+              - offre (valeur unitaire)
+          delivery:
+            sheet: offre valeur fret
+            title:
+              - lots et postes de l'appel d'offres
+            columns:
+              - code du lot
+              - nom du lot
+              - délai du lot (en jours)
+              - lieu de livraison du lot
+              - fret (valeur)
+            rows:
+              deadline: "%s jours"

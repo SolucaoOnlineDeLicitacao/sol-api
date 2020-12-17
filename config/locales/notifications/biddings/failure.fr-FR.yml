@@ -1,0 +1,20 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      failure_cooperative: &failure_cooperative
+        title: Appel d'offres %s échoué.
+        body: "Le réviseur a échoué l'appel d'offres <strong>%s</strong>, en raison de: <strong>%s</strong>"
+
+      failure_provider:
+        <<: *failure_cooperative
+        body: "L'appel d'offres <strong>%s</strong> a échoué, attendez le début d'un nouvel appel d'offres"
+      
+      failure_all_admin: &failure_all_without_proposals
+        <<: *failure_cooperative
+        body: "L'appel d'offres <strong>%s</strong> n'a pas d'offre gagnante, il a échoué"
+
+      failure_all_provider:
+        <<: *failure_all_without_proposals
+      
+      failure_all_cooperative:
+        <<: *failure_all_without_proposals

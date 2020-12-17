@@ -1,0 +1,18 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      waiting_approval:
+        title: Appel d'offres %s en attente de libération.
+        body: L'appel d'offres <strong>%s</strong> a été créé et est en attente de libération.
+
+      approved:
+        title: Appel d'offres %s libérée.
+        body: Le réviseur a libéré l'appel d'offres <strong>%s</strong>! Il commencera le jour<strong>%s</strong>.
+
+      finished:
+        title: Appel d'offres %s achevé.
+        body: L'appel d'offres <strong>%s</strong> a été achevé avec succès.
+
+      reproved:
+        title: Appel d'offres %s rejeté.
+        body: Le réviseur a rejeté l'appel d'offres <strong>%s</strong>!
