@@ -29,8 +29,10 @@
           global_text: "Para la licitación <b>%s</b><br/>"
           lot_text: "Para el lote <b>%s - %s</b><br/>"
           proposal_line: "la empresa %s ha presentado la propuesta por un valor de %s (%s)"
+          proposal_line_without_text_value: "la empresa %s ha presentado la propuesta por un valor de %s"
           bidding_comment_text: "La propuesta del proveedor %s ha recibido los comentarios:<br/>"
           proposals_accepted: "La empresa %s / %s ha sido declarada ganadora por el valor de %s (%s), teniendo en cuenta que fue la que presentó la propuesta de menor valor y de conformidad con los Términos de referencia presentados por la asociación."
+          proposals_accepted_without_text_value: "La empresa %s / %s ha sido declarada ganadora por el valor de %s, teniendo en cuenta que fue la que presentó la propuesta de menor valor y de conformidad con los Términos de referencia presentados por la asociación."
           contract_refused: "El contrato %s ha sido rechazado por el proveedor %s por el/los motivo/s %s"
           contract_total_inexecution: "El contrato %s con el proveedor %s / CNPJ %s ha sido actualizado para la situación de falta de ejecución total por la asociación %s."
           no_proposals: Ninguna empresa ganadora.
