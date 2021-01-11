@@ -17,7 +17,7 @@
               fragment_present: 'Ne peut contenir un fragment.'
               invalid_uri: 'doit être une URI valable.'
               relative_uri: 'doit être une URI absolue.'
-              secured_uri: 'doit être une URI URI HTTPS/SSL.'
+              secured_uri: 'doit être une URI HTTPS/SSL.'
               forbidden_uri: 'est forbidden dans le serveur.'
             scopes:
               not_match_configured: "ne correspond pas à la configuration du serveur."
@@ -25,7 +25,7 @@
   doorkeeper:
     applications:
       confirmations:
-        destroy: 'Êtes-vous sûr?'
+        destroy: 'Êtes-vous sûr ?'
       buttons:
         edit: 'Editer'
         destroy: 'Supprimer'
@@ -33,7 +33,7 @@
         cancel: 'Annuler'
         authorize: 'Autoriser'
       form:
-        error: 'Whoops! Voir le formulaire pour les erreurs éventuelles'
+        error: 'Whoops ! Voir le formulaire pour les erreurs éventuelles'
       help:
         confidential: "L'application sera utilisée lorsque le secret du client pourra être maintenu confidentiel. Les applications mobiles natives et les applications à page unique sont considérées comme non confidentielles."
         redirect_uri: 'Employez une ligne par URI'
@@ -47,14 +47,14 @@
         name: 'Nom'
         callback_url: 'URL de Callback'
         actions: 'Actions'
-        confidential: 'Confidentiel?'
+        confidential: 'Confidentiel ?'
         confidentiality:
           'yes': 'Oui'
           'no': 'Non'
       new:
         title: 'Nouvelle application'
       show:
-        title: 'Application: %{name}'
+        title: 'Application : %{name}'
         application_id: "Id de l'Application (Application UID)"
         secret: 'Secret (Secret)'
         scopes: ~
@@ -77,7 +77,7 @@
 
     authorized_applications:
       confirmations:
-        revoke: 'Êtes-vous sûr?'
+        revoke: 'Êtes-vous sûr ?'
       buttons:
         revoke: 'Abroger'
       index:

@@ -6,10 +6,8 @@ fr-FR:
       messages:
         record_invalid: 'La validation a échoué : %{errors}'
         restrict_dependent_destroy:
-          has_one: Vous ne pouvez pas supprimer l'enregistrement car un(e) %{record}
-            dépendant(e) existe
-          has_many: Vous ne pouvez pas supprimer l'enregistrement parce que les %{record}
-            dépendants existent
+          has_one: On ne peut pas supprimer l'enregistrement parce qu'il y a un %{record} dépendant
+          has_many: On ne peut pas supprimer l'enregistrement parce qu'il y a des %{record} dépendants
   date:
     abbr_day_names:
     - dim
@@ -150,8 +148,8 @@ fr-FR:
     template:
       body: 'Veuillez vérifier les champs suivants : '
       header:
-        one: 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
-        other: 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+        one: "Impossible d'enregistrer ce(tte) %{model} : 1 erreur"
+        other: "Impossible d'enregistrer ce(tte) %{model} : %{count} erreurs"
   helpers:
     select:
       prompt: Veuillez sélectionner
@@ -163,7 +161,7 @@ fr-FR:
     currency:
       format:
         delimiter: " "
-        format: "%n %u"
+        format: "%u %n" # specific for pt-BR implantation
         precision: 2
         separator: ","
         significant: false

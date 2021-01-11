@@ -7,7 +7,7 @@
 
       approved:
         title: Appel d'offres %s libérée.
-        body: Le réviseur a libéré l'appel d'offres <strong>%s</strong>! Il commencera le jour<strong>%s</strong>.
+        body: Le réviseur a libéré l'appel d'offres <strong>%s</strong> ! Il commencera le jour<strong>%s</strong>.
 
       finished:
         title: Appel d'offres %s achevé.
@@ -15,4 +15,4 @@
 
       reproved:
         title: Appel d'offres %s rejeté.
-        body: Le réviseur a rejeté l'appel d'offres <strong>%s</strong>!
+        body: Le réviseur a rejeté l'appel d'offres <strong>%s</strong> !

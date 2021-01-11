@@ -3,7 +3,7 @@
     importer:
       log:
         end: Importation conclue
-        error: "Erreur à l'importation: %{e}"
+        error: "Erreur à l'importation : %{e}"
         fail: "Erreur d'importation à la ligne %{line}"
         start: Importation démarrée
         api_fault:  'Erreur dans la communication api "%{value}"'

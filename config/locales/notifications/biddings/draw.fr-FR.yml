@@ -10,8 +10,8 @@
 
       draw_sent_provider:
         <<: *draw_admin
-        title: Offre à égalité!
+        title: Offre à égalité !
 
       draw_draw_provider:
-        title: Offre à égalité!
-        body: "Attention! Une ou plusieurs offres de l'appel d'offres <strong>%s</strong> sont À départager. Vous pourrez mettre à jour votre offre jusqu'au jour <strong>%s</strong>"
+        title: Offre à égalité !
+        body: "Attention ! Une ou plusieurs offres de l'appel d'offres <strong>%s</strong> sont à départager.  Vous pourrez mettre à jour votre offre jusqu'au jour <strong>%s</strong>"

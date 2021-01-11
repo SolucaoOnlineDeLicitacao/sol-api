@@ -14,7 +14,7 @@
           price:
             sheet: offre valeur poste
             title:
-              - lots et postes de l'appel d'offres
+              - lots et éléments de l'appel d'offres
             columns:
               - numéro de l'appel d'offres
               - code du lot
@@ -28,7 +28,7 @@
           delivery:
             sheet: offre valeur fret
             title:
-              - lots et postes de l'appel d'offres
+              - lots et éléments de l'appel d'offres
             columns:
               - code du lot
               - nom du lot

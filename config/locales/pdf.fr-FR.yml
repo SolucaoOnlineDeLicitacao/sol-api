@@ -11,7 +11,7 @@
             classification: Classification
             unit: Unité
             unit_price: Prix unitaire
-        annex_lots: "Lot: %s, Délai: %s jours, Fret: %s"
+        annex_lots: "Lot : %s, Délai: %s jours, Fret: %s"
       bidding:
         edict:
           lot: Lot
@@ -24,13 +24,15 @@
               item_unit: Unité
         minute:
           invites_providers: "Entreprises invitées par l''application: "
-          proposals_providers: "Nom des entreprises qui ont déposé une offre: "
+          proposals_providers: 'Nom des entreprises qui ont déposé une offre : '
           provider_sentence: "entreprise %s, inscrite au CPF/CNPJ nº %s"
           global_text: "Pour l'appel d'offres <b>%s</b><br/>"
-          lot_text: "Pour le lot  <b>%s - %s</b><br/>"
+          lot_text: "Pour le lot <b>%s - %s</b><br/>"
           proposal_line: "l'entreprise %s a déposé une offre du montant de %s (%s)"
-          bidding_comment_text: "L'offre du fournisseur %s a reçu les commentaires suivants:<br/>"
+          proposal_line_without_text_value: "l'entreprise %s a déposé une offre du montant de %s"
+          bidding_comment_text: "L'offre du fournisseur %s a reçu les commentaires suivants :<br/>"
           proposals_accepted: "La société %s / %s a été déclarée gagnante avec la valeur de %s (%s), car c'est celle qui a présenté l'offre au moindre montant et conformément au Terme de Référence présenté par l'Association."
+          proposals_accepted_without_text_value: "La société %s / %s a été déclarée gagnante avec la valeur de %s, car c'est celle qui a présenté l'offre au moindre montant et conformément au Terme de Référence présenté par l'Association."
           contract_refused: "Le contrat %s a été refusé par le fournisseur pour la (les) raison(s) %s"
           contract_total_inexecution: "Le contrat %s avec le fournisseur %s / CPF/CNPJ %s a été actualisé à la situation de non réalisation totale par l'association %s."
           no_proposals: Aucune entreprise n'a été gagnante.

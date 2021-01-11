@@ -15,7 +15,7 @@
         body: Le contrat <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été signé par le fournisseur <strong>%s</strong>
       
       total_inexecution:
-        title: Contrat avec non réalisation totale
+        title: Contrat avec non réalisation totale.
         body: Le contrat <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été signalé avec non réalisation totale.
 
       completed:

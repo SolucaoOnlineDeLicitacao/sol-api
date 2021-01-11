@@ -3,7 +3,7 @@
     bidding:
       failure_cooperative: &failure_cooperative
         title: Appel d'offres %s échoué.
-        body: "Le réviseur a échoué l'appel d'offres <strong>%s</strong>, en raison de: <strong>%s</strong>"
+        body: "Le réviseur a échoué l'appel d'offres <strong>%s</strong>, en raison de : <strong>%s</strong>"
 
       failure_provider:
         <<: *failure_cooperative

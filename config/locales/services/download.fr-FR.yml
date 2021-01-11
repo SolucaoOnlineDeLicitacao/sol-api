@@ -19,11 +19,11 @@
           finnished: Achevée
           ongoing: Ouverte
           under_review: En analyse
-          reopened: Ré-ouverte
+          reopened: Rouverte
           waiting: En attente de libération
           suspended: En suspension
-          draw: En attente d'être départagée
-          desert: Déserte
+          draw: En attente de départage
+          desert: Désert
 
           column_5: Association
           column_6: Commune
@@ -47,7 +47,7 @@
             closed_invite: Invitation fermée
 
         time:
-          worksheet: Temps de réalisation d'appel d'offres
+          worksheet: emps de réalisation d'appels d'offres
           column_1: Titre
           column_2: Temps
 
@@ -78,8 +78,8 @@
 
       contracts:
         kind:
-          worksheet: Classement par contrat
-          column_1: Nom Classement
+          worksheet: Classification par contrat
+          column_1: Nom Classification
           column_2: Total contrat
           column_3: Prix total
 
@@ -94,7 +94,7 @@
 
       items:
         prices:
-          worksheet: Variation de prix entre postes similaires
+          worksheet: Variation de prix entre éléments similaires
 
           column_1: Poste
           column_2: Lot
@@ -110,7 +110,7 @@
           worksheet: Fournisseurs qui participent le plus des appels d'offres
           column_1: Document
           column_2: Nom du fournisseur
-          column_3: Quantité d'appel d'offres
+          column_3: Quantité d'appels d'offres
 
           column_4: Numéro de l'appel d'offres
           column_5: Fournisseur
@@ -139,12 +139,12 @@
           finnished: Achevée
           ongoing: Ouverte
           under_review: En analyse
-          reopened: Ré-ouverte
+          reopened: Rouverte
           waiting: En attente de libération
           suspended: En suspension
-          draw: En attente d'être départagée
+          draw: En attente de départage
           draft: En brouillon
-          desert: Déserte
+          desert: Désert
 
         ranking:
           worksheet: Classement des fournisseurs ayant le plus grand nombre et la plus grande valeur de contrats

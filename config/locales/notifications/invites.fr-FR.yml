@@ -7,7 +7,7 @@
 
       pending:
         title: Analyse de l'invitation en suspens.
-        body: Le fournisseur <strong>%s</strong> souhaite participer à l'appel d'offres <strong>%s</strong>! Analysez la demande.
+        body: Le fournisseur <strong>%s</strong> souhaite participer à l'appel d'offres <strong>%s</strong> ! Analysez la demande.
 
       reproved:
         title: Invitation rejetée.
