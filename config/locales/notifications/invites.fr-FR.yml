@@ -1,0 +1,14 @@
+﻿fr-FR:
+  notifications:
+    invite:
+      approved:
+        title: Invitation acceptée.
+        body: Votre demande pour participer à l'appel d'offres <strong>%s</strong> a été approuvé par l'association.
+
+      pending:
+        title: Analyse de l'invitation en suspens.
+        body: Le fournisseur <strong>%s</strong> souhaite participer à l'appel d'offres <strong>%s</strong> ! Analysez la demande.
+
+      reproved:
+        title: Invitation rejetée.
+        body: Votre demande pour participer à l'appel d'offres <strong>%s</strong> a été rejetée par l'association <strong>%s</strong>.

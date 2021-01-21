@@ -1,0 +1,71 @@
+﻿# @see https://github.com/tigrish/devise-i18n/blob/master/rails/locales/fr.yml
+fr-FR:
+  devise:
+    confirmations:
+      confirmed: "Merci de confirmer votre compte !"
+      send_instructions: "Dans quelques minutes vous recevrez un e-mail avec des instructions pour la confirmation de votre compte."
+      send_paranoid_instructions: "Si votre adresse de courriel est enregistrée, vous recevrez un message avec des instructions pour la confirmation de votre compte."
+    failure:
+      already_authenticated: "Vous êtes déjà authentifié."
+      inactive: "Votre compte n'a pas encore été activé."
+      invalid: "%{authentication_keys} ou code d'accès non valable."
+      locked: "Votre compte est bloqué."
+      last_attempt: "Vous avez encore une tentative avant de bloquer votre compte."
+      not_found_in_database: "%{authentication_keys} ou code d'accès non valable."
+      timeout: "Votre session a expiré, veuillez vous reconnecter pour continuer."
+      unauthenticated: "Pour continuer, connectez-vous ou inscrivez-vous."
+      unconfirmed: "Avant de continuer, veuillez confirmer votre compte."
+    mailer:
+      # custom subjects per-model with "#{model}_subject"
+      confirmation_instructions:
+        subject: "Instructions de confirmation"
+        user_subject: "Bienvenue ! Veuillez confirmer votre compte à Alpop"
+      reset_password_instructions:
+        user_subject: &reset_password_subject "Récupération du code d'accès"
+        supplier_subject: *reset_password_subject
+        admin_subject: *reset_password_subject
+      unlock_instructions:
+        subject: "Instructions de déblocage"
+        user_subject: "Débloquez votre compte"
+      email_changed:
+        subject: "E-mail modifié"
+        user_subject: "Votre e-mail a été modifié"
+      password_change:
+        subject: "Code d'accès modifié"
+        user_subject: "Votre code d'accès a été modifié"
+
+    omniauth_callbacks:
+      failure: "Il n'est pas possible de vous authentifier comme %{kind} parce que \"%{reason}\"."
+      success: "Authentifié avec succès avec un compte de %{kind}."
+    passwords:
+      no_token: "Vous ne pouvez accéder à cette page que par un courriel d'échange de code d'accès. Si vous accédez déjà au site d'après un courriel, veuillez vérifier si l'URL fournie est complète."
+      send_instructions: "Dans quelques minutes vous recevrez un e-mail avec des instructions pour la substitution de votre code d'accès."
+      send_paranoid_instructions: "Si votre adresse de courriel est enregistrée, vous recevrez un message avec un lien pour récupérer le code d'accès par e-mail."
+      updated: "Votre code d'accès a été modifié avec succès. Vous êtes connecté."
+      updated_not_active: "Votre code d'accès a été modifié avec succès."
+    registrations:
+      destroyed: "Votre compte a été annulé avec succès. Nous espérons de vous revoir bientôt."
+      signed_up: "Connexion réussie. Si vous n'êtes pas autorisé, une confirmation sera envoyée par courriel."
+      signed_up_but_inactive: "Votre enregistrement est réussi. Cependant, il n'a pas été possible de vous connecter parce que votre compte n'a pas été activé."
+      signed_up_but_locked: "Votre enregistrement est réussi. Cependant, il n'a pas été possible de vous connecter parce que votre compte est bloqué."
+      signed_up_but_unconfirmed: "Un message avec un lien de confirmation a été envoyé à votre adresse de courriel. Veuillez ouvrir le lien pour confirmer votre compte."
+      update_needs_confirmation: "Vous avez mis à jour votre compte avec succès, mais votre nouvelle adresse de courriel doit être confirmée. Veuillez y accéder et cliquer sur le lien de confirmation que nous vous avons envoyé."
+      updated: "Votre compte a été mis à jour avec succès."
+    sessions:
+      signed_in: "Connexion réussie."
+      signed_out: "Vous êtes déconnecté avec succès."
+      already_signed_out: "Vous êtes déconnecté avec succès."
+    unlocks:
+      send_instructions: "Dans quelques minutes vous recevrez un e-mail avec des instructions pour débloquer votre compte."
+      send_paranoid_instructions: "Si votre compte existe déjà, dans quelques minutes vous recevrez un e-mail avec des instructions pour le débloquer."
+      unlocked: "Votre compte a été débloqué avec succès. Pour continuer, connectez-vous."
+  errors:
+    messages:
+      already_confirmed: "déjà confirmé"
+      confirmation_period_expired: "doit être confirmé dans %{period}, demandez un nouveau "
+      expired: "expiré, veuillez demander un nouveau"
+      not_found: "non trouvé"
+      not_locked: "non bloqué"
+      not_saved:
+        one: "Il a été impossible de sauvegarder %{resource} : 1 erreur"
+        other: "Il a été impossible de sauvegarder %{resource} : %{count} erreurs."

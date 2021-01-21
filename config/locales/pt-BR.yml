@@ -159,7 +159,7 @@ pt-BR:
     currency:
       format:
         delimiter: "."
-        format: "%u %n"
+        format: "%u %n" # specific for pt-BR implantation
         precision: 2
         separator: ","
         significant: false

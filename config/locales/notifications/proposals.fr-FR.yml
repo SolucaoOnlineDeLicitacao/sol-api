@@ -1,0 +1,48 @@
+﻿fr-FR:
+  notifications:
+    proposal:
+      coop_accepted:
+        title: Offre acceptée.
+        body: L'appel d'offres <strong>%s</strong> a une offre gagnante et peut être revu.
+
+      coop_refused:
+        title: Offre refusée.
+        body: L'appel d'offres <strong>%s</strong> a une offre gagnante et peut être revu.
+
+      accepted:
+        title: Offre gagnante.
+        body: L'offre <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été acceptée par le réviseur.
+
+      refused:
+        title: Offre refusée acceptée.
+        body: Le réviseur a accepté le refus du fournisseur <strong>%s</strong> de l'appel d'offres <strong>%s</strong>.
+
+      fail:
+        title: Il faut revoir les offres.
+        body: "L'offre du fournisseur <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été rejetée, par la raison: <strong>%s</strong>. Il faudra revoir les offres encore une fois."
+
+
+
+      lot_coop_accepted:
+        title: Offre acceptée.
+        body: Le lot <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a une offre gagnante et peut être revu.
+
+      lot_coop_refused:
+        title: Offre refusée.
+        body: L'appel d'offres <strong>%s</strong> a une offre refusée et peut être revu.
+
+      lot_accepted:
+        title: Offre gagnante.
+        body: L'offre du fournisseur <strong>%s</strong> pour le lot <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été acceptée par le réviseur.
+
+      lot_refused:
+        title: Offre refusée acceptée.
+        body: Le réviseur a accepté le refus de l'offre du fournisseur <strong>%s</strong> pour le lot <strong>%s</strong> de l'appel d'offres <strong>%s</strong>.
+
+      lot_fail:
+        title: Il faut revoir les offres.
+        body: "L'offre du fournisseur <strong>%s</strong> pour le lot <strong>%s</strong> de l'appel d'offres <strong>%s</strong> a été rejetée, par la raison: <strong>%s</strong>. Il faudra revoir les offres encore une fois."
+
+      supplier_accepted:
+        title: Félicitations, vous êtes le gagnant.
+        body: Félicitations, vous êtes le gagnant de(s) <strong>%s</strong>, cliquez ici pour savoir davantage

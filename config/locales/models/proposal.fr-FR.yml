@@ -1,0 +1,11 @@
+﻿fr-FR:
+  activerecord:
+    errors:
+      models:
+        proposal:
+          attributes:
+            bidding:
+              already_abandoned_proposal: il y a déjà une offre abandonnée pour cet appel d'offres
+              invalid_modality_change: on ne peut pas modifier l'offre proposition parce que l'appel d'offres est du type invitation fermée
+              already_importing: il y a déjà une offre importée pour cet appel d'offres
+              can_not_edit: il est impossible d'éditer l'offre.

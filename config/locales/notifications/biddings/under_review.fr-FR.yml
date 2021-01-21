@@ -1,0 +1,13 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      under_review_admin: &under_review_admin
+        title: Appel d'offres %s en analyse.
+        body: L'appel d'offres <strong>%s</strong> est en analyse. Attendez l'analyse des offres par l'association <strong>%s</strong>.
+
+      under_review_provider:
+        <<: *under_review_admin
+
+      under_review_cooperative:
+        <<: *under_review_admin
+        body: L'appel d'offres <strong>%s</strong> est en analyse. Les offres sont disponibles pous analyse
