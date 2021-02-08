@@ -22,6 +22,8 @@
               item_classification: Item classification
               item_quantity: Quantity
               item_unit: Unit
+              professional: Professional
+              quantity: Quantity
         minute:
           invites_providers: 'Companies called via application: '
           proposals_providers: 'Names of companies that submitted proposals: '

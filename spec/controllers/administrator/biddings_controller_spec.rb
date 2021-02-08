@@ -23,6 +23,7 @@ RSpec.describe Administrator::BiddingsController, type: :controller do
       let!(:params) do
         { search: 'search', page: 2, sort_column: 'biddings.created_at', sort_direction: 'desc' }
       end
+
       let(:exposed_biddings) { Bidding.all }
 
       before do
@@ -41,7 +42,7 @@ RSpec.describe Administrator::BiddingsController, type: :controller do
     end
 
     describe 'response' do
-      let(:exposed_biddings) { Bidding.not_draft }
+      let(:exposed_biddings) { Bidding.all }
 
       before { get_index }
 
@@ -51,7 +52,6 @@ RSpec.describe Administrator::BiddingsController, type: :controller do
 
       describe 'exposes' do
         let!(:bidding_draft) { create(:bidding, status: :draft) }
-
         it { expect(controller.biddings).to eq exposed_biddings }
       end
 
