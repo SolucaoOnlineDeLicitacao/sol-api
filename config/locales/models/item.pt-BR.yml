@@ -1,18 +1,8 @@
 pt-BR:
   activerecord:
-    models:
-      item:
-        one: Item
-        other: Itens
-    attributes:
-      item:
-        title: Título
-        description: Descrição
-        unit: Unidade de Medida
-        lot_group_items: Lote Item
     errors:
       models:
         item:
           attributes:
             lot_group_items:
-              in_use: " não pode ser alterado, pois está em uso. Código do item: %{code}. Altetações:%{changes}."
+              in_use: não pode ser alterado pois o item está em uso

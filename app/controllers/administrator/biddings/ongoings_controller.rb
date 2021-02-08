@@ -11,7 +11,7 @@ module Administrator
     private
 
     def updated?
-      current_user.general? && BiddingsService::Ongoing.call(bidding: bidding)
+      BiddingsService::Ongoing.call(bidding: bidding)
     end
 
     def resource

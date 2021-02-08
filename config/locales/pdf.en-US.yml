@@ -22,8 +22,6 @@
               item_classification: Item classification
               item_quantity: Quantity
               item_unit: Unit
-              professional: Professional
-              quantity: Quantity
         minute:
           invites_providers: 'Companies called via application: '
           proposals_providers: 'Names of companies that submitted proposals: '
@@ -31,8 +29,10 @@
           global_text: "For procurement process <b>%s</b><br/>"
           lot_text: "For lot <b>%s - %s</b><br/>"
           proposal_line: "company %s submitted a proposal with a value of %s (%s)"
+          proposal_line_without_text_value: "company %s submitted a proposal with a value of %s"
           bidding_comment_text: "The proposal of vendor %s received comments:<br/>"
           proposals_accepted: "Company %s / %s was declared the winner with a value of %s (%s), considering that it was the lowest value and fully compliant with the Term of Reference established by the Cooperative."
+          proposals_accepted_without_text_value: "Company %s / %s was declared the winner with a value of %s, considering that it was the lowest value and fully compliant with the Term of Reference established by the Cooperative."
           contract_refused: "Contract %s was rejected by vendor %s due to %s"
           contract_total_inexecution: "Contract %s with vendor %s / CNPJ %s was updated to “complete nonperformance” status by the cooperative %s."
           no_proposals: No winning company.

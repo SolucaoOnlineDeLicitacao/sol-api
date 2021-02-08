@@ -1,0 +1,6 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      additive_created:
+        title: Altération dans la date de clôture de l'appel d'offres %s.
+        body: Un additif a été créé pour l'appel d'offres <strong>%s</strong>. La nouvelle date de clôture é <strong>%s</strong>.

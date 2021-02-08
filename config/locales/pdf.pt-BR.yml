@@ -22,18 +22,18 @@ pt-BR:
               item_classification: Classificação do item
               item_quantity: Quantidade
               item_unit: Unidade
-              professional: Profissional
-              quantity: Quantidade
         minute:
           invites_providers: 'Empresas que foram convidadas por meio do aplicativo: '
           proposals_providers: 'Nome das empresas que enviaram propostas: '
-          provider_sentence: "empresa %s, inscrita no CPF/CNPJ nº %s"
+          provider_sentence: "empresa %s, inscrita no CNPJ nº %s"
           global_text: "Para a licitação <b>%s</b><br/>"
           lot_text: "Para o lote <b>%s - %s</b><br/>"
           proposal_line: "a empresa %s apresentou proposta no valor de %s (%s)"
+          proposal_line_without_text_value: "a empresa %s apresentou proposta no valor de %s"
           bidding_comment_text: "A proposta do fornecedor %s recebeu os comentários:<br/>"
           proposals_accepted: "A empresa %s / %s foi declarada vencedora com valor %s (%s), tendo em vista que foi a que apresentou a proposta de menor valor e em conformidade com o Termo de Referência apresentado pela Associação."
+          proposals_accepted_without_text_value: "A empresa %s / %s foi declarada vencedora com valor %s, tendo em vista que foi a que apresentou a proposta de menor valor e em conformidade com o Termo de Referência apresentado pela Associação."
           contract_refused: "O contrato %s foi recusado pelo fornecedor %s pelo(s) motivo(s) %s"
-          contract_total_inexecution: "O contrato %s com o fornecedor %s / CPF/CNPJ %s foi atualizado para a situação de inexecução total pela associação %s."
+          contract_total_inexecution: "O contrato %s com o fornecedor %s / CNPJ %s foi atualizado para a situação de inexecução total pela associação %s."
           no_proposals: Nenhuma empresa vencedora.
 

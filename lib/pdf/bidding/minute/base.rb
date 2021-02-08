@@ -2,6 +2,7 @@ module Pdf::Bidding
   class Minute::Base
     include Call::Methods
     include ActionView::Helpers::NumberHelper
+    include Pdf::HelperMethods
 
     attr_accessor :html
 
@@ -39,7 +40,6 @@ module Pdf::Bidding
         '@@bidding.description@@' => bidding.description,
         '@@bidding.closing_date@@' => format_date(bidding.closing_date),
         '@@invite.suppliers.sentence@@' => invite_suppliers_sentence,
-        '@@invite.suppliers.provider_sentence@@' => invite_suppliers_provider_sentence,
         '@@bidding.lot_proposals.providers@@' => bidding_lot_proposals_providers,
         '@@bidding.proposals.sentence@@' => bidding_proposals_sentence,
         '@@bidding.proposals.accepted@@' => bidding_proposals_accepted,
@@ -57,14 +57,6 @@ module Pdf::Bidding
       return if bidding.invites.blank?
 
       I18n.t('document.pdf.bidding.minute.invites_providers') +
-      bidding.invites.inject([]) do |array, invite|
-        array << provider_sentence(invite)
-      end.uniq.to_sentence + '.'
-    end
-
-    def invite_suppliers_provider_sentence
-      return if bidding.invites.blank?
-
       bidding.invites.inject([]) do |array, invite|
         array << provider_sentence(invite)
       end.uniq.to_sentence + '.'
@@ -108,10 +100,18 @@ module Pdf::Bidding
 
     def proposal_line(proposal)
       proposal_value = format_currency(proposal.price_total)
-      proposal_text = Extenso.moeda(prepare_currency(proposal_value))
+      proposal_value_prepared = prepare_currency(proposal_value)
 
-      I18n.t('document.pdf.bidding.minute.proposal_line') %
-        [proposal.provider.name, proposal_value, proposal_text]
+      if valid_value_for_full_text?(proposal_value_prepared)
+        proposal_text = Extenso.moeda(proposal_value_prepared)
+
+        I18n.t('document.pdf.bidding.minute.proposal_line') %
+          [proposal.provider.name, proposal_value, proposal_text]
+      else
+        I18n.t('document.pdf.bidding.minute.proposal_line_without_text_value') %
+          [proposal.provider.name, proposal_value]
+      end
+
     end
 
     def bidding_proposals_accepted
@@ -130,10 +130,17 @@ module Pdf::Bidding
       return I18n.t('document.pdf.bidding.minute.no_proposals') if proposal.blank?
 
       proposal_value = format_currency(proposal.price_total)
-      proposal_text = Extenso.moeda(prepare_currency(proposal_value))
+      proposal_value_prepared = prepare_currency(proposal_value)
 
-      I18n.t('document.pdf.bidding.minute.proposals_accepted') %
-        [proposal.provider.name, proposal.provider.document, proposal_value, proposal_text]
+      if valid_value_for_full_text?(proposal_value_prepared)
+        proposal_text = Extenso.moeda(proposal_value_prepared)
+
+        I18n.t('document.pdf.bidding.minute.proposals_accepted') %
+          [proposal.provider.name, proposal.provider.document, proposal_value, proposal_text]
+      else
+        I18n.t('document.pdf.bidding.minute.proposals_accepted_without_text_value') %
+          [proposal.provider.name, proposal.provider.document, proposal_value]
+      end
     end
 
     def bidding_comments_sentence

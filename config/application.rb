@@ -42,7 +42,7 @@ module SdcApi
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     config.i18n.default_locale = :'pt-BR'
-    config.i18n.available_locales = %w[pt-BR en-US es-PY]
+    config.i18n.available_locales = %w[pt-BR en-US es-PY fr-FR]
     config.time_zone = 'Brasilia'
 
     # criamos o arquivo sol.yml (em config/) e com isso fazemos o load do mesmo nas `ENV`

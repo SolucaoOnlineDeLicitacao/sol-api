@@ -19,7 +19,6 @@ RSpec.describe Coop::BiddingSerializer, type: :serializer do
     let(:supp_can_see) { object.finnished? }
 
     let(:covenant_number_name) { "#{object.covenant.number} - #{object.covenant.name}" }
-    let(:covenant_admin_name) { object.covenant.admin_name }
 
     it { is_expected.to include 'id' => object.id }
     it { is_expected.to include 'title' => object.title }
@@ -32,7 +31,6 @@ RSpec.describe Coop::BiddingSerializer, type: :serializer do
     it { is_expected.to include 'closing_date' => object.closing_date.to_s }
     it { is_expected.to include 'covenant_id' => object.covenant_id }
     it { is_expected.to include 'covenant_name' => covenant_number_name }
-    it { is_expected.to include 'covenant_admin_name' => covenant_admin_name }
     it { is_expected.to include 'address' => object.address }
     it { is_expected.to include 'can_finish' => can_finish }
     it { is_expected.to include 'supp_can_see' => supp_can_see }

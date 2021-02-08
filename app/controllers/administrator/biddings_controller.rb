@@ -22,7 +22,7 @@ module Administrator
     end
 
     def find_biddings
-      Bidding.accessible_by(current_ability)
+      Bidding.accessible_by(current_ability).not_draft
     end
   end
 end

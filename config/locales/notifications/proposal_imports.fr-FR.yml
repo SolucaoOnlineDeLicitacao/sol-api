@@ -1,0 +1,19 @@
+﻿fr-FR:
+  notifications:
+    proposal_import:
+
+      success:
+        title: Offres importées.
+        body: Les offres de l'appel d'offres "%s" du fichier <strong>%s</strong> ont été importées avec succès.
+
+      error:
+        title: Offres non importées.
+        body: Il a n'a pas été possible d'importer l'offre de l'appel d'offres "%s". Vérifiez le fichier <strong>%s</strong> et essayez encore une fois. 
+
+      lot_success:
+        title: Offre importée.
+        body: L'offre du lot "%s" du fichier <strong>%s</strong> a été importée avec succès.
+
+      lot_error:
+        title: Offre non importée.
+        body: Il a n'a pas été possible d'importer l'offre du lot "%s". Vérifiez le fichier <strong>%s</strong> et essayez encore une fois. 
