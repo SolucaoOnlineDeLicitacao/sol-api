@@ -2,6 +2,7 @@ module Pdf::Contract::Classification
   class Base
     include Call::Methods
     include ActionView::Helpers::NumberHelper
+    include Pdf::HelperMethods
 
     attr_accessor :html, :table, :template
 
@@ -225,7 +226,8 @@ module Pdf::Contract::Classification
     end
 
     def total_full_value
-      Extenso.moeda(prepare_currency(formatted_total_value))
+      value = prepare_currency(formatted_total_value)
+      valid_value_for_full_text?(value) ? Extenso.moeda(value) : nil
     end
 
     def total_value

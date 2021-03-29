@@ -1,0 +1,19 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      cancellation_request_new: &cancellation_request_new
+        title: Demande d'annulation de l'appel d'offres %s.
+        body: Il y a une demande d'annulation de l'appel d'offres <strong>%s</strong>. La révision n'est pas disponible.
+
+      cancellation_request_approved_cooperative:
+        <<: *cancellation_request_new
+        body: La demande d'annulation de l'appel d'offres <strong>%s</strong> a été acceptée.
+
+      cancellation_request_approved_provider:
+        <<: *cancellation_request_new
+        title: Annulation de l'appel d'offres
+        body: "L'appel d'offres <strong>%s</strong> a été annulé, pour la raison: <strong>%s</strong>"
+
+      cancellation_request_reproved:
+        <<: *cancellation_request_new
+        body: La demande d'annulation de l'appel d'offres <strong>%s</strong> a été rejetée. La justificative est disponible pour analyse.

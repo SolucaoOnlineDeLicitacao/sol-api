@@ -35,11 +35,11 @@ class LotGroupItem < ApplicationRecord
   private
 
   def minimum_quantity
-    errors.add(:quantity, :greater_than, count: MINIMUM_QUANTITY_VALUE) unless quantity_greater_than_minimum?
+    errors.add(:quantity, :greater_or_equal_than, count: MINIMUM_QUANTITY_VALUE) unless quantity_greater_than_minimum?
   end
 
   def quantity_greater_than_minimum?
-    quantity.present? && quantity > MINIMUM_QUANTITY_VALUE
+    quantity.present? && quantity >= MINIMUM_QUANTITY_VALUE
   end
 
   def max_quantity

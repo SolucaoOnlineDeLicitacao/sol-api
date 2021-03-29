@@ -1,0 +1,14 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      ongoing_cooperative:
+        title: Appel d'offres %s ouvert.
+        body: L'appel d'offres <strong>%s</strong> a été ouvert avec succès.
+
+      ongoing_invited_provider:
+        title: Nouvelle invitation à l'appel d'offres %s.
+        body: Vous avez été invité pour participer à l'appel d'offres <strong>%s</strong>.
+
+      ongoing_classification_provider:
+        title: Nouvel appel d'offres %s ouvert.
+        body: Un nouvel appel d'offres de votre intérêt (<strong>%s</strong>) a été ouvert. 

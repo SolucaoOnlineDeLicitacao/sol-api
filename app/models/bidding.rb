@@ -243,5 +243,5 @@ class Bidding < ApplicationRecord
 
   def future_start_date?
     start_date <= Date.today
-  end
+  end  
 end

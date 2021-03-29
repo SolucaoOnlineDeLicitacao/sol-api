@@ -1,0 +1,20 @@
+﻿fr-FR:
+  activerecord:
+    models:
+      cooperative:
+        one: Association
+        other: Associations
+    attributes:
+      cooperative:
+        name: Nom
+        cnpj: CNPJ
+        email: E-mail
+
+    errors:
+      models:
+        cooperative:
+          attributes:
+            name:
+              blank: 'Il faut informer'
+            cnpj:
+              taken: '(%{value}) est déjà utilisé'

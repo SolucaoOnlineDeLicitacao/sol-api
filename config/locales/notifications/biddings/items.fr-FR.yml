@@ -1,0 +1,6 @@
+﻿fr-FR:
+  notifications:
+    bidding:
+      item_cooperative:
+        title: Appel d'offre %s avec poste modifié.
+        body: L'appel d'offres <strong>%s</strong> a eu le poste <strong>%s</strong> modifé.

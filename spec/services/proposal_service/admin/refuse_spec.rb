@@ -4,10 +4,8 @@ RSpec.describe ProposalService::Admin::Refuse, type: :service do
   let(:bidding) { create(:bidding) }
   let(:lots) { bidding.lots }
   let(:lot) { lots.first }
-  let(:status) { :sent }
-  let(:proposal) { create(:proposal, lot: lot, bidding: bidding, status: status) }
-  let(:proposal2) { create(:proposal, lot: lot, bidding: bidding, status: status) }
-  let!(:proposal3) { create(:proposal, lot: lot, bidding: bidding, status: status) }
+  let(:proposal_status) { :sent }
+  let(:proposal) { create(:proposal, lot: lot, bidding: bidding, status: proposal_status) }
   let(:params) { { proposal: proposal } }
 
   describe '#initialize' do
@@ -29,11 +27,11 @@ RSpec.describe ProposalService::Admin::Refuse, type: :service do
     subject { described_class.call(params) }
 
     context 'when success' do
-      context 'and not all refused or abandoned' do
-        before do
-          subject
-          proposal.reload
-        end
+      context 'and not all refused, abandoned or failure' do
+        let!(:proposal2) { create(:proposal, lot: lot, bidding: bidding, status: :coop_refused) }
+        let!(:proposal3) { create(:proposal, lot: lot, bidding: bidding, status: :triage) }
+
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(proposal.refused?).to be_truthy }
@@ -49,33 +47,9 @@ RSpec.describe ProposalService::Admin::Refuse, type: :service do
       end
 
       context 'and only one refused' do
-        before do
-          proposal2.refused!
-          subject
-          proposal.reload
-        end
+        let(:proposal_status) { :refused }
 
-        it { is_expected.to be_truthy }
-        it { expect(proposal.refused?).to be_truthy }
-        it { expect(proposal.lots.map(&:failure?).all?).to be_falsey }
-        it do
-          expect(Blockchain::Proposal::Update).
-            to have_received(:call).with(proposal)
-        end
-        it do
-          expect(Notifications::Proposals::Refused).
-            to have_received(:call).with(proposal)
-        end
-      end
-
-      context 'and only one draft' do
-        let(:status) { :refused }
-
-        before do
-          proposal2.draft!
-          subject
-          proposal.reload
-        end
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(proposal.refused?).to be_truthy }
@@ -90,14 +64,48 @@ RSpec.describe ProposalService::Admin::Refuse, type: :service do
         end
       end
 
-      context 'and all refused or abandoned' do
-        let(:status) { :refused }
+      context 'and only one draft' do
+        let(:proposal_status) { :draft }
 
-        before do
-          proposal.abandoned!
-          subject
-          proposal.reload
+        before { subject }
+
+        it { is_expected.to be_truthy }
+        it { expect(proposal.refused?).to be_truthy }
+        it { expect(proposal.lots.map(&:failure?).all?).to be_truthy }
+        it do
+          expect(Blockchain::Proposal::Update).
+            to have_received(:call).with(proposal)
         end
+        it do
+          expect(Notifications::Proposals::Refused).
+            to have_received(:call).with(proposal)
+        end
+      end
+
+      context 'and only one failure' do
+        let(:proposal_status) { :failure }
+
+        before { subject }
+
+        it { is_expected.to be_truthy }
+        it { expect(proposal.refused?).to be_truthy }
+        it { expect(proposal.lots.map(&:failure?).all?).to be_truthy }
+        it do
+          expect(Blockchain::Proposal::Update).
+            to have_received(:call).with(proposal)
+        end
+        it do
+          expect(Notifications::Proposals::Refused).
+            to have_received(:call).with(proposal)
+        end
+      end
+
+      context 'and all refused, abandoned or failure' do
+        let(:proposal_status) { :refused }
+        let!(:proposal2) { create(:proposal, lot: lot, bidding: bidding, status: :abandoned) }
+        let!(:proposal3) { create(:proposal, lot: lot, bidding: bidding, status: :failure) }
+
+        before { subject }
 
         it { is_expected.to be_truthy }
         it { expect(proposal.refused?).to be_truthy }
