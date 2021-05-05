@@ -15,6 +15,8 @@ module BiddingsService
 
         bidding.waiting! && bidding.lots.map(&:waiting!)
 
+        Bidding::SpreadsheetReportGenerateWorker.perform_async(bidding.id)
+
         Notifications::Biddings::WaitingApproval.call(bidding)
       end
     end

@@ -19,6 +19,8 @@ RSpec.shared_examples 'services/concerns/proposal' do |status|
   end
 
   describe '.call' do
+    let(:report_worker) { Bidding::SpreadsheetReportGenerateWorker }
+
     context 'when success' do
       describe 'when have more than one proposal' do
         let(:proposals) { bidding.proposals.where(status: [:sent, :accepted, :refused]) }
@@ -42,7 +44,7 @@ RSpec.shared_examples 'services/concerns/proposal' do |status|
         it { expect(proposal_2.reload.sent?).to be_truthy }
         it { expect(bidding.reload.reopen_reason_contract_id).to eq(contract.id) }
         it { expect(BiddingsService::Proposals::Retry).to have_received(:call!).with(bidding: bidding, proposal: proposal) }
-
+        it { expect(report_worker.jobs.size).to eq(1) }
       end
 
       describe 'when have one proposal' do
@@ -56,6 +58,7 @@ RSpec.shared_examples 'services/concerns/proposal' do |status|
         it { expect(contract.send("#{contract_status}?")).to be_truthy }
         it { expect(proposal.failure?).to be_truthy }
         it { expect(bidding.reload.reopen_reason_contract_id).to eq(contract.id) }
+        it { expect(report_worker.jobs.size).to eq(1) }
       end
     end
 
@@ -71,6 +74,7 @@ RSpec.shared_examples 'services/concerns/proposal' do |status|
       it { expect(contract.send("#{contract_status}?")).to be_falsy }
       it { expect(service_call).to be_falsy }
       it { expect(bidding.reload.reopen_reason_contract).to be_nil }
+      it { expect(report_worker.jobs.size).to eq(0) }
     end
 
     context 'when BC error' do
@@ -84,6 +88,7 @@ RSpec.shared_examples 'services/concerns/proposal' do |status|
       it { expect(contract.reload.send("#{contract_status}?")).to be_falsy }
       it { expect(service_call).to be_falsy }
       it { expect(bidding.reload.reopen_reason_contract).to be_nil }
+      it { expect(report_worker.jobs.size).to eq(0) }
     end
   end
 end

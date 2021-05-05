@@ -18,6 +18,7 @@ RSpec.shared_examples 'services/concerns/clone' do |status|
 
   describe '.call' do
     let(:worker) { Bidding::Minute::AddendumPdfGenerateWorker }
+    let(:report_worker) { Bidding::SpreadsheetReportGenerateWorker }
 
     subject(:service_call) { service.call }
 
@@ -36,6 +37,7 @@ RSpec.shared_examples 'services/concerns/clone' do |status|
         it { expect(BiddingsService::Cancel).to have_received(:call!).with(bidding: bidding) }
         it { expect(BiddingsService::Clone).to have_received(:call!).with(bidding: bidding) }
         it { expect(worker.jobs.size).to eq(1) }
+        it { expect(report_worker.jobs.size).to eq(1) }
       end
     end
 

@@ -15,8 +15,9 @@ module BiddingsService
     def main_method
       execute_or_rollback do
         event.save!
-
-        updates_bidding_to_review && bidding.reload
+        updates_bidding_to_review
+        destroy_spreadsheet_report!
+        bidding.reload
 
         Notifications::Biddings::Reproved.call(bidding)
       end
@@ -27,6 +28,15 @@ module BiddingsService
       # possível mesmo que a licitação seja inválida - como por exemplo uma reprovação
       # depois do seu dia de abertura
       bidding.update_attribute(:status, :draft)
+    end
+
+    def destroy_spreadsheet_report!
+      spreadsheet_report = bidding.spreadsheet_report
+      return if spreadsheet_report.blank?
+
+      spreadsheet_report.remove_file!
+      bidding.update_attribute(:spreadsheet_report, nil)
+      spreadsheet_report.destroy!
     end
 
     def attributes

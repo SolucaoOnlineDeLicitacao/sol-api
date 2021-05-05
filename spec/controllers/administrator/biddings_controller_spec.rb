@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Administrator::BiddingsController, type: :controller do
-  let(:serializer) { Coop::BiddingSerializer }
+  let(:serializer) { Administrator::BiddingSerializer }
   let(:user) { create :admin }
   let!(:covenant) { create(:covenant) }
   let!(:biddings) { create_list(:bidding, 2, covenant: covenant) }

@@ -37,6 +37,7 @@ module BiddingsService
       bidding.reload
       update_bidding_blockchain!
       clone_bidding!
+      generate_spreadsheet_report
     end
 
     def finish_bidding!
@@ -45,6 +46,7 @@ module BiddingsService
       create_contract!
       update_bidding_blockchain!
       notify
+      generate_spreadsheet_report
     end
 
     def update_bidding_blockchain!
@@ -64,6 +66,10 @@ module BiddingsService
 
     def recalculate_quantity!
       RecalculateQuantityService.call!(covenant: bidding.covenant)
+    end
+
+    def generate_spreadsheet_report
+      Bidding::SpreadsheetReportGenerateWorker.perform_async(bidding.id)
     end
 
     def generate_minute

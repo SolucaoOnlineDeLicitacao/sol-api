@@ -39,6 +39,11 @@ class Bidding < ApplicationRecord
   belongs_to :edict_document, class_name: 'Document',
                               foreign_key: :edict_document_id,
                               optional: true
+
+  belongs_to :spreadsheet_report, class_name: 'SpreadsheetDocument',
+                                  foreign_key: :spreadsheet_report_id,
+                                  optional: true
+
   belongs_to :classification
 
   has_one :cooperative, through: :covenant

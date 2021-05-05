@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Supp::BiddingsController, type: :controller do
-  let(:serializer) { Coop::BiddingSerializer }
+  let(:serializer) { Supp::BiddingSerializer }
   let(:covenant) { create(:covenant) }
   let(:cooperative) { covenant.cooperative }
   let(:user) { create(:supplier) }

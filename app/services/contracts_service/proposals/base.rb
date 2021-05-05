@@ -18,6 +18,7 @@ module ContractsService
         fail_and_retry_proposal!
         update_reopen_reason_contract!
         update_contract_blockchain!
+        generate_spreadsheet_report
         notify
         update_deleted_at!
       end
@@ -50,6 +51,10 @@ module ContractsService
 
     def update_contract_blockchain!
       Blockchain::Contract::Update.call!(contract: contract)
+    end
+
+    def generate_spreadsheet_report
+      Bidding::SpreadsheetReportGenerateWorker.perform_async(bidding.id)
     end
 
     # override

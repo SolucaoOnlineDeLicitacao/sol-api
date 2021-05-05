@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe BiddingsService::Reprove, type: :service do
   let!(:admin) { create(:admin) }
-  let!(:bidding) { create(:bidding, status: :waiting) }
+  let(:spreadsheet_document) { create(:spreadsheet_document) }
+  let!(:bidding) do
+    create(:bidding, status: :waiting, spreadsheet_report: spreadsheet_document)
+  end
   let(:comment) { 'comment' }
 
   let(:service) do
@@ -34,6 +37,7 @@ RSpec.describe BiddingsService::Reprove, type: :service do
 
       it { expect(service.event).to be_persisted }
       it { expect(bidding.reload.draft?).to be_truthy }
+      it { expect(bidding.reload.spreadsheet_report).to be_nil }
       it { expect(Notifications::Biddings::Reproved).to have_received(:call).with(bidding) }
     end
 
@@ -47,6 +51,7 @@ RSpec.describe BiddingsService::Reprove, type: :service do
 
       it { expect(service.event).not_to be_persisted }
       it { expect(bidding.reload.draft?).to be_falsy }
+      it { expect(bidding.reload.spreadsheet_report).to be_present }
       it { expect(Notifications::Biddings::Reproved).not_to have_received(:call).with(bidding) }
     end
   end
