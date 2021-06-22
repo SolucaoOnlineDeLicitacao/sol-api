@@ -1,7 +1,7 @@
 class AddressSerializer < ActiveModel::Serializer
 
-  attributes :id, :latitude, :longitude, :city_name, :city_id, :address,
-              :number, :neighborhood, :cep, :complement, :reference_point
+  attributes :id, :latitude, :longitude, :city_name, :city_id, :address, :number,
+               :neighborhood, :cep, :complement, :reference_point, :phone, :email
 
   belongs_to :city
 
