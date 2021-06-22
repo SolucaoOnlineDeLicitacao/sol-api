@@ -32,6 +32,7 @@ RSpec.describe BiddingsService::UnderReview, type: :service do
       end
 
       it { expect(BiddingsService::Review).not_to have_received(:call).with(bidding: bidding) }
+      it { expect(bidding.reload.under_review?).to be_falsy }
     end
 
     context 'when proposals not draw' do
@@ -42,6 +43,7 @@ RSpec.describe BiddingsService::UnderReview, type: :service do
       end
 
       it { expect(BiddingsService::Review).to have_received(:call).with(bidding: bidding) }
+      it { expect(bidding.reload.under_review?).to be_truthy }
     end
   end
 
@@ -66,6 +68,7 @@ RSpec.describe BiddingsService::UnderReview, type: :service do
       end
 
       it { expect(BiddingsService::Review).not_to have_received(:call).with(bidding: bidding) }
+      it { expect(bidding.reload.under_review?).to be_falsy }
     end
 
     context 'when proposals not draw' do
@@ -76,6 +79,7 @@ RSpec.describe BiddingsService::UnderReview, type: :service do
       end
 
       it { expect(BiddingsService::Review).to have_received(:call).with(bidding: bidding) }
+      it { expect(bidding.reload.under_review?).to be_truthy }
     end
   end
 end

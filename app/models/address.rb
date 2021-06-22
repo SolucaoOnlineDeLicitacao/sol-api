@@ -13,7 +13,6 @@ class Address < ApplicationRecord
             :number,
             :neighborhood,
             :reference_point,
-            :phone,
             presence: true
 
   with_options unless: -> { skip_integration_validations } do |model|

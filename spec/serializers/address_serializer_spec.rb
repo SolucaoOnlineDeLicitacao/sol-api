@@ -17,8 +17,6 @@ RSpec.describe AddressSerializer, type: :serializer do
     it { is_expected.to include 'cep' => object.cep }
     it { is_expected.to include 'complement' => object.complement }
     it { is_expected.to include 'reference_point' => object.reference_point }
-    it { is_expected.to include 'phone' => object.phone }
-    it { is_expected.to include 'email' => object.email }
   end
 
   describe 'associations' do

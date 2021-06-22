@@ -25,9 +25,18 @@ module BiddingsService
 
           recalculate_quantity!
 
+          return desert_and_clone_bidding! if bidding_havent_proposals?
+
           finish_bidding!
         end
       end
+    end
+
+    def desert_and_clone_bidding!
+      bidding.desert!
+      bidding.reload
+      update_bidding_blockchain!
+      clone_bidding!
     end
 
     def finish_bidding!
@@ -49,6 +58,10 @@ module BiddingsService
       end
     end
 
+    def bidding_havent_proposals?
+      bidding.proposals.not_draft_or_abandoned.empty?
+    end
+
     def recalculate_quantity!
       RecalculateQuantityService.call!(covenant: bidding.covenant)
     end
@@ -61,6 +74,10 @@ module BiddingsService
       ContractsService::Create::Strategy::Finnished.call!(
         bidding: bidding, user: user
       )
+    end
+
+    def clone_bidding!
+      BiddingsService::Clone.call!(bidding: bidding)
     end
 
     def notify

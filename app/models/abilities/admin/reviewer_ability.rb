@@ -21,7 +21,6 @@ module Abilities::Admin
         can :manage, GroupItem, group_rule
       end
 
-      can :read,   Bidding
       can :manage, Contract, bidding_rule
       can :manage, Bidding, covenant_rule
       can :manage, Proposal, bidding_rule

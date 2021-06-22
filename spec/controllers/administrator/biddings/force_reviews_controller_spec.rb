@@ -27,6 +27,7 @@ RSpec.describe Administrator::Biddings::ForceReviewsController, type: :controlle
       end
 
       it { expect(controller.bidding.id).to eq bidding.id }
+      it { expect(controller.bidding.under_review?).to be_truthy }
     end
 
     describe 'response' do

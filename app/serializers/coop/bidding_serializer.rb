@@ -7,8 +7,7 @@ module Coop
         :cancel_comment, :comment_response, :event_status, :event_id, :address,
         :can_finish, :supp_can_see, :modality, :draw_end_days, :refuse_comment,
         :failure_comment, :minute_pdf, :edict_pdf, :classification_id, :classification_name,
-        :all_lots_failure, :code, :position, :estimated_cost_total, :proposal_import_file_url,
-        :user_role
+        :all_lots_failure, :code, :position, :estimated_cost_total, :proposal_import_file_url
 
     has_one :cooperative, through: :covenant, serializer: Supp::CooperativeSerializer
 
@@ -62,10 +61,6 @@ module Coop
 
     def all_lots_failure
       object.fully_failed_lots?
-    end
-
-    def user_role
-      current_user.class == Admin ? current_user.role : ''
     end
 
     private

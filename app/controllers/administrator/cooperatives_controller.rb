@@ -9,7 +9,7 @@ module Administrator
 
       address_attributes: [
         :id, :address, :number, :neighborhood, :city_id, :cep, :complement,
-        :reference_point, :latitude, :longitude, :phone, :email
+        :reference_point, :latitude, :longitude
       ],
 
       legal_representative_attributes: [
@@ -17,7 +17,7 @@ module Administrator
 
         address_attributes: [
           :id, :address, :number, :neighborhood, :city_id, :cep, :complement,
-          :reference_point, :latitude, :longitude, :phone, :email
+          :reference_point, :latitude, :longitude
         ]
 
       ]

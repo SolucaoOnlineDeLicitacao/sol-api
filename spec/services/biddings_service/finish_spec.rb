@@ -39,6 +39,8 @@ RSpec.describe BiddingsService::Finish, type: :service do
         to receive(:call).with(bidding).and_return(true)
       allow(Notifications::Proposals::Suppliers::All).
         to receive(:call).with(proposals: bidding.proposals).and_return(true)
+      allow(BiddingsService::Clone).
+        to receive(:call!).with(bidding: bidding).and_return(true)
     end
 
     subject { described_class.call(params) }
@@ -70,6 +72,41 @@ RSpec.describe BiddingsService::Finish, type: :service do
         it do
           expect(Notifications::Proposals::Suppliers::All).
             to have_received(:call).with(proposals: bidding.proposals)
+        end
+        it { expect(worker.jobs.size).to eq(1) }
+      end
+
+      context 'and bidding havent proposals' do
+        before do
+          bidding.proposals.map(&:draft!)
+          subject
+          bidding.reload
+        end
+
+        it { expect(bidding.desert?).to be_truthy }
+        it do
+          expect(RecalculateQuantityService).
+            to have_received(:call!).with(covenant: bidding.covenant)
+        end
+        it do
+          expect(Blockchain::Bidding::Update).
+            to have_received(:call).with(bidding)
+        end
+        it do
+          expect(BiddingsService::Clone).
+            to have_received(:call!).with(bidding: bidding)
+        end
+        it do
+          expect(ContractsService::Create::Strategy::Finnished).
+            not_to have_received(:call!).with(params)
+        end
+        it do
+          expect(Notifications::Biddings::Finished).
+            not_to have_received(:call).with(bidding)
+        end
+        it do
+          expect(Notifications::Proposals::Suppliers::All).
+            not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(1) }
       end
@@ -264,6 +301,33 @@ RSpec.describe BiddingsService::Finish, type: :service do
         end
 
         it { expect(bidding.finnished?).to be_falsey }
+        it do
+          expect(Notifications::Biddings::Finished).
+            not_to have_received(:call).with(bidding)
+        end
+        it do
+          expect(Notifications::Proposals::Suppliers::All).
+            not_to have_received(:call).with(proposals: bidding.proposals)
+        end
+        it { expect(worker.jobs.size).to eq(0) }
+      end
+
+      context 'and bidding havent proposals and clone has errors' do
+        before do
+          allow(BiddingsService::Clone).
+            to receive(:call!).with(bidding: bidding).
+            and_raise(ActiveRecord::RecordInvalid)
+
+          bidding.proposals.map(&:draft!)
+          subject
+          bidding.reload
+        end
+
+        it { expect(bidding.desert?).to be_falsey }
+        it do
+          expect(ContractsService::Create::Strategy::Finnished).
+            not_to have_received(:call!).with(params)
+        end
         it do
           expect(Notifications::Biddings::Finished).
             not_to have_received(:call).with(bidding)
