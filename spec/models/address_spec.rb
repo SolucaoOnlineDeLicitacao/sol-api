@@ -37,6 +37,7 @@ RSpec.describe Address, type: :model do
       it { is_expected.to validate_presence_of :neighborhood }
       it { is_expected.to validate_presence_of :cep }
       it { is_expected.to validate_presence_of :reference_point }
+      it { is_expected.to validate_presence_of :phone }
 
       it { is_expected.to validate_zip_code_for :cep }
       it { is_expected.to validate_latitude_for :latitude }
