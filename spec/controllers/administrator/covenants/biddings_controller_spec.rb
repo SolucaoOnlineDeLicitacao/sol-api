@@ -55,7 +55,7 @@ RSpec.describe Administrator::Covenants::BiddingsController, type: :controller d
 
       describe 'JSON' do
         let(:json) { JSON.parse(response.body) }
-        let(:expected_json) { biddings.map { |bidding| format_json(serializer, bidding) } }
+        let(:expected_json) { biddings.map { |bidding| format_json(serializer, bidding, scope: user) } }
 
         it { expect(json).to match_array expected_json }
       end
@@ -82,7 +82,7 @@ RSpec.describe Administrator::Covenants::BiddingsController, type: :controller d
 
      describe 'JSON' do
       let(:json) { JSON.parse(response.body) }
-      let(:expected_json) { format_json(serializer, bidding) }
+      let(:expected_json) { format_json(serializer, bidding, scope: user) }
 
       it { expect(json).to eq expected_json }
     end

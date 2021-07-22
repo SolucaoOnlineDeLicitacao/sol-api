@@ -17,20 +17,17 @@ module BiddingsService
           common_review!
         end
 
-        bidding.under_review!
-        bidding.reload
+        return desert_and_clone_bidding! if proposals_not_draft_or_abandoned.empty?
 
-        raise BlockchainError unless blockchain_bidding_update.success?
-
-        Notifications::Biddings::UnderReview.call(bidding)
+        under_review_and_notify!
       end
     end
 
     def global_review!
-      if global_proposals.present?
+      if proposals_not_draft_or_abandoned.present?
         lots.map(&:triage!)
 
-        update_proposals(global_proposals)
+        update_proposals(proposals_not_draft_or_abandoned)
       else
         lots.map(&:desert!)
       end
@@ -39,7 +36,7 @@ module BiddingsService
     def common_review!
       lots.find_each do |lot|
         # only sent or draw proposals - cant have abandoned/draft ones
-        proposals = lot.proposals.where.not(status: [:draft, :abandoned])
+        proposals = lot.proposals.not_draft_or_abandoned
 
         if proposals.present?
           lot.triage!
@@ -51,8 +48,24 @@ module BiddingsService
       end
     end
 
-    def blockchain_bidding_update
-      Blockchain::Bidding::Update.call(bidding)
+    def desert_and_clone_bidding!
+      bidding.desert!
+      bidding.reload
+      blockchain_bidding_update!
+      BiddingsService::Clone.call!(bidding: bidding)
+      generate_minute
+    end
+
+    def under_review_and_notify!
+      bidding.under_review!
+      bidding.reload
+      blockchain_bidding_update!
+      Notifications::Biddings::UnderReview.call(bidding)
+    end
+
+    def blockchain_bidding_update!
+      response = Blockchain::Bidding::Update.call(bidding)
+      raise BlockchainError unless response.success?
     end
 
     def update_proposals(proposals)
@@ -63,13 +76,16 @@ module BiddingsService
       proposals.sent.lower&.triage!
     end
 
-    def global_proposals
-      # only sent or draw proposals - cant have abandoned/draft ones
-      @global_proposals ||= bidding.proposals.where.not(status: [:draft, :abandoned])
+    def proposals_not_draft_or_abandoned
+      @proposals_not_draft_or_abandoned ||= bidding.proposals.not_draft_or_abandoned
     end
 
     def lots
       @lots ||= bidding.lots
+    end
+
+    def generate_minute
+      Bidding::Minute::PdfGenerateWorker.perform_async(bidding.id)
     end
   end
 end

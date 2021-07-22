@@ -39,13 +39,9 @@ RSpec.describe Abilities::Admin::ReviewerAbility, type: :model do
   describe '.as_json' do
     let(:expected) do
       {
-        manage: [
-          "Covenant", "Group", "Cooperative", "Item", "GroupItem",
-          "Contract", "Bidding", "Proposal", "Lot", "LotProposal", "Provider",
-          "Supplier", "Unit", "User", "Notification", "Report"
-        ],
+        manage: %w[Covenant Group Cooperative Item GroupItem Contract Bidding Proposal Lot LotProposal Provider Supplier Unit User Notification Report],
         mark_as_read: ["Notification"],
-        read: ["Admin"],
+        read: %w[Bidding Admin],
         profile: ["Admin"],
         update: ["Admin"]
       }
