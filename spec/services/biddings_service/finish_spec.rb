@@ -26,6 +26,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
 
   describe '.call' do
     let(:worker) { Bidding::Minute::PdfGenerateWorker }
+    let(:report_worker) { Bidding::SpreadsheetReportGenerateWorker }
     let(:api_response) { double('api_response', success?: true) }
 
     before do
@@ -72,6 +73,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(1) }
+        it { expect(report_worker.jobs.size).to eq(1) }
       end
     end
 
@@ -105,6 +107,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and lots are not accepted, desert or failure' do
@@ -136,6 +139,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and bidding is not under_review and lots are not accepted, desert or failure' do
@@ -168,6 +172,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and recalculate quantity has errors' do
@@ -198,6 +203,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and bidding has errors' do
@@ -227,6 +233,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and contract create has errors' do
@@ -253,6 +260,7 @@ RSpec.describe BiddingsService::Finish, type: :service do
             not_to have_received(:call).with(proposals: bidding.proposals)
         end
         it { expect(worker.jobs.size).to eq(0) }
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and blockchain has errors' do

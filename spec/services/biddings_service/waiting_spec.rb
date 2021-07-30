@@ -16,6 +16,8 @@ RSpec.describe BiddingsService::Waiting, type: :service do
   end
 
   describe '.call' do
+    let(:report_worker) { Bidding::SpreadsheetReportGenerateWorker }
+
     subject { described_class.call(params) }
 
     context 'when success' do
@@ -31,6 +33,7 @@ RSpec.describe BiddingsService::Waiting, type: :service do
         expect(Notifications::Biddings::WaitingApproval).
           to have_received(:call).with(bidding)
       end
+      it { expect(report_worker.jobs.size).to eq(1) }
     end
 
     context 'when error' do
@@ -50,6 +53,7 @@ RSpec.describe BiddingsService::Waiting, type: :service do
           expect(Notifications::Biddings::WaitingApproval).
             not_to have_received(:call).with(bidding)
         end
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
 
       context 'and bidding is not draft' do
@@ -67,6 +71,7 @@ RSpec.describe BiddingsService::Waiting, type: :service do
           expect(Notifications::Biddings::WaitingApproval).
             not_to have_received(:call).with(bidding)
         end
+        it { expect(report_worker.jobs.size).to eq(0) }
       end
     end
   end

@@ -3,7 +3,7 @@ module GroupItemSerializable
 
   included do
     attributes :id, :item_id, :item_short_name, :item_name, :item_unit, :quantity,
-               :available_quantity, :group_name, :estimated_cost, :_destroy
+               :available_quantity, :group_id, :group_name, :estimated_cost, :_destroy
   end
 
   def item_name
@@ -16,6 +16,10 @@ module GroupItemSerializable
 
   def item_unit
     object.item.unit_name
+  end
+
+  def group_id
+    object.group_id
   end
 
   def group_name

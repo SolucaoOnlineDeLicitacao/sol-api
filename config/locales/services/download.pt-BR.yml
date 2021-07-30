@@ -6,6 +6,26 @@ pt-BR:
       details: Detalhes
 
       biddings:
+        items:
+          worksheet: Itens da Licitação
+          header_row_1: Descrição (objeto)
+          header_row_2: Associação
+          header_row_3: Convênio
+          header_row_4: Tipo de licitação
+          header_row_5: Prazo para entrega/execução (dias)
+          column_1: Nome do lote
+          column_2: Nome do item
+          column_3: Descrição do item
+          column_4: Preço estimado
+          column_5: Quantidade
+          column_6: Preço da compra
+          column_7: Preço total
+          column_8: Nome do fornecedor
+          kind:
+            global: Preço global
+            lot: Preço por lote
+            unitary: Preço individual
+
         status:
           worksheet: Licitação por Situação
           column_1: Situação

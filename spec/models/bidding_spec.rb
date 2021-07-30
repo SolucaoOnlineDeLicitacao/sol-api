@@ -36,6 +36,7 @@ RSpec.describe Bidding, type: :model do
     it { is_expected.to belong_to :classification }
     it { is_expected.to belong_to(:merged_minute_document).class_name(Document).optional }
     it { is_expected.to belong_to(:edict_document).class_name(Document).optional }
+    it { is_expected.to belong_to(:spreadsheet_report).class_name(SpreadsheetDocument).optional }
     it { is_expected.to belong_to(:reopen_reason_contract).class_name(Contract).optional }
 
     it { is_expected.to have_one(:cooperative).through(:covenant) }

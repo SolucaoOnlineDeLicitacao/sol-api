@@ -59,6 +59,7 @@ module BiddingsService
       [
         :merged_minute_document_id,
         :edict_document_id,
+        :spreadsheet_report_id,
         { lots: [:lot_group_items_count] }
       ]
     end

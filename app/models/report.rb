@@ -5,7 +5,7 @@ class Report < ApplicationRecord
 
   enum report_type: {
     biddings: 0, contracts: 1, time: 2, items: 3, suppliers_biddings: 4,
-    suppliers_contracts: 5
+    suppliers_contracts: 5, bidding_items: 6
   }
 
   enum status: { waiting: 0, processing: 1, error: 2, success: 3 }

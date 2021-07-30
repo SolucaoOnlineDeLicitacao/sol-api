@@ -165,6 +165,37 @@ RSpec.describe LotGroupItemLotProposal, type: :model do
     end
   end
 
+  describe 'scopes' do
+    describe '.first_proposal_accepted' do
+      let!(:lot_proposal_1) do
+        create(:lot_proposal, build_lot_group_item_lot_proposal: false)
+      end
+      let!(:proposal_1) do
+        create(:proposal, status: :draft,
+                          lot_proposals: [lot_proposal_1],
+                          build_lot_proposal: false)
+      end
+      let!(:lot_group_item_lot_proposal_1) do
+        create(:lot_group_item_lot_proposal, lot_proposal: lot_proposal_1)
+      end
+      let!(:lot_proposal_2) do
+        create(:lot_proposal, build_lot_group_item_lot_proposal: false)
+      end
+      let!(:proposal_2) do
+        create(:proposal, status: :accepted,
+                          lot_proposals: [lot_proposal_2],
+                          build_lot_proposal: false)
+      end
+      let!(:lot_group_item_lot_proposal_2) do
+        create(:lot_group_item_lot_proposal, lot_proposal: lot_proposal_2)
+      end
+
+      subject { LotGroupItemLotProposal.first_proposal_accepted }
+
+      it { is_expected.to eq(lot_group_item_lot_proposal_2) }
+    end
+  end
+
   describe 'behaviors' do
     it { is_expected.to be_versionable }
   end

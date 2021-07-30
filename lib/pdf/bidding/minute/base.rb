@@ -40,6 +40,7 @@ module Pdf::Bidding
         '@@bidding.description@@' => bidding.description,
         '@@bidding.closing_date@@' => format_date(bidding.closing_date),
         '@@invite.suppliers.sentence@@' => invite_suppliers_sentence,
+        '@@invite.suppliers.provider_sentence@@' => invite_suppliers_provider_sentence,
         '@@bidding.lot_proposals.providers@@' => bidding_lot_proposals_providers,
         '@@bidding.proposals.sentence@@' => bidding_proposals_sentence,
         '@@bidding.proposals.accepted@@' => bidding_proposals_accepted,
@@ -57,6 +58,14 @@ module Pdf::Bidding
       return if bidding.invites.blank?
 
       I18n.t('document.pdf.bidding.minute.invites_providers') +
+      bidding.invites.inject([]) do |array, invite|
+        array << provider_sentence(invite)
+      end.uniq.to_sentence + '.'
+    end
+
+    def invite_suppliers_provider_sentence
+      return if bidding.invites.blank?
+
       bidding.invites.inject([]) do |array, invite|
         array << provider_sentence(invite)
       end.uniq.to_sentence + '.'

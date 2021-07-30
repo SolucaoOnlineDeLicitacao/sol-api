@@ -29,6 +29,7 @@ module BiddingsService
           update_bidding_blockchain!
           notify
           create_contract!
+          generate_spreadsheet_report
         end
       end
     end
@@ -60,6 +61,10 @@ module BiddingsService
 
     def generate_addendum_accepted_pdf
       Bidding::Minute::AddendumAcceptedPdfGenerateWorker.perform_async(bidding.id)
+    end
+
+    def generate_spreadsheet_report
+      Bidding::SpreadsheetReportGenerateWorker.perform_async(bidding.id)
     end
   end
 end
